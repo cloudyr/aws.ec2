@@ -1,0 +1,27 @@
+# AWS EC2 Client Package #
+
+**aws.ec2** is a simple client package for the Amazon Web Services (AWS) [Elastic Cloud Compute (EC2)](http://aws.amazon.com/ec2/) REST API, which can be used to monitor use of AWS web services.
+
+## Installation ##
+
+[![Build Status](https://travis-ci.org/leeper/aws.ec2.png?branch=master)](https://travis-ci.org/leeper/aws.ec2)
+
+To install the latest development version from GitHub, run the following:
+
+```R
+if(!require("devtools")){
+    install.packages("devtools")
+    library("devtools")
+}
+install_github("cloudyr/aws.ec2")
+```
+
+To install the latest version from CRAN, simply use `install.packages("aws.ec2")`.
+```
+
+## Code Examples ##
+
+Coming soon...
+
+---
+[![cloudyr project logo](http://i.imgur.com/JHS98Y7.png)](https://github.com/cloudyr)
