@@ -7,7 +7,7 @@ create_keypair <- function(name, ...) {
     return(r)
 }
 
-delete_keypair <- function(name, ) {
+delete_keypair <- function(name, ...) {
     query <- list(Action = "DeleteKeyPair")
     if(nchar(name) > 255)
         stop("'name' must be <= 255 characters")
