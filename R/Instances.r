@@ -27,7 +27,7 @@ get_console_output <- function(instance, ...) {
     return(r)
 }
 
-get_password_data <- function() {
+get_password_data <- function(instance, ...) {
     query <- list(Action = "GetPasswordData", InstanceId = instance)
     r <- ec2HTTP(query = query, ...)
     return(r)
@@ -65,7 +65,7 @@ stop_instances <- function(instance, force, ...) {
     return(r)
 }
 
-terminate_instances <- function(instance, ...) {
+terminate_instances <- function(instance, dryrun, ...) {
     query <- list(Action = "TerminateInstances")
     if(!missing(instance)) {
         instance <- as.list(instance)
@@ -148,7 +148,7 @@ unmonitor_instances <- function(instance, ...) {
     return(r)
 }
 
-reboot_instances <- function() {
+reboot_instances <- function(...) {
     query <- list(Action = "RebootInstances")
     if(!missing(instance)) {
         instance <- as.list(instance)

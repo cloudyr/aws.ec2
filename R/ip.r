@@ -20,7 +20,7 @@ release_ip <- function(allocation, public, ...) {
     return(r)
 }
 
-assign_private_ip <- function(netinterface, n, private, allow, ..) {
+assign_private_ip <- function(netinterface, n, private, allow, ...) {
     query <- list(Action = "ReleaseAddress", NetworkInterfaceId = netinterface)
     if(!missing(n))
         query$SecondaryPrivateIpAddressCount <- n

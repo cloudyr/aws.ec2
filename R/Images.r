@@ -11,7 +11,7 @@ copy_image <- function(name, image, region, description, token, ...) {
     return(r)
 }
 
-create_image <- function(name, instance, description, noreboot, mapping, ...) {
+create_image <- function(name, instance, region, description, noreboot, mapping, ...) {
     query <- list(Action = "CreateImage", 
                   Name = name,
                   InstanceId = instance,
@@ -69,7 +69,7 @@ function(image,
     return(r)
 }
 
-reset_image_attr <- function() {
+reset_image_attr <- function(image, attribute, ...) {
     query <- list(Action = "ResetImageAttribute", 
                   ImageId = image,
                   Attribute = attribute)

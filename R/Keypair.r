@@ -7,7 +7,7 @@ create_keypair <- function(name, ...) {
     return(r)
 }
 
-delete_keypair <- function(name, ) {
+delete_keypair <- function(name, ...) {
     query <- list(Action = "DeleteKeyPair")
     if(nchar(name) > 255)
         stop("'name' must be <= 255 characters")
@@ -38,7 +38,7 @@ import_keypair <- function(name, publickey, ...) {
     if(nchar(name) > 255)
         stop("'name' must be <= 255 characters")
     query$KeyName <- name
-    query$PublicKeyMaterial <- base64Encode(publickey)
+    query$PublicKeyMaterial <- base64encode(charToRaw(publickey))
     r <- ec2HTTP(query = query, ...)
     return(r)    
 }
