@@ -8,5 +8,6 @@ Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Description: A simple client package for the Amazon Web Services AWS Elastic Cloud Compute (EC2) REST API.
 License: GPL (>= 2)
 Imports: httr, XML, base64enc, jsonlite, aws.signature
+Suggests: testthat
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues

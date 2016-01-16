@@ -1,14 +1,18 @@
-language: c
-script: ./travis-tool.sh run_tests
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
-install:
-  - ./travis-tool.sh install_deps
-notifications:
-  email:
+language: r
+sudo: required
+r_packages:
+- knitr
+r_github_packages:
+- cloudyr/aws.signature
+- jimhester/covr
+- eddelbuettel/drat
+after_failure:
+  email: 
+    recipients:
+     - thosjleeper@gmail.com
     on_success: change
     on_failure: change
-after_script:
-  - ./travis-tool.sh dump_logs
+after_success:
+- Rscript -e 'library("covr");codecov()'
+#- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash knitreadme.sh
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash drat.sh
