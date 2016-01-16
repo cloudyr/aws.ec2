@@ -7,12 +7,15 @@ r_github_packages:
 - jimhester/covr
 - eddelbuettel/drat
 after_failure:
-  email: 
+  email:
     recipients:
-     - thosjleeper@gmail.com
+    - thosjleeper@gmail.com
     on_success: change
     on_failure: change
 after_success:
 - Rscript -e 'library("covr");codecov()'
-#- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash knitreadme.sh
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash drat.sh
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
+  drat.sh
+env:
+  global:
+    secure: T1TQXhUQpiDF3mpmRzZKj0cHB1sJ+JonIICEB6kOfOyxXdGOstz4ajMPk6XPROVd4i2V/qXVDwEzWkfN+HwMAX1AgsAg1fTJpFQsoGbyzeaOxEg/8U2ikKYqaTjqwFNF1NEVx3T9yBQ8/4rsUVSNtZGodzFAeM5iEIxEyfZ8kcc=
