@@ -1,10 +1,9 @@
-ec2HTTP <- function(query = list(), dryrun, region, key, secret, ...) {
-    if(missing(region))
-        region <- "us-east-1"
-    if(missing(key))
-        key <- Sys.getenv("AWS_ACCESS_KEY_ID")
-    if(missing(secret))
-        secret <- Sys.getenv("AWS_SECRET_ACCESS_KEY")
+ec2HTTP <- function(query = list(), 
+                    dryrun, 
+                    region = Sys.getenv("AWS_DEFAULT_REGION","us-east-1"), 
+                    key = Sys.getenv("AWS_ACCESS_KEY_ID"), 
+                    secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), 
+                    ...) {
     if(!missing(dryrun))
         query$DryRun <- tolower(as.character(dryrun))
     url <- paste0("https://ec2.",region,".amazonaws.com")
