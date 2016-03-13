@@ -1,13 +1,20 @@
 Package: aws.ec2
 Type: Package
 Title: AWS EC2 Client Package
-Version: 0.1.1
-Date: 2015-01-16
+Version: 0.1.2
+Date: 2016-03-13
 Author: Thomas J. Leeper
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
-Description: A simple client package for the Amazon Web Services AWS Elastic Cloud Compute (EC2) REST API.
+Description: A simple client package for the Amazon Web Services AWS Elastic
+    Cloud Compute (EC2) REST API.
 License: GPL (>= 2)
-Imports: httr, XML, base64enc, jsonlite, aws.signature
-Suggests: testthat
+Imports:
+    aws.signature,
+    httr,
+    xml2,
+    base64enc
+Suggests:
+    testthat
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues
+RoxygenNote: 5.0.1
