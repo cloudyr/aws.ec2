@@ -15,6 +15,8 @@ copy_image(name, image, description, region = getOption("AWS_DEFAULT_REGION",
 \item{region}{A character string specifying the AWS region to create the AMI in. The default is \dQuote{us-east-1}.}
 
 \item{token}{A (max 64-character) string containing a unique user-defined token. This can be used to ensure idempotency of requests in the event of a user-side failure. See \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html} for details.}
+
+\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 }
 \value{
 A list.

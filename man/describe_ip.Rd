@@ -12,6 +12,8 @@ describe_ip(allocation, public, filter, ...)
 \item{public}{\dots}
 
 \item{filter}{\dots}
+
+\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 }
 \value{
 A list

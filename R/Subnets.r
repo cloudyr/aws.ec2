@@ -3,7 +3,7 @@
 #' @description Get, create, and delete subnets
 #' @template subnet
 #' @template filter
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{

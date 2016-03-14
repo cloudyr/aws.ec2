@@ -1,7 +1,7 @@
 #' @title Account Attributes
 #' @description Retrieve Account Attributes
 #' @param attribute Optionally a character string specifying one or more of: \dQuote{supported-platforms}, \dQuote{vpc-max-security-groups-per-interface}, \dQuote{max-elastic-ips}, \dQuote{max-instances}, \dQuote{vpc-max-elastic-ips}, \dQuote{default-vpc}. If missing, all are returned.
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @export
 account_attrs <- function(attribute, ...) {
@@ -23,7 +23,7 @@ account_attrs <- function(attribute, ...) {
 #' @description Retrieve Zone Details
 #' @param zone Optionally a character string specifying the name of one or more AWS zones. If missing, details about all are returned.
 #' @param filter \dots
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 describe_zones <- function(zone, filter, ...) {
     query <- list(Action = "DescribeAvailabilityZones")
@@ -47,7 +47,7 @@ describe_zones <- function(zone, filter, ...) {
 #' @description Retrieve Region Details
 #' @param region Optionally a character string specifying the name of one or more AWS regions. If missing, details about all are returned.
 #' @param filter \dots
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 describe_regions <- function(region, filter, ...) {
     query <- list(Action = "DescribeRegions")

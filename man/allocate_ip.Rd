@@ -12,6 +12,8 @@ release_ip(allocation, public, ...)
 \arguments{
 \item{domain}{Optionally, a character string specifying \dQuote{vpc} or \dQuote{standard}.}
 
+\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+
 \item{allocation}{A character string specifying an EC2 IP address Allocation ID.}
 
 \item{public}{This is the public IP address for a \dQuote{classic} EC2 instance. For VPC, use \code{allocation} instead.}

@@ -6,6 +6,7 @@
 #' @template filter
 #' @param n \dots
 #' @param page \dots
+#' @template dots
 #' @return A logical.
 #' @seealso \code{\link{associate_ip}}
 #' @export

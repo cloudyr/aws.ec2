@@ -4,6 +4,7 @@
 #' @param domain Optionally, a character string specifying \dQuote{vpc} or \dQuote{standard}.
 #' @template allocation
 #' @param public This is the public IP address for a \dQuote{classic} EC2 instance. For VPC, use \code{allocation} instead.
+#' @template dots
 #' @return For \code{allocate_ip}, a list containing the IP address. For \code{release_ip}, a logical.
 #' @seealso \code{\link{associate_ip}}
 #' @export
@@ -58,7 +59,7 @@ assign_private_ip <- function(netinterface, n, private, allow, ...) {
 #' @param private \dots
 #' @param netinterface \dots
 #' @param allow \dots
-#' @param ... \dots
+#' @template dots
 #' @return A list.
 #' @export
 associate_ip <- 
@@ -108,6 +109,7 @@ disassociate_ip <- function(allocation, public, ...) {
 #' @template allocation
 #' @param public \dots
 #' @template filter
+#' @template dots
 #' @return A list
 #' @export
 describe_ip <- function(allocation, public, filter, ...) {

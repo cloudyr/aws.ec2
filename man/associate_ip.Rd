@@ -22,7 +22,7 @@ disassociate_ip(allocation, public, ...)
 
 \item{allow}{\dots}
 
-\item{...}{\dots}
+\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 }
 \value{
 A list.

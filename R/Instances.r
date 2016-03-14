@@ -3,7 +3,7 @@
 #' @description Get, set, and reset attributes for an EC2 instance
 #' @template instance
 #' @param attribute For \code{get_instance_attr} and \code{reset_instance_attr}, a character string. For \code{set_instance_attr}, a named character string, where the name is an attribute name. Valid attribute names are: \dQuote{instanceType}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{userData}, \dQuote{disableApiTermination}, \dQuote{instanceInitiatedShutdownBehavior}, \dQuote{rootDeviceName}, \dQuote{blockDeviceMapping}, \dQuote{productCodes}, \dQuote{sourceDestCheck}, \dQuote{groupSet}, \dQuote{ebsOptimized}, \dQuote{sriovNetSupport}.
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A character string
 #' @examples
 #' \dontrun{
@@ -58,7 +58,7 @@ reset_instance_attr <- function(instance, attribute, ...) {
 #' @title Get EC2 Instance Console Output
 #' @description Retrieve console output for an EC2 instance as a character string
 #' @template instance
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A character string
 #' @examples
 #' \dontrun{
@@ -78,7 +78,7 @@ get_console_output <- function(instance, ...) {
 #' @title Get EC2 Instance Password Data
 #' @description Retrieve password data for an EC2 instance
 #' @template instance
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{
@@ -102,21 +102,26 @@ get_password_data <- function(instance, ...) {
 #' @param min An integer specifying a minimum number of instances to launch. Defaults to \code{min}.
 #' @template keypair 
 #' @template subnet
+#' @template sgroup 
 #' @param userdata Optionally, a character string specifying a script to run during launch.
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{
 #' # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 #' describe_images("ami-7f9dc615")
 #' s <- describe_subnets()
-#' i <- run_instances("ami-7f9dc615", type = "t2.micro", subnet = s[[1]])
+#' g <- describe_security_groups()
+#' i <- run_instances(image = "ami-7f9dc615", 
+#'                    type = "t2.micro", 
+#'                    subnet = s[[1]], 
+#'                    sgroup = g[[1]]$groupId[[1]])
 #'
 #' stop_instances(i[[1]])
 #' terminate_instances(i[[1]])
 #' }
 #' @export
-run_instances <- function(image, type, min = 1, max = min, keypair, subnet, userdata, ...) {
+run_instances <- function(image, type, min = 1, max = min, keypair, subnet, sgroup, userdata, ...) {
     query <- list(Action = "RunInstances", 
                   ImageId = get_imageid(image),
                   InstanceType = type,
@@ -127,6 +132,11 @@ run_instances <- function(image, type, min = 1, max = min, keypair, subnet, user
     }
     if (!missing(subnet)) {
         query$SubnetId <- get_subnetid(subnet)
+    }
+    if (!missing(sgroup)) {
+        sgroup <- as.list(sgroup)
+        names(sgroup) <- paste0("SecurityGroupId.", seq_along(sgroup))
+        query <- c(query, sgroup)
     }
     if (!missing(userdata)) {
         query$UserData <- userdata
@@ -141,7 +151,7 @@ run_instances <- function(image, type, min = 1, max = min, keypair, subnet, user
 #' @template instance
 #' @param force \dots
 #' @param info \dots
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{
@@ -197,7 +207,7 @@ stop_instances <- function(instance, force, ...) {
 #' @title Terminate EC2 Instance
 #' @description Terminate a stopped EC2 instance
 #' @template instance
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{
@@ -231,7 +241,7 @@ terminate_instances <- function(instance, ...) {
 #' @param runningonly \dots
 #' @param n \dots
 #' @template token
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{
@@ -316,7 +326,7 @@ instance_status <- function(instance, filter, runningonly, n, token, ...) {
 #' @title EC2 Instance Monitoring
 #' @description Set EC2 instance monitoring on or off
 #' @template instance
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{
@@ -367,7 +377,7 @@ unmonitor_instances <- function(instance, ...) {
 #' @title Reboot EC2 Instance
 #' @description Reboot a running EC2 instance
 #' @template instance
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{

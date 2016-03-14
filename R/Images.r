@@ -5,6 +5,7 @@
 #' @description A character string containing a description of the AMI.
 #' @param region A character string specifying the AWS region to create the AMI in. The default is \dQuote{us-east-1}.
 #' @template token
+#' @template dots
 #' @return A list.
 #' @examples
 #' \dontrun{
@@ -65,7 +66,7 @@ deregister_image <- function(image, ...) {
 #' @description Get, set, and reset AMI attributes
 #' @template image
 #' @param attribute A character string specifying one of: \dQuote{description}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{launchPermission}, \dQuote{productCodes}, \dQuote{blockDeviceMapping}, \dQuote{sriovNetSupport}
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{
@@ -122,7 +123,7 @@ reset_image_attr <- function(image, attribute, ...) {
 #' @template filter
 #' @param availableto \dots
 #' @param owner \dots
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @template dots
 #' @return A list
 #' @examples
 #' \dontrun{

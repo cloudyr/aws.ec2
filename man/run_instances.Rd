@@ -4,8 +4,8 @@
 \alias{run_instances}
 \title{Run an EC2 Instance}
 \usage{
-run_instances(image, type, min = 1, max = min, keypair, subnet, userdata,
-  ...)
+run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
+  userdata, ...)
 }
 \arguments{
 \item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}.}
@@ -17,6 +17,8 @@ run_instances(image, type, min = 1, max = min, keypair, subnet, userdata,
 \item{keypair}{A character string (max 255 character) containing the name of a keypair, or an object of class \dQuote{ec2_keypair}.}
 
 \item{subnet}{A character string containing the name of a subnet, or an object of class \dQuote{ec2_subnet}.}
+
+\item{sgroup}{A character vector specifying one or more Security Group IDs.}
 
 \item{userdata}{Optionally, a character string specifying a script to run during launch.}
 
@@ -35,7 +37,11 @@ Run/launch a new EC2 Instance
 # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 describe_images("ami-7f9dc615")
 s <- describe_subnets()
-i <- run_instances("ami-7f9dc615", type = "t2.micro", subnet = s[[1]])
+g <- describe_security_groups()
+i <- run_instances(image = "ami-7f9dc615", 
+                   type = "t2.micro", 
+                   subnet = s[[1]], 
+                   sgroup = g[[1]]$groupId[[1]])
 
 stop_instances(i[[1]])
 terminate_instances(i[[1]])

@@ -17,6 +17,8 @@ describe_tags(filter, n, page, ...)
 
 \item{tag}{A named character string of key-value pairs of tag names and their corresponding values.}
 
+\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+
 \item{filter}{\dots}
 
 \item{n}{\dots}
