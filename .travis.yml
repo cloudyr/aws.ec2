@@ -1,0 +1,20 @@
+language: r
+sudo: required
+r_packages:
+- knitr
+r_github_packages:
+- jimhester/covr
+- eddelbuettel/drat
+after_failure:
+  email:
+    recipients:
+    - thosjleeper@gmail.com
+    on_success: change
+    on_failure: change
+after_success:
+- Rscript -e 'library("covr");codecov()'
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
+  drat.sh
+env:
+  global:
+    secure: XAbDDSw79nbneFuzYGFUCGFtJUA4pBXkBwzBAKV8+QeZFJqhzOMKYQpG6cyQ5rv1mQFxfTIvbtahAOydwa/HfZLH4Zl2OrdRQ1yDSoaKMrWREKqoH7BUDGx6UEtsxq+lN92CYClcXzS83m7jyTzyTyer3kM8ivtrc4xgVL2ym8M=
