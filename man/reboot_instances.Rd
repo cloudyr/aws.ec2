@@ -20,9 +20,9 @@ Reboot a running EC2 instance
 \examples{
 \dontrun{
 i <- run_instance()
-reboot_instances(i)
-stop_instances(i)
-terminate_instances(i)
+reboot_instances(i[[1]])
+stop_instances(i[[1]])
+terminate_instances(i[[1]])
 }
 }
 

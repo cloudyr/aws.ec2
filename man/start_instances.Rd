@@ -27,10 +27,10 @@ Stop a running or start a stopped EC2 instance
 \examples{
 \dontrun{
 i <- run_instance()
-stop_instances(i)
-start_instances(i)
-stop_instances(i)
-terminate_instances(i)
+stop_instances(i[[1]])
+start_instances(i[[1]])
+stop_instances(i[[1]])
+terminate_instances(i[[1]])
 }
 }
 

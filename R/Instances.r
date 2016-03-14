@@ -9,8 +9,8 @@
 #' \dontrun{
 #' i <- run_instance()
 #' cat(get_console_output(), "\n")
-#' stop_instances(i)
-#' terminate_instances(i)
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @importFrom base64enc base64decode
 #' @export
@@ -64,8 +64,8 @@ reset_instance_attr <- function(instance, attribute, ...) {
 #' \dontrun{
 #' i <- run_instance()
 #' cat(get_console_output(), "\n")
-#' stop_instances(i)
-#' terminate_instances(i)
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @importFrom base64enc base64decode
 #' @export
@@ -83,9 +83,9 @@ get_console_output <- function(instance, ...) {
 #' @examples
 #' \dontrun{
 #' i <- run_instance()
-#' get_password_data()
-#' stop_instances(i)
-#' terminate_instances(i)
+#' get_password_data(i[[1]])
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @export
 get_password_data <- function(instance, ...) {
@@ -109,10 +109,11 @@ get_password_data <- function(instance, ...) {
 #' \dontrun{
 #' # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 #' describe_images("ami-7f9dc615")
-#' i <- run_instances("ami-7f9dc615", type = "t2.micro")
+#' s <- describe_subnets()
+#' i <- run_instances("ami-7f9dc615", type = "t2.micro", subnet = s[[1]])
 #'
-#' stop_instances(i)
-#' terminate_instances(i)
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @export
 run_instances <- function(image, type, min = 1, max = min, keypair, subnet, userdata, ...) {
@@ -131,7 +132,7 @@ run_instances <- function(image, type, min = 1, max = min, keypair, subnet, user
         query$UserData <- userdata
     }
     r <- ec2HTTP(query = query, ...)
-    return(r)
+    return(lapply(r$instancesSet, `class<-`, "ec2_instance"))
 }
 
 #' @rdname start_instances
@@ -145,10 +146,10 @@ run_instances <- function(image, type, min = 1, max = min, keypair, subnet, user
 #' @examples
 #' \dontrun{
 #' i <- run_instance()
-#' stop_instances(i)
-#' start_instances(i)
-#' stop_instances(i)
-#' terminate_instances(i)
+#' stop_instances(i[[1]])
+#' start_instances(i[[1]])
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @export
 start_instances <- function(instance, info, ...) {
@@ -201,8 +202,8 @@ stop_instances <- function(instance, force, ...) {
 #' @examples
 #' \dontrun{
 #' i <- run_instance()
-#' stop_instances(i)
-#' terminate_instances(i)
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @export
 terminate_instances <- function(instance, ...) {
@@ -226,7 +227,7 @@ terminate_instances <- function(instance, ...) {
 #' @title EC2 Instance Status
 #' @description Describe or check status of an EC2 instance
 #' @template instance
-#' @param filter \dots
+#' @template filter
 #' @param runningonly \dots
 #' @param n \dots
 #' @template token
@@ -235,11 +236,11 @@ terminate_instances <- function(instance, ...) {
 #' @examples
 #' \dontrun{
 #' i <- run_instance()
-#' describe_instances(i)
-#' instance_status(i)
+#' describe_instances(i[[1]])
+#' instance_status(i[[1]])
 #'
-#' stop_instances(i)
-#' terminate_instances(i)
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @export
 describe_instances <- function(instance, filter, n, token, ...) {
@@ -320,11 +321,11 @@ instance_status <- function(instance, filter, runningonly, n, token, ...) {
 #' @examples
 #' \dontrun{
 #' i <- run_instance()
-#' monitor_instances(i)
-#' unmonitor_instances(i)
+#' monitor_instances(i[[1]])
+#' unmonitor_instances(i[[1]])
 #' 
-#' stop_instances(i)
-#' terminate_instances(i)
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @export
 monitor_instances <- function(instance, ...) {
@@ -371,9 +372,9 @@ unmonitor_instances <- function(instance, ...) {
 #' @examples
 #' \dontrun{
 #' i <- run_instance()
-#' reboot_instances(i)
-#' stop_instances(i)
-#' terminate_instances(i)
+#' reboot_instances(i[[1]])
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
 #' }
 #' @export
 reboot_instances <- function(instance, ...) {

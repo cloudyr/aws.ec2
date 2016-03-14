@@ -20,9 +20,9 @@ Retrieve password data for an EC2 instance
 \examples{
 \dontrun{
 i <- run_instance()
-get_password_data()
-stop_instances(i)
-terminate_instances(i)
+get_password_data(i[[1]])
+stop_instances(i[[1]])
+terminate_instances(i[[1]])
 }
 }
 

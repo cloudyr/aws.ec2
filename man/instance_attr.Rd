@@ -29,8 +29,8 @@ Get, set, and reset attributes for an EC2 instance
 \dontrun{
 i <- run_instance()
 cat(get_console_output(), "\\n")
-stop_instances(i)
-terminate_instances(i)
+stop_instances(i[[1]])
+terminate_instances(i[[1]])
 }
 }
 

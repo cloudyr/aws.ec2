@@ -23,11 +23,11 @@ Set EC2 instance monitoring on or off
 \examples{
 \dontrun{
 i <- run_instance()
-monitor_instances(i)
-unmonitor_instances(i)
+monitor_instances(i[[1]])
+unmonitor_instances(i[[1]])
 
-stop_instances(i)
-terminate_instances(i)
+stop_instances(i[[1]])
+terminate_instances(i[[1]])
 }
 }
 

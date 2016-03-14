@@ -31,11 +31,11 @@ Describe or check status of an EC2 instance
 \examples{
 \dontrun{
 i <- run_instance()
-describe_instances(i)
-instance_status(i)
+describe_instances(i[[1]])
+instance_status(i[[1]])
 
-stop_instances(i)
-terminate_instances(i)
+stop_instances(i[[1]])
+terminate_instances(i[[1]])
 }
 }
 

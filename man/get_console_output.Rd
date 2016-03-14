@@ -21,8 +21,8 @@ Retrieve console output for an EC2 instance as a character string
 \dontrun{
 i <- run_instance()
 cat(get_console_output(), "\\n")
-stop_instances(i)
-terminate_instances(i)
+stop_instances(i[[1]])
+terminate_instances(i[[1]])
 }
 }
 

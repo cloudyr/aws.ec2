@@ -2,7 +2,7 @@
 #' @title Subnets
 #' @description Get, create, and delete subnets
 #' @template subnet
-#' @param filter \dots
+#' @template filter
 #' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
 #' @return A list
 #' @examples
@@ -25,7 +25,7 @@ describe_subnets <- function(subnet, filter, ...) {
         query <- c(query, subnet)
     }
     r <- ec2HTTP(query = query, ...)
-    return(r)
+    return(lapply(r$subnetSet, `class<-`, "ec2_subnet"))
 }
 
 #' @rdname subnets
@@ -53,7 +53,7 @@ get_subnetid <- function(x) {
     if (is.character(x)) {
         return(x)
     } else if (inherits(x, "ec2_subnet")) {
-        return(x$SubnetId[[1]])
+        return(x$subnetId[[1]])
     }
 }
 

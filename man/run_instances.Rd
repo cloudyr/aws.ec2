@@ -16,7 +16,7 @@ run_instances(image, type, min = 1, max = min, keypair, subnet, userdata,
 
 \item{keypair}{A character string (max 255 character) containing the name of a keypair, or an object of class \dQuote{ec2_keypair}.}
 
-\item{subnet}{Optionally, a character string containing the name of a subnet, or an object of class \dQuote{ec2_subnet}.}
+\item{subnet}{A character string containing the name of a subnet, or an object of class \dQuote{ec2_subnet}.}
 
 \item{userdata}{Optionally, a character string specifying a script to run during launch.}
 
@@ -34,10 +34,11 @@ Run/launch a new EC2 Instance
 \dontrun{
 # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 describe_images("ami-7f9dc615")
-i <- run_instances("ami-7f9dc615", type = "t2.micro")
+s <- describe_subnets()
+i <- run_instances("ami-7f9dc615", type = "t2.micro", subnet = s[[1]])
 
-stop_instances(i)
-terminate_instances(i)
+stop_instances(i[[1]])
+terminate_instances(i[[1]])
 }
 }
 

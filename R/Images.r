@@ -1,4 +1,18 @@
-copy_image <- function(name, image, region, description, token, ...) {
+#' @title Copy AMI
+#' @description Create a copy of an AMI
+#' @param name A character string specifying a name for the new AMI
+#' @template image
+#' @description A character string containing a description of the AMI.
+#' @param region A character string specifying the AWS region to create the AMI in. The default is \dQuote{us-east-1}.
+#' @template token
+#' @return A list.
+#' @examples
+#' \dontrun{
+#' copy_image("example-rstudio-ami", "ami-7f9dc615", "This is a description")
+#' 
+#' }
+#' @export
+copy_image <- function(name, image, description, region = getOption("AWS_DEFAULT_REGION", "us-east-1"), token, ...) {
     query <- list(Action = "CopyImage", 
                   Name = name,
                   SourceImageId = get_imageid(image),
@@ -105,7 +119,7 @@ reset_image_attr <- function(image, attribute, ...) {
 #' @title Describe AMI(s)
 #' @description Search/Describe AMI(s)
 #' @template image
-#' @param filter \dots
+#' @template filter
 #' @param availableto \dots
 #' @param owner \dots
 #' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.

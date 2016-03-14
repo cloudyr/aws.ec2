@@ -20,20 +20,21 @@ delete_security_group <- function(name, id, ...) {
 
 describe_security_groups <- function(name, id, filter, ...) {
     query <- list(Action = "DescribeSecurityGroups")
-    if(!missing(name)) {
+    if (!missing(name)) {
         name <- as.list(name)
         names(name) <- paste0("GroupName.", 1:length(name))
         query <- c(query, name)
-    } else {
+    }
+    if (!missing(id)) {
         id <- as.list(id)
-        names(id) <- paste0("GroupName.", 1:length(id))
+        names(id) <- paste0("GroupId.", 1:length(id))
         query <- c(query, id)
     }
     if(!missing(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(r)
+    return(lapply(r$securityGroupInfo, `class<-`, "ec2_security_group"))
 }
 
 

@@ -4,7 +4,7 @@
 \alias{create_subnet}
 \alias{delete_subnet}
 \alias{describe_subnets}
-\title{Get Subnets}
+\title{Subnets}
 \usage{
 describe_subnets(subnet, filter, ...)
 
