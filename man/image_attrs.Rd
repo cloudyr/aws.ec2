@@ -2,12 +2,19 @@
 % Please edit documentation in R/Images.r
 \name{get_image_attr}
 \alias{get_image_attr}
-\title{Get AMI Attribute}
+\alias{reset_image_attr}
+\alias{set_image_attr}
+\title{AMI Attributes}
 \usage{
 get_image_attr(image, attribute, ...)
+
+set_image_attr(image, attribute, value, description, operationtype,
+  launchpermission, usergroup, userid, ...)
+
+reset_image_attr(image, attribute, ...)
 }
 \arguments{
-\item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}}
+\item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}.}
 
 \item{attribute}{A character string specifying one of: \dQuote{description}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{launchPermission}, \dQuote{productCodes}, \dQuote{blockDeviceMapping}, \dQuote{sriovNetSupport}}
 
@@ -17,7 +24,7 @@ get_image_attr(image, attribute, ...)
 A list
 }
 \description{
-Get AMI Attribute
+Get, set, and reset AMI attributes
 }
 \examples{
 \dontrun{

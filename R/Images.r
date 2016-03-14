@@ -46,8 +46,9 @@ deregister_image <- function(image, ...) {
     return(r)
 }
 
-#' @title Get AMI Attribute
-#' @description Get AMI Attribute
+#' @rdname image_attrs
+#' @title AMI Attributes
+#' @description Get, set, and reset AMI attributes
 #' @template image
 #' @param attribute A character string specifying one of: \dQuote{description}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{launchPermission}, \dQuote{productCodes}, \dQuote{blockDeviceMapping}, \dQuote{sriovNetSupport}
 #' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
@@ -58,7 +59,6 @@ deregister_image <- function(image, ...) {
 #' get_image_attr("ami-7f9dc615", "description")
 #' }
 #' @export
-# 
 get_image_attr <- function(image, attribute, ...) {
     val <- c("description", "kernel", "ramdisk", "launchPermission", "productCodes", "blockDeviceMapping", "sriovNetSupport")
     if (!attribute %in% val) {
@@ -71,6 +71,8 @@ get_image_attr <- function(image, attribute, ...) {
     return(r)
 }
 
+#' @rdname image_attrs
+#' @export
 set_image_attr <- 
 function(image, 
          attribute, 
@@ -90,6 +92,8 @@ function(image,
     return(r)
 }
 
+#' @rdname image_attrs
+#' @export
 reset_image_attr <- function(image, attribute, ...) {
     query <- list(Action = "ResetImageAttribute", 
                   ImageId = get_imageid(image),

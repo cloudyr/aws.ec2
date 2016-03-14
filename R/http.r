@@ -51,7 +51,6 @@ ec2HTTP <- function(query = list(),
     } else {
         r <- GET(url, H, ...)
     }
-    warn_for_status(r)
     if (http_status(r)$category == "client error") {
         tmp <- gsub("\n\\s*", "", content(r, "text"))
         x <- try(as_list(read_xml(tmp)), silent = TRUE)

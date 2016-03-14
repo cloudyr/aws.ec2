@@ -1,44 +1,85 @@
-create_keypair <- function(name, ...) {
-    query <- list(Action = "CreateKeyPair")
-    if(nchar(name) > 255)
-        stop("'name' must be <= 255 characters")
-    query$KeyName <- name
-    r <- ec2HTTP(query = query, ...)
-    return(r)
-}
-
-delete_keypair <- function(name, ...) {
-    query <- list(Action = "DeleteKeyPair")
-    if(nchar(name) > 255)
-        stop("'name' must be <= 255 characters")
-    query$KeyName <- name
-    r <- ec2HTTP(query = query, ...)
-    return(r)
-}
-
-describe_keypairs <- function(name, filter, ...) {
+#' @rdname keypairs
+#' @title EC2 Keypairs
+#' @description Get, create, delete, and import EC2 keypairs
+#' @template keypair
+#' @param filter \dots
+#' @param publickey \dots
+#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @return A list
+#' @examples
+#' \dontrun{
+#' k <- create_keypair("test_keypair")
+#' get_keypairs()
+#' delete_keypair(k)
+#' }
+#' @export
+get_keypairs <- function(keypair, filter, ...) {
     query <- list(Action = "DescribeKeyPairs")
-    if(!missing(name)) {
-        name <- as.list(name)
-        names(name) <- paste0("KeyName.", 1:length(name))
-        query <- c(query, name)
+    if (!missing(keypair)) {
+        if (inherits(keypair, "ec2_keypair")) {
+            keypair <- list(get_keypairname(keypair))
+        } else if (is.character(keypair)) {
+            keypair <- as.list(get_keypairname(keypair))
+        } else {
+            keypair <- lapply(keypair, get_keypairname)
+        }
+        names(keypair) <- paste0("KeyName.", 1:length(keypair))
+        query <- c(query, keypair)
     }
-    if(!missing(filter)) {
+    if (!missing(filter)) {
         vfilter <- c("fingerprint", "key-name")
-        if(any(!names(filter) %in% vfilter))
+        if (any(!names(filter) %in% vfilter)) {
             stop("'filter' must be in: ", paste0(vfilter, collapse = ", "))
+        }
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(r)
+    return(lapply(r$keySet, `class<-`, "ec2_keypair"))
 }
 
-import_keypair <- function(name, publickey, ...) {
+#' @rdname keypairs
+#' @export
+create_keypair <- function(keypair, ...) {
+    query <- list(Action = "CreateKeyPair")
+    keypair <- get_keypairname(keypair)
+    if (nchar(keypair) > 255) {
+        stop("'keypair' must be <= 255 characters")
+    }
+    query$KeyName <- keypair
+    r <- ec2HTTP(query = query, ...)
+    return(structure(r, class = "ec2_keypair"))
+}
+
+#' @rdname keypairs
+#' @export
+delete_keypair <- function(keypair, ...) {
+    query <- list(Action = "DeleteKeyPair")
+    keypair <- get_keypairname(keypair)
+    if (nchar(keypair) > 255) {
+        stop("'keypair' must be <= 255 characters")
+    }
+    query$KeyName <- keypair
+    r <- ec2HTTP(query = query, ...)
+    return(r$return)
+}
+
+#' @rdname keypairs
+#' @export
+import_keypair <- function(keypair, publickey, ...) {
     query <- list(Action = "ImportKeyPair")
-    if(nchar(name) > 255)
-        stop("'name' must be <= 255 characters")
-    query$KeyName <- name
+    if (nchar(keypair) > 255) {
+        stop("'keypair' must be <= 255 characters")
+    }
+    query$KeyName <- keypair
     query$PublicKeyMaterial <- base64encode(charToRaw(publickey))
     r <- ec2HTTP(query = query, ...)
     return(r)    
+}
+
+get_keypairname <- function(x) {
+    if (is.character(x)) {
+        return(x)
+    } else if (inherits(x, "ec2_keypair")) {
+        return(x$keyName[[1]])
+    }
 }
