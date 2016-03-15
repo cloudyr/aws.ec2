@@ -18,6 +18,12 @@ delete_subnet(subnet, ...)
 \item{filter}{\dots}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+
+\item{vpc}{\dots}
+
+\item{cidr}{\dots}
+
+\item{zone}{\dots}
 }
 \value{
 A list

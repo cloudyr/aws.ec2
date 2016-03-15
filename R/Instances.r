@@ -72,7 +72,7 @@ reset_instance_attr <- function(instance, attribute, ...) {
 get_console_output <- function(instance, ...) {
     query <- list(Action = "GetConsoleOutput", InstanceId = get_instanceid(instance))
     r <- ec2HTTP(query = query, ...)
-    return(rawToChar(base64decode(o$output[[1]])))
+    return(rawToChar(base64decode(r$output[[1]])))
 }
 
 #' @title Get EC2 Instance Password Data
@@ -99,7 +99,7 @@ get_password_data <- function(instance, ...) {
 #' @template image
 #' @param type A character string specifying the type of EC2 instance to use. See \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html} for details of types and available options.
 #' @param min An integer specifying a minimum number of instances to launch. Defaults to 1.
-#' @param min An integer specifying a minimum number of instances to launch. Defaults to \code{min}.
+#' @param max An integer specifying a minimum number of instances to launch. Defaults to \code{min}.
 #' @template keypair 
 #' @template subnet
 #' @template sgroup 

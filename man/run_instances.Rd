@@ -14,6 +14,8 @@ run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
 
 \item{min}{An integer specifying a minimum number of instances to launch. Defaults to 1.}
 
+\item{max}{An integer specifying a minimum number of instances to launch. Defaults to \code{min}.}
+
 \item{keypair}{A character string (max 255 character) containing the name of a keypair, or an object of class \dQuote{ec2_keypair}.}
 
 \item{subnet}{A character string containing the name of a subnet, or an object of class \dQuote{ec2_subnet}.}
@@ -23,8 +25,6 @@ run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
 \item{userdata}{Optionally, a character string specifying a script to run during launch.}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
-
-\item{min}{An integer specifying a minimum number of instances to launch. Defaults to \code{min}.}
 }
 \value{
 A list

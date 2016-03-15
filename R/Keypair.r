@@ -64,6 +64,7 @@ delete_keypair <- function(keypair, ...) {
 }
 
 #' @rdname keypairs
+#' @importFrom base64enc base64encode
 #' @export
 import_keypair <- function(keypair, publickey, ...) {
     query <- list(Action = "ImportKeyPair")

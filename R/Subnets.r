@@ -3,6 +3,9 @@
 #' @description Get, create, and delete subnets
 #' @template subnet
 #' @template filter
+#' @param vpc \dots
+#' @param cidr \dots
+#' @param zone \dots
 #' @template dots
 #' @return A list
 #' @examples
@@ -58,3 +61,7 @@ get_subnetid <- function(x) {
 }
 
 # set_subnet_attr
+
+get_vpcid <- function(x) {
+    x
+}

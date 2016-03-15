@@ -50,8 +50,8 @@ describe_tags <- function(filter, n, page, ...) {
         }
         query$MaxResults <- n
     }
-    if (!missing(token)) {
-        query$NextToken <- token
+    if (!missing(page)) {
+        query$NextToken <- page
     }
     r <- ec2HTTP(query = query, ...)
     return(r$tagSet)

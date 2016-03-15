@@ -19,6 +19,18 @@ reset_image_attr(image, attribute, ...)
 \item{attribute}{A character string specifying one of: \dQuote{description}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{launchPermission}, \dQuote{productCodes}, \dQuote{blockDeviceMapping}, \dQuote{sriovNetSupport}}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+
+\item{value}{\dots}
+
+\item{description}{\dots}
+
+\item{operationtype}{\dots}
+
+\item{launchpermission}{\dots}
+
+\item{usergroup}{\dots}
+
+\item{userid}{\dots}
 }
 \value{
 A list

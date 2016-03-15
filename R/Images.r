@@ -2,7 +2,7 @@
 #' @description Create a copy of an AMI
 #' @param name A character string specifying a name for the new AMI
 #' @template image
-#' @description A character string containing a description of the AMI.
+#' @param description A character string containing a description of the AMI.
 #' @param region A character string specifying the AWS region to create the AMI in. The default is \dQuote{us-east-1}.
 #' @template token
 #' @template dots
@@ -66,6 +66,12 @@ deregister_image <- function(image, ...) {
 #' @description Get, set, and reset AMI attributes
 #' @template image
 #' @param attribute A character string specifying one of: \dQuote{description}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{launchPermission}, \dQuote{productCodes}, \dQuote{blockDeviceMapping}, \dQuote{sriovNetSupport}
+#' @param value \dots
+#' @param description \dots
+#' @param operationtype \dots
+#' @param launchpermission \dots
+#' @param usergroup \dots
+#' @param userid \dots
 #' @template dots
 #' @return A list
 #' @examples
@@ -101,7 +107,7 @@ function(image,
                   ImageId = get_imageid(image))
     
     # NEED TO HANDLE THIS
-    
+    stop("This function is not currently implemented.")
     
     r <- ec2HTTP(query = query, ...)
     return(r)

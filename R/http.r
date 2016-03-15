@@ -9,7 +9,7 @@
 #' @param ... Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return A list
 #' @importFrom aws.signature signature_v4_auth
-#' @importFrom httr add_headers content warn_for_status http_status GET
+#' @importFrom httr add_headers headers content warn_for_status http_status GET
 #' @importFrom xml2 read_xml as_list
 #' @export
 ec2HTTP <- function(query = list(), 
@@ -54,9 +54,6 @@ ec2HTTP <- function(query = list(),
     if (http_status(r)$category == "client error") {
         tmp <- gsub("\n\\s*", "", content(r, "text"))
         x <- try(as_list(read_xml(tmp)), silent = TRUE)
-        if (inherits(x, "try-error")) {
-            x <- try(fromJSON(content(r, "text"))$Error, silent = TRUE)
-        }
         warn_for_status(r)
         h <- headers(r)
         out <- structure(x, headers = h, class = "aws_error")
