@@ -1,6 +1,7 @@
 #' @rdname allocate_ip
-#' @title Allocate/Release IP Address
+#' @title Allocate/Release IP Addresses
 #' @description Allocate or release VPC or standard IP Address
+#' @details This function is used to allocate IP addresses either to EC2 classic (if it is available on your account; see \code{\link{account_attrs}}) or on a Virtual Private Cloud (VPC). The default for new AWS EC2 accounts is only to be able to create VPC configurations. Due to limitations in the IPv4 universe, users are typically restricted to 5 IP addresses, which can dynamically be allocated to instances via a VPC. Use \code{\link{associate_ip}}/\code{\link{disassociate_ip}} to link an IP address to a specific instance.
 #' @param domain Optionally, a character string specifying \dQuote{vpc} or \dQuote{standard}.
 #' @template ip 
 #' @template dots
@@ -10,10 +11,15 @@
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseAddress.html}
 #' @examples
 #' \dontrun{
-#' a <- allocate_ip("standard")
-#' release_ip(public = a$publicIp)
+#' # create a classic/"standard" IP address
+#' a1 <- allocate_ip("standard")
+#' release_ip(a1$publicIp)
+#'
+#' # create a VPC IP address
+#' a2 <- allocate_ip("vpc")
+#' release_ip(a2$allocationId)
 #' }
-#' @seealso \code{\link{associate_ip}}, \code{\link{describe_ip}}, \code{\link{release_ip}}
+#' @seealso \code{\link{associate_ip}}, \code{\link{describe_ips}}, \code{\link{release_ip}}, \code{\link{make_ip_vpc}}/\code{\link{make_ip_classic}}
 #' @export
 allocate_ip <- function(domain = c("vpc", "standard"), ...) {
     query <- list(Action = "AllocateAddress")
@@ -69,22 +75,6 @@ release_ip <- function(ip, ...) {
     }
 }
 
-assign_private_ip <- function(netinterface, n, private, allow, ...) {
-    query <- list(Action = "ReleaseAddress", NetworkInterfaceId = netinterface)
-    if(!missing(n))
-        query$SecondaryPrivateIpAddressCount <- n
-    else {
-        private <- as.list(private)
-        names(private) <- paste0("PrivateIpAddress.", 1:length(private))
-        query <- c(query, private)
-    }
-    if(!missing(allow))
-        query$AllowReassociation <- tolower(as.character(allow))
-    r <- ec2HTTP(query = query, ...)
-    return(r)
-
-}
-
 #' @rdname associate_ip
 #' @title (Dis)Associate IP
 #' @description Associate/Disassociate IP with Instance
@@ -99,7 +89,7 @@ assign_private_ip <- function(netinterface, n, private, allow, ...) {
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html}
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html}
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html}
-#' @seealso \code{\link{allocate_ip}}, \code{\link{describe_ip}}, \code{\link{release_ip}}
+#' @seealso \code{\link{allocate_ip}}, \code{\link{describe_ips}}, \code{\link{release_ip}}
 #' @export
 associate_ip <- 
 function(instance, 
@@ -181,39 +171,41 @@ disassociate_ip <- function(ip, ...) {
     return(r)
 }
 
-#' @title Describe IP
-#' @description Get IP information
+#' @title Describe IP(s)
+#' @description Get information about one or more IP addresses.
 #' @template ip 
 #' @template filter
 #' @template dots
 #' @return A list
 #' @export
-describe_ip <- function(ip, filter, ...) {
+describe_ips <- function(ip, filter, ...) {
     query <- list(Action = "DescribeAddresses")
-    if (inherits(ip, "ec2_ip")) {
-        if (ip$domain == "vpc") {
-            query$AllocationId <- ip$allocationId
-        } else if (ip$domain == "standard") {
-            query$PublicIp <- ip$publicIp
+    if (!missing(ip)) {
+        if (inherits(ip, "ec2_ip")) {
+            if (ip$domain == "vpc") {
+                query$AllocationId <- ip$allocationId
+            } else if (ip$domain == "standard") {
+                query$PublicIp <- ip$publicIp
+            } else {
+                stop("'ip' is not a recognized domain")
+            }
+        } else if (is.list(ip)) {
+            if ("allocationId" %in% names(ip)) {
+                query$AllocationId <- ip$allocationId
+            } else if ("publicIp" %in% names(ip)) {
+                query$PublicIp <- ip$publicIp
+            } else {
+                stop("'ip' is not a recognized domain")
+            }
+        } else if (is.character(ip)) {
+            if (!grepl("\\.", ip)) {
+                query$AllocationId <- ip
+            } else {
+                query$PublicIp <- ip
+            }
         } else {
-            stop("'ip' is not a recognized domain")
+            stop("'ip' must be an allocationId, a publicIp, or an object of class 'ec2_ip'")
         }
-    } else if (is.list(ip)) {
-        if ("allocationId" %in% names(ip)) {
-            query$AllocationId <- ip$allocationId
-        } else if ("publicIp" %in% names(ip)) {
-            query$PublicIp <- ip$publicIp
-        } else {
-            stop("'ip' is not a recognized domain")
-        }
-    } else if (is.character(ip)) {
-        if (!grepl("\\.", ip)) {
-            query$AllocationId <- ip
-        } else {
-            query$PublicIp <- ip
-        }
-    } else {
-        stop("'ip' must be an allocationId, a publicIp, or an object of class 'ec2_ip'")
     }
     if (!missing(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
@@ -225,6 +217,61 @@ describe_ip <- function(ip, filter, ...) {
 }
 
 
+#' @rdname convert_ip
+#' @title IP conversion
+#' @description Convert IP between Classic/EC2
+#' @details IP addresses can only be used within EC2 classic or a Virtual Private Cloud. These functions allow you to convert an IP address between the two systems.
+#' @template ip
+#' @template dots
+#' @return A list.
+#' @references
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html}
+#' @export
+make_ip_vpc <- function(ip, ...) {
+    query <- list(Action = "MoveAddressToVpc")
+    if (inherits(ip, "ec2_ip")) {
+        query$PublicIp <- ip[["publicIp"]]
+    } else if (is.list(ip)) {
+        if ("publicIp" %in% names(ip)) {
+            query$PublicIp <- ip[["publicIp"]]
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.character(ip)) {
+        if (grepl("\\.", ip)) {
+            query$PublicIp <- ip
+        }
+    } else {
+        stop("'ip' must be a publicIp, or an object of class 'ec2_ip'")
+    }
+    r <- ec2HTTP(query = query, ...)
+    return(r)
+}
+
+#' @rdname convert_ip
+#' @export
+make_ip_classic <- function(ip, ...) {
+    query <- list(Action = "RestoreAddressToClassic")
+    if (inherits(ip, "ec2_ip")) {
+        query$PublicIp <- ip[["publicIp"]]
+    } else if (is.list(ip)) {
+        if ("publicIp" %in% names(ip)) {
+            query$PublicIp <- ip[["publicIp"]]
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.character(ip)) {
+        if (grepl("\\.", ip)) {
+            query$PublicIp <- ip
+        }
+    } else {
+        stop("'ip' must be a publicIp, or an object of class 'ec2_ip'")
+    }
+    r <- ec2HTTP(query = query, ...)
+    return(r)
+}
+
 # utils
 
 print.ec2_ip <- function(x, ...) {
@@ -234,4 +281,8 @@ print.ec2_ip <- function(x, ...) {
         cat("allocationId: ", x$allocationId, "\n")
     }
     invisible(x)
+}
+
+my_ip <- function() {
+    readLines("http://checkip.amazonaws.com/")
 }

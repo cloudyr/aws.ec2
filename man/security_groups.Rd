@@ -34,8 +34,15 @@ Describe, create, and delete Security Groups
 \examples{
 \dontrun{
 describe_sgroups()
-sg <- create_sgroup("test_group", "example security group")
-delete_sgroup(sg)
+# create a generic security group
+sg1 <- create_sgroup("test_group", "example security group")
+delete_sgroup(sg1)
+
+# create a security group within a VPC
+## setup the VPC
+vpc <- allocate_ip("vpc")
+vpc <- describe_ips(vpc)[[1]]
+sg2 <- create_sgroup("test_group2", "new security group", vpc = vpc)
 }
 }
 \references{

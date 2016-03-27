@@ -16,8 +16,15 @@
 #' @examples
 #' \dontrun{
 #' describe_sgroups()
-#' sg <- create_sgroup("test_group", "example security group")
-#' delete_sgroup(sg)
+#' # create a generic security group
+#' sg1 <- create_sgroup("test_group", "example security group")
+#' delete_sgroup(sg1)
+#'
+#' # create a security group within a VPC
+#' ## setup the VPC
+#' vpc <- allocate_ip("vpc")
+#' vpc <- describe_ips(vpc)[[1]]
+#' sg2 <- create_sgroup("test_group2", "new security group", vpc = vpc)
 #' }
 #' @export
 describe_sgroups <- function(id, name, filter, ...) {
@@ -63,7 +70,8 @@ create_sgroup <- function(name, description, vpc, ...) {
         query$VpcId <- get_vpcid(vpc)
     }
     r <- ec2HTTP(query = query, ...)
-    return(structure(list(r$groupId), class = "ec2_security_group"))
+    out <- list(groupId = r$groupId[[1]], groupName = name, groupDescription = description)
+    return(structure(out, class = "ec2_security_group"))
 }
 
 #' @rdname security_groups

@@ -19,7 +19,7 @@ delete_subnet(subnet, ...)
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 
-\item{vpc}{\dots}
+\item{vpc}{A character string specifying a VPC Allocation ID or an object of class \dQuote{ec2_ip}.}
 
 \item{cidr}{A character string specifying a network range for the subnet in CIDR notation.}
 
@@ -38,7 +38,10 @@ Get, create, and delete subnets
 describe_subnets(d[[1]])
 
 # create a subnet
-
+## setup new VPC IP address
+new_ip <- allocate_ip("vpc")
+aid <- describe_ips(new_ip$publicIp)[[1]]$allocationId
+s <- create_subnet(aid, cidr = "10.0.1.0/24")
 
 # delete a subnet
 

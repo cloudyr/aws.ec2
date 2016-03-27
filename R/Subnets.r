@@ -3,7 +3,7 @@
 #' @description Get, create, and delete subnets
 #' @template subnet
 #' @template filter
-#' @param vpc \dots
+#' @template vpc
 #' @param cidr A character string specifying a network range for the subnet in CIDR notation.
 #' @param zone Optionally, a character string specifying an availability zone (see \code{\link{describe_zones}}) or an object of class \dQuote{ec2_zone}. If omitted, a zone is selected automatically.
 #' @template dots
@@ -20,7 +20,10 @@
 #' describe_subnets(d[[1]])
 #' 
 #' # create a subnet
-#' 
+#' ## setup new VPC IP address
+#' new_ip <- allocate_ip("vpc")
+#' aid <- describe_ips(new_ip$publicIp)[[1]]$allocationId
+#' s <- create_subnet(aid, cidr = "10.0.1.0/24")
 #' 
 #' # delete a subnet
 #' 
@@ -87,7 +90,15 @@ get_subnetid <- function(x) {
 # set_subnet_attr
 
 get_vpcid <- function(x) {
-    x
+    if (inherits(x, "ec2_ip")) {
+        if (x$domain == "vpc") {
+            return(x$allocationId)
+        } else {
+            stop("'x' does not appear to be a VPC")
+        }
+    } else {
+        return(x)
+    }
 }
 
 print.ec2_subnet <- function(x, ...) {
