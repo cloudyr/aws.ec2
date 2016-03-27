@@ -2,7 +2,7 @@ Package: aws.ec2
 Type: Package
 Title: AWS EC2 Client Package
 Version: 0.1.6
-Date: 2016-03-15
+Date: 2016-03-27
 Author: Thomas J. Leeper
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Description: A simple client package for the Amazon Web Services AWS Elastic
