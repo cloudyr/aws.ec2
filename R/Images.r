@@ -1,12 +1,19 @@
-#' @title Copy AMI
-#' @description Create a copy of an AMI
+#' @rdname create_ami
+#' @title Create AMI
+#' @description Copy an AMI or create AMI from instance
+#' @template instance
 #' @param name A character string specifying a name for the new AMI
 #' @template image
 #' @param description A character string containing a description of the AMI.
 #' @param region A character string specifying the AWS region to create the AMI in. The default is \dQuote{us-east-1}.
+#' @param mapping \dots
+#' @param noreboot A logical. From the AWS documentation: \dQuote{By default, this parameter is set to false, which means Amazon EC2 attempts to shut down the instance cleanly before image creation and then reboots the instance. When the parameter is set to true, Amazon EC2 doesn't shut down the instance before creating the image. When this option is used, file system integrity on the created image can't be guaranteed.}
 #' @template token
 #' @template dots
 #' @return A list.
+#' @references
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopyImage.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html}
 #' @examples
 #' \dontrun{
 #' copy_image("example-rstudio-ami", "ami-7f9dc615", "This is a description")
@@ -28,7 +35,10 @@ copy_image <- function(name, image, description, region = getOption("AWS_DEFAULT
     return(r)
 }
 
-create_image <- function(name, instance, region, description, noreboot, mapping, ...) {
+#' @rdname create_ami
+create_image <- function(instance, name, description, 
+                         region = getOption("AWS_DEFAULT_REGION", "us-east-1"), 
+                         mapping, noreboot = FALSE, ...) {
     query <- list(Action = "CreateImage", 
                   Name = name,
                   InstanceId = instance,
@@ -48,6 +58,8 @@ create_image <- function(name, instance, region, description, noreboot, mapping,
     return(r)
 }
 
+# \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html}
+# \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RegisterImage.html}
 register_image <- function() {
     
     # NEED TO DO THIS
@@ -61,67 +73,6 @@ deregister_image <- function(image, ...) {
     return(r)
 }
 
-#' @rdname image_attrs
-#' @title AMI Attributes
-#' @description Get, set, and reset AMI attributes
-#' @template image
-#' @param attribute A character string specifying one of: \dQuote{description}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{launchPermission}, \dQuote{productCodes}, \dQuote{blockDeviceMapping}, \dQuote{sriovNetSupport}
-#' @param value \dots
-#' @param description \dots
-#' @param operationtype \dots
-#' @param launchpermission \dots
-#' @param usergroup \dots
-#' @param userid \dots
-#' @template dots
-#' @return A list
-#' @examples
-#' \dontrun{
-#' # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
-#' get_image_attr("ami-7f9dc615", "description")
-#' }
-#' @export
-get_image_attr <- function(image, attribute, ...) {
-    val <- c("description", "kernel", "ramdisk", "launchPermission", "productCodes", "blockDeviceMapping", "sriovNetSupport")
-    if (!attribute %in% val) {
-        stop(paste0("'attribute' must be one of: ", paste(val, sep = ", ")))
-    }
-    query <- list(Action = "DescribeImageAttribute", 
-                  ImageId = get_imageid(image),
-                  Attribute = attribute)
-    r <- ec2HTTP(query = query, ...)
-    return(r)
-}
-
-#' @rdname image_attrs
-#' @export
-set_image_attr <- 
-function(image, 
-         attribute, 
-         value,
-         description, 
-         operationtype, 
-         launchpermission, 
-         usergroup,
-         userid, ...) {
-    query <- list(Action = "DescribeImageAttribute", 
-                  ImageId = get_imageid(image))
-    
-    # NEED TO HANDLE THIS
-    stop("This function is not currently implemented.")
-    
-    r <- ec2HTTP(query = query, ...)
-    return(r)
-}
-
-#' @rdname image_attrs
-#' @export
-reset_image_attr <- function(image, attribute, ...) {
-    query <- list(Action = "ResetImageAttribute", 
-                  ImageId = get_imageid(image),
-                  Attribute = attribute)
-    r <- ec2HTTP(query = query, ...)
-    return(r)
-}
 
 #' @title Describe AMI(s)
 #' @description Search/Describe AMI(s)
@@ -164,7 +115,9 @@ describe_images <- function(image, filter, availableto, owner, ...) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(setNames(lapply(r$imagesSet, `class<-`, "ec2_image"), NULL))
+    return(unname(lapply(r$imagesSet, function(z) {
+        structure(flatten_list(z), class = "ec2_image")
+    })))
 }
 
 print.ec2_image <- function(x, ...) {

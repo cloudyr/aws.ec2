@@ -5,7 +5,7 @@
 \title{Run an EC2 Instance}
 \usage{
 run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
-  userdata, ...)
+  userdata, shutdown = c("stop", "terminate"), token, ...)
 }
 \arguments{
 \item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}.}
@@ -23,6 +23,10 @@ run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
 \item{sgroup}{A character vector specifying one or more Security Group IDs.}
 
 \item{userdata}{Optionally, a character string specifying a script to run during launch.}
+
+\item{shutdown}{A character string specifying either \dQuote{stop} or \dQuote{terminate}, to control the behavior of a shutdown action taken from within the instance.}
+
+\item{token}{A (max 64-character) string containing a unique user-defined token. This can be used to ensure idempotency of requests in the event of a user-side failure. See \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html} for details.}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 }
@@ -46,5 +50,12 @@ i <- run_instances(image = "ami-7f9dc615",
 stop_instances(i[[1]])
 terminate_instances(i[[1]])
 }
+}
+\references{
+\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html}
+}
+\seealso{
+\code{\link{describe_instances}}, \code{\link{start_instances}}, \code{\link{terminate_instances}}
 }
 

@@ -49,7 +49,7 @@ describe_zones <- function(zone, filter, ...) {
     }
     r <- ec2HTTP(query = query, ...)
     return(unname(lapply(r$availabilityZoneInfo, function(z) {
-        structure(unlist(z, recursive = FALSE), class = "ec2_zone")
+        structure(flatten_list(z), class = "ec2_zone")
     })))
 }
 
@@ -81,6 +81,6 @@ describe_regions <- function(region, filter, ...) {
     }
     r <- ec2HTTP(query = query, ...)
     return(unname(lapply(r$regionInfo, function(z) {
-        structure(unlist(z, recursive = FALSE), class = "ec2_region")
+        structure(flatten_list(z), class = "ec2_region")
     })))
 }

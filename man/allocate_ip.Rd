@@ -5,18 +5,16 @@
 \alias{release_ip}
 \title{Allocate/Release IP Address}
 \usage{
-allocate_ip(domain, ...)
+allocate_ip(domain = c("vpc", "standard"), ...)
 
-release_ip(allocation, public, ...)
+release_ip(ip, ...)
 }
 \arguments{
 \item{domain}{Optionally, a character string specifying \dQuote{vpc} or \dQuote{standard}.}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 
-\item{allocation}{A character string specifying an EC2 IP address Allocation ID.}
-
-\item{public}{This is the public IP address for a \dQuote{classic} EC2 instance. For VPC, use \code{allocation} instead.}
+\item{ip}{An object of class \dQuote{ec2_ip} or an allocationId (for a VPC IP) or publicIp (for a standard IP).}
 }
 \value{
 For \code{allocate_ip}, a list containing the IP address. For \code{release_ip}, a logical.
@@ -24,7 +22,17 @@ For \code{allocate_ip}, a list containing the IP address. For \code{release_ip},
 \description{
 Allocate or release VPC or standard IP Address
 }
+\examples{
+\dontrun{
+a <- allocate_ip("standard")
+release_ip(public = a$publicIp)
+}
+}
+\references{
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateAddress.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseAddress.html}
+}
 \seealso{
-\code{\link{associate_ip}}
+\code{\link{associate_ip}}, \code{\link{describe_ip}}, \code{\link{release_ip}}
 }
 

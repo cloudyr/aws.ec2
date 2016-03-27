@@ -2,10 +2,15 @@
 % Please edit documentation in R/Images.r
 \name{copy_image}
 \alias{copy_image}
-\title{Copy AMI}
+\alias{create_image}
+\title{Create AMI}
 \usage{
 copy_image(name, image, description, region = getOption("AWS_DEFAULT_REGION",
   "us-east-1"), token, ...)
+
+create_image(instance, name, description,
+  region = getOption("AWS_DEFAULT_REGION", "us-east-1"), mapping,
+  noreboot = FALSE, ...)
 }
 \arguments{
 \item{name}{A character string specifying a name for the new AMI}
@@ -19,17 +24,27 @@ copy_image(name, image, description, region = getOption("AWS_DEFAULT_REGION",
 \item{token}{A (max 64-character) string containing a unique user-defined token. This can be used to ensure idempotency of requests in the event of a user-side failure. See \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html} for details.}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+
+\item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}.}
+
+\item{mapping}{\dots}
+
+\item{noreboot}{A logical. From the AWS documentation: \dQuote{By default, this parameter is set to false, which means Amazon EC2 attempts to shut down the instance cleanly before image creation and then reboots the instance. When the parameter is set to true, Amazon EC2 doesn't shut down the instance before creating the image. When this option is used, file system integrity on the created image can't be guaranteed.}}
 }
 \value{
 A list.
 }
 \description{
-Create a copy of an AMI
+Copy an AMI or create AMI from instance
 }
 \examples{
 \dontrun{
 copy_image("example-rstudio-ami", "ami-7f9dc615", "This is a description")
 
 }
+}
+\references{
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopyImage.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html}
 }
 

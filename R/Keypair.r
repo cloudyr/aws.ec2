@@ -5,15 +5,15 @@
 #' @param filter \dots
 #' @param publickey \dots
 #' @template dots
-#' @return A list
+#' @return A list of class \dQuote{ec2_keypair} or list of such objects.
 #' @examples
 #' \dontrun{
 #' k <- create_keypair("test_keypair")
-#' get_keypairs()
+#' describe_keypairs()
 #' delete_keypair(k)
 #' }
 #' @export
-get_keypairs <- function(keypair, filter, ...) {
+describe_keypairs <- function(keypair, filter, ...) {
     query <- list(Action = "DescribeKeyPairs")
     if (!missing(keypair)) {
         if (inherits(keypair, "ec2_keypair")) {
@@ -34,7 +34,9 @@ get_keypairs <- function(keypair, filter, ...) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(lapply(r$keySet, `class<-`, "ec2_keypair"))
+    return(unname(lapply(r$keySet, function(z) {
+        structure(flatten_list(z), class = "ec2_keypair")
+    })))
 }
 
 #' @rdname keypairs
@@ -47,7 +49,7 @@ create_keypair <- function(keypair, ...) {
     }
     query$KeyName <- keypair
     r <- ec2HTTP(query = query, ...)
-    return(structure(r, class = "ec2_keypair"))
+    return(structure(flatten_list(r), class = "ec2_keypair"))
 }
 
 #' @rdname keypairs
@@ -60,7 +62,11 @@ delete_keypair <- function(keypair, ...) {
     }
     query$KeyName <- keypair
     r <- ec2HTTP(query = query, ...)
-    return(r$return)
+    if (r$return[[1]] == "true") {
+        return(TRUE)
+    } else { 
+        return(FALSE)
+    }
 }
 
 #' @rdname keypairs
@@ -83,4 +89,10 @@ get_keypairname <- function(x) {
     } else if (inherits(x, "ec2_keypair")) {
         return(x$keyName[[1]])
     }
+}
+
+print.ec2_keypair <- function(x, ...) {
+    cat("keyName:        ", x$keyName[[1]], "\n")
+    cat("keyFingerprint: ", x$keyFingerprint[[1]], "\n")
+    invisible(x)
 }

@@ -6,16 +6,16 @@
 \alias{describe_sgroups}
 \title{Security Groups}
 \usage{
-describe_sgroups(name, id, filter, ...)
+describe_sgroups(id, name, filter, ...)
 
 create_sgroup(name, description, vpc, ...)
 
 delete_sgroup(name, id, ...)
 }
 \arguments{
-\item{name}{A character string (max 255 characters) specifying a security group name.}
-
 \item{id}{A character string specifying a security group ID.}
+
+\item{name}{A character string (max 255 characters) specifying a security group name.}
 
 \item{filter}{\dots}
 
@@ -26,9 +26,22 @@ delete_sgroup(name, id, ...)
 \item{vpc}{A character string specifying a VPC Id (required for a VPC).}
 }
 \value{
-For \code{describe_sgroups}, a list of objects of class \dQuote{ec2_security_group}.
+For \code{describe_sgroups} and \code{create_sgroup}, a list of objects of class \dQuote{ec2_security_group}. For \code{delete_sgroup}, a logical.
 }
 \description{
 Describe, create, and delete Security Groups
+}
+\examples{
+\dontrun{
+describe_sgroups()
+sg <- create_sgroup("test_group", "example security group")
+delete_sgroup(sg)
+}
+}
+\references{
+\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSecurityGroup.html}
 }
 

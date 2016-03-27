@@ -21,20 +21,33 @@ delete_subnet(subnet, ...)
 
 \item{vpc}{\dots}
 
-\item{cidr}{\dots}
+\item{cidr}{A character string specifying a network range for the subnet in CIDR notation.}
 
-\item{zone}{\dots}
+\item{zone}{Optionally, a character string specifying an availability zone (see \code{\link{describe_zones}}) or an object of class \dQuote{ec2_zone}. If omitted, a zone is selected automatically.}
 }
 \value{
-A list
+A list of objects of class \dQuote{ec2_subnet}.
 }
 \description{
 Get, create, and delete subnets
 }
 \examples{
 \dontrun{
-# RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
-get_image_attr("ami-7f9dc615", "description")
+# describe existing subnets
+(d <- describe_subnets())
+describe_subnets(d[[1]])
+
+# create a subnet
+
+
+# delete a subnet
+
 }
+}
+\references{
+\url{http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSubnet.html}
 }
 

@@ -2,36 +2,71 @@
 #' @title Allocate/Release IP Address
 #' @description Allocate or release VPC or standard IP Address
 #' @param domain Optionally, a character string specifying \dQuote{vpc} or \dQuote{standard}.
-#' @template allocation
-#' @param public This is the public IP address for a \dQuote{classic} EC2 instance. For VPC, use \code{allocation} instead.
+#' @template ip 
 #' @template dots
 #' @return For \code{allocate_ip}, a list containing the IP address. For \code{release_ip}, a logical.
-#' @seealso \code{\link{associate_ip}}
+#' @references
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateAddress.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseAddress.html}
+#' @examples
+#' \dontrun{
+#' a <- allocate_ip("standard")
+#' release_ip(public = a$publicIp)
+#' }
+#' @seealso \code{\link{associate_ip}}, \code{\link{describe_ip}}, \code{\link{release_ip}}
 #' @export
-allocate_ip <- function(domain, ...) {
+allocate_ip <- function(domain = c("vpc", "standard"), ...) {
     query <- list(Action = "AllocateAddress")
     if (!missing(domain)) {
-        vdomain <- c("vpc", "standard")
-        if (!domain %in% vdomain) {
-            stop("'domain' must be one of: ", paste0(vdomain, collapse = ", "))
-        }
+        domain <- match.arg(domain)
         query$Domain <- domain
     }
     r <- ec2HTTP(query = query, ...)
-    return(structure(r, class = "ec2_ip"))
+    if ("publicIp" %in% names(r)) {
+        out <- list(publicIp = r$publicIp[[1]], domain = r$domain[[1]])
+    } else {
+        out <- list(allocationId = r$allocationId[[1]], domain = r$domain[[1]])
+    }
+    return(structure(out, 
+                     class = "ec2_ip", 
+                     requestId = r$requestId[[1]]))
+    
 }
 
 #' @rdname allocate_ip
-release_ip <- function(allocation, public, ...) {
+release_ip <- function(ip, ...) {
     query <- list(Action = "ReleaseAddress")
-    if (!missing(allocation)) {
-        query$AllocationId <- allocation
-    }
-    if (!missing(public)) {
-        query$PublicIp <- public
+    if (inherits(ip, "ec2_ip")) {
+        if (ip$domain == "vpc") {
+            query$AllocationId <- ip$allocationId
+        } else if (ip$domain == "standard") {
+            query$PublicIp <- ip$publicIp
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.list(ip)) {
+        if ("allocationId" %in% names(ip)) {
+            query$AllocationId <- ip$allocationId
+        } else if ("publicIp" %in% names(ip)) {
+            query$PublicIp <- ip$publicIp
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.character(ip)) {
+        if (!grepl("\\.", ip)) {
+            query$AllocationId <- ip
+        } else {
+            query$PublicIp <- ip
+        }
+    } else {
+        stop("'ip' must be an allocationId, a publicIp, or an object of class 'ec2_ip'")
     }
     r <- ec2HTTP(query = query, ...)
-    return(r$return)
+    if (r$return[[1]] == "true") {
+        return(TRUE)
+    } else { 
+        return(FALSE)
+    }
 }
 
 assign_private_ip <- function(netinterface, n, private, allow, ...) {
@@ -54,30 +89,53 @@ assign_private_ip <- function(netinterface, n, private, allow, ...) {
 #' @title (Dis)Associate IP
 #' @description Associate/Disassociate IP with Instance
 #' @template instance
-#' @param allocation \dots
-#' @param public \dots
-#' @param private \dots
-#' @param netinterface \dots
+#' @template ip 
+#' @param private For a VPC \code{ip}, the primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
+#' @param netinterface For a VCP \code{ip}, the ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.
 #' @param allow \dots
 #' @template dots
 #' @return A list.
+#' @references
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html}
+#' @seealso \code{\link{allocate_ip}}, \code{\link{describe_ip}}, \code{\link{release_ip}}
 #' @export
 associate_ip <- 
 function(instance, 
-         allocation, 
-         public, 
+         ip, 
          private, 
          netinterface, 
          allow,
          ...) {
     query <- list(Action = "AssociateAddress", InstanceId = get_instanceid(instance))
-    if (!missing(allocation)) {
-        query$AllocationId <- allocation
+    if (inherits(ip, "ec2_ip")) {
+        if (ip$domain == "vpc") {
+            query$AllocationId <- ip$allocationId
+        } else if (ip$domain == "standard") {
+            query$PublicIp <- ip$publicIp
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.list(ip)) {
+        if ("allocationId" %in% names(ip)) {
+            query$AllocationId <- ip$allocationId
+        } else if ("publicIp" %in% names(ip)) {
+            query$PublicIp <- ip$publicIp
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.character(ip)) {
+        if (!grepl("\\.", ip)) {
+            query$AllocationId <- ip
+        } else {
+            query$PublicIp <- ip
+        }
+    } else {
+        stop("'ip' must be an allocationId, a publicIp, or an object of class 'ec2_ip'")
     }
-    if (!missing(public)) {
-        query$PublicIp <- public
-    }
-    if (!missing(public)) {
+    
+    if (!missing(private)) {
         query$PrivateIpAddress <- private
     }
     if (!missing(netinterface)) {
@@ -92,13 +150,32 @@ function(instance,
 
 #' @rdname associate_ip
 #' @export
-disassociate_ip <- function(allocation, public, ...) {
+disassociate_ip <- function(ip, ...) {
     query <- list(Action = "DisassociateAddress")
-    if (!missing(allocation)) {
-        query$AllocationId <- allocation
-    }
-    if (!missing(public)) {
-        query$PublicIp <- public
+    if (inherits(ip, "ec2_ip")) {
+        if (ip$domain == "vpc") {
+            query$AllocationId <- ip$allocationId
+        } else if (ip$domain == "standard") {
+            query$PublicIp <- ip$publicIp
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.list(ip)) {
+        if ("allocationId" %in% names(ip)) {
+            query$AllocationId <- ip$allocationId
+        } else if ("publicIp" %in% names(ip)) {
+            query$PublicIp <- ip$publicIp
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.character(ip)) {
+        if (!grepl("\\.", ip)) {
+            query$AllocationId <- ip
+        } else {
+            query$PublicIp <- ip
+        }
+    } else {
+        stop("'ip' must be an allocationId, a publicIp, or an object of class 'ec2_ip'")
     }
     r <- ec2HTTP(query = query, ...)
     return(r)
@@ -106,27 +183,55 @@ disassociate_ip <- function(allocation, public, ...) {
 
 #' @title Describe IP
 #' @description Get IP information
-#' @template allocation
-#' @param public \dots
+#' @template ip 
 #' @template filter
 #' @template dots
 #' @return A list
 #' @export
-describe_ip <- function(allocation, public, filter, ...) {
+describe_ip <- function(ip, filter, ...) {
     query <- list(Action = "DescribeAddresses")
-    if (!missing(allocation)) {
-        allocation <- as.list(allocation)
-        names(allocation) <- paste0("AllocationId.", 1:length(allocation))
-        query <- c(query, allocation)
-    }
-    if (!missing(public)) {
-        public <- as.list(public)
-        names(public) <- paste0("PublicIp.", 1:length(public))
-        query <- c(query, public)
+    if (inherits(ip, "ec2_ip")) {
+        if (ip$domain == "vpc") {
+            query$AllocationId <- ip$allocationId
+        } else if (ip$domain == "standard") {
+            query$PublicIp <- ip$publicIp
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.list(ip)) {
+        if ("allocationId" %in% names(ip)) {
+            query$AllocationId <- ip$allocationId
+        } else if ("publicIp" %in% names(ip)) {
+            query$PublicIp <- ip$publicIp
+        } else {
+            stop("'ip' is not a recognized domain")
+        }
+    } else if (is.character(ip)) {
+        if (!grepl("\\.", ip)) {
+            query$AllocationId <- ip
+        } else {
+            query$PublicIp <- ip
+        }
+    } else {
+        stop("'ip' must be an allocationId, a publicIp, or an object of class 'ec2_ip'")
     }
     if (!missing(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(lapply(r$addressesSet, `class<-`, "ec2_ip"))
+    return(unname(lapply(r$addressesSet, function(z) {
+        structure(flatten_list(z), class = "ec2_ip")
+    })))
+}
+
+
+# utils
+
+print.ec2_ip <- function(x, ...) {
+    cat("publicIp:     ", x$publicIp, "\n")
+    cat("domain:       ", x$domain, "\n")
+    if (x$domain == "vpc") {
+        cat("allocationId: ", x$allocationId, "\n")
+    }
+    invisible(x)
 }

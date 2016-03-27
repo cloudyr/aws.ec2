@@ -1,3 +1,8 @@
-# CHANGES TO aws.ec2 0.1 #
+# CHANGES TO aws.ec2 0.1.6 #
+
+* Several breaking API changes and substantial changes to return values of various functions to increase consistency across the package.
+* Considerable expansion of documentation.
+
+# CHANGES TO aws.ec2 0.1.1 #
 
 * Initial release.

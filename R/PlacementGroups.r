@@ -1,28 +1,76 @@
+#' @rdname placement_groups
+#' @title Placement Groups
+#' @description EC2 Cluster \dQuote{Placement Groups}
+#' @param group A character string specifying a placement group.
+#' @param strategy A character string specifying \dQuote{cluster}. No other values are currently allowed.
+#' @template filter
+#' @return For \code{describe_placements}, a list of objects of class \dQuote{ec2_placement_group}. Otherwise, a logical.
+#' @references
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribePlacementGroups.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreatePlacementGroup.html}
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeletePlacementGroup.html}
+#' @examples
+#' \dontrun{
+#' pg <- create_placement("examplepg")
+#' describe_placements()
+#' delete_placement("examplepg")
+#' }
+#' @export
 create_placement <- function(group, strategy = "cluster", ...) {
     query <- list(Action = "CreatePlacementGroup", 
                   GroupName = group,
                   Strategy = strategy)
     r <- ec2HTTP(query = query, ...)
-    return(r)
+    if (r$return[[1]] == "true") {
+        return(TRUE)
+    } else {
+        return(FALSE)
+    }
 }
 
+#' @rdname placement_groups
+#' @export
 delete_placement <- function(group, ...) {
     query <- list(Action = "DeletePlacementGroup", 
-                  GroupName = group)
+                  GroupName = get_pgname(group))
     r <- ec2HTTP(query = query, ...)
-    return(r)
+    if (r$return[[1]] == "true") {
+        return(TRUE)
+    } else {
+        return(FALSE)
+    }
 }
 
+#' @rdname placement_groups
+#' @export
 describe_placements <- function(group, filter, ...) {
-    query <- list(Action = "DescribePlacementGroup")
-    if(!missing(group)) {
-        group <- as.list(group)
-        names(group) <- paste0("InstanceId.", 1:length(group))
+    query <- list(Action = "DescribePlacementGroups")
+    if (!missing(group)) {
+        if (inherits(group, "ec2_image")) {
+            group <- list(get_pgname(group))
+        } else if (is.character(group)) {
+            group <- as.list(get_pgname(group))
+        } else {
+            group <- lapply(group, get_pgname)
+        }
+        names(group) <- paste0("GroupName.", 1:length(group))
         query <- c(query, group)
     }
-    if(!missing(filter)) {
+    if (!missing(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(r)
+    return(unname(lapply(r$placementGroupSet, function(z) {
+        structure(flatten_list(z), class = "ec2_placement_group")
+    })))
+}
+
+get_pgname <- function(x) {
+    if (inherits(x, "ec2_placement_group")) {
+        return(x$groupName[[1]])
+    } else if (is.character(x)) {
+        return(x)
+    } 
 }

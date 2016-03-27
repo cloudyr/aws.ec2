@@ -5,20 +5,18 @@
 \alias{disassociate_ip}
 \title{(Dis)Associate IP}
 \usage{
-associate_ip(instance, allocation, public, private, netinterface, allow, ...)
+associate_ip(instance, ip, private, netinterface, allow, ...)
 
-disassociate_ip(allocation, public, ...)
+disassociate_ip(ip, ...)
 }
 \arguments{
 \item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}.}
 
-\item{allocation}{\dots}
+\item{ip}{An object of class \dQuote{ec2_ip} or an allocationId (for a VPC IP) or publicIp (for a standard IP).}
 
-\item{public}{\dots}
+\item{private}{For a VPC \code{ip}, the primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.}
 
-\item{private}{\dots}
-
-\item{netinterface}{\dots}
+\item{netinterface}{For a VCP \code{ip}, the ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.}
 
 \item{allow}{\dots}
 
@@ -29,5 +27,13 @@ A list.
 }
 \description{
 Associate/Disassociate IP with Instance
+}
+\references{
+\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html}
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html}
+}
+\seealso{
+\code{\link{allocate_ip}}, \code{\link{describe_ip}}, \code{\link{release_ip}}
 }
 

@@ -4,12 +4,10 @@
 \alias{describe_ip}
 \title{Describe IP}
 \usage{
-describe_ip(allocation, public, filter, ...)
+describe_ip(ip, filter, ...)
 }
 \arguments{
-\item{allocation}{A character string specifying an EC2 IP address Allocation ID.}
-
-\item{public}{\dots}
+\item{ip}{An object of class \dQuote{ec2_ip} or an allocationId (for a VPC IP) or publicIp (for a standard IP).}
 
 \item{filter}{\dots}
 
