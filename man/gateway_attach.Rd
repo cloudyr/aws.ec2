@@ -13,6 +13,8 @@ detach_gateway(gateway, vpc, ...)
 \item{gateway}{A character string specifying an Internet Gateway ID, or an object of class \dQuote{ec2_internet_gateway}.}
 
 \item{vpc}{A character string specifying a VPC Allocation ID or an object of class \dQuote{ec2_ip}.}
+
+\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 }
 \description{
 Attach or Detacth Network Gateways for a VPC

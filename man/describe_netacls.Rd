@@ -7,6 +7,8 @@
 describe_netacls(acl, filter, ...)
 }
 \arguments{
+\item{acl}{\dots}
+
 \item{filter}{\dots}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}

@@ -16,6 +16,7 @@ associate_netacl <- function(association, acl, ...) {}
 
 #' @title describe_network_acls
 #' @description Describe Network ACL(s)
+#' @template acl
 #' @template filter
 #' @template dots
 #' @return A list of objects of class \dQuote{ec2_network_acl}.

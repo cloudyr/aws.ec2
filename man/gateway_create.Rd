@@ -10,6 +10,8 @@ create_gateway(...)
 delete_gateway(gateway, ...)
 }
 \arguments{
+\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+
 \item{gateway}{A character string specifying an Internet Gateway ID, or an object of class \dQuote{ec2_internet_gateway}.}
 }
 \description{

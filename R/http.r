@@ -9,7 +9,7 @@
 #' @param ... Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return A list
 #' @importFrom aws.signature signature_v4_auth
-#' @importFrom httr add_headers headers content warn_for_status http_status GET
+#' @importFrom httr add_headers headers content warn_for_status http_status http_error GET
 #' @importFrom xml2 read_xml as_list
 #' @export
 ec2HTTP <- function(query = list(), 

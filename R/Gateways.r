@@ -2,6 +2,7 @@
 #' @title Create/Delete Gateways
 #' @description Create and delete Network Gateways for a VPC
 #' @template gateway
+#' @template dots
 #' @references
 #' \url{http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/}
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway.html}
@@ -32,6 +33,7 @@ delete_gateway <- function(gateway, ...) {
 #' @description Attach or Detacth Network Gateways for a VPC
 #' @template gateway
 #' @template vpc
+#' @template dots
 #' @references
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachInternetGateway.html}
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html}

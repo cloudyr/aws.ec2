@@ -17,6 +17,8 @@ describe_placements(group, filter, ...)
 
 \item{strategy}{A character string specifying \dQuote{cluster}. No other values are currently allowed.}
 
+\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+
 \item{filter}{\dots}
 }
 \value{

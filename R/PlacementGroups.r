@@ -4,6 +4,7 @@
 #' @param group A character string specifying a placement group.
 #' @param strategy A character string specifying \dQuote{cluster}. No other values are currently allowed.
 #' @template filter
+#' @template dots
 #' @return For \code{describe_placements}, a list of objects of class \dQuote{ec2_placement_group}. Otherwise, a logical.
 #' @references
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html}
