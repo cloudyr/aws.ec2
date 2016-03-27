@@ -19,4 +19,10 @@ A list
 \description{
 Retrieve Zone Details
 }
+\references{
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html}
+}
+\seealso{
+\code{\link{describe_regions}}
+}
 

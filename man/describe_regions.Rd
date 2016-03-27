@@ -19,4 +19,12 @@ A list
 \description{
 Retrieve Region Details
 }
+\examples{
+\dontrun{
+decribe_regions()
+}
+}
+\seealso{
+\code{\link{describe_zones}}
+}
 

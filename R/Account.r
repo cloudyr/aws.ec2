@@ -3,6 +3,10 @@
 #' @param attribute Optionally a character string specifying one or more of: \dQuote{supported-platforms}, \dQuote{vpc-max-security-groups-per-interface}, \dQuote{max-elastic-ips}, \dQuote{max-instances}, \dQuote{vpc-max-elastic-ips}, \dQuote{default-vpc}. If missing, all are returned.
 #' @template dots
 #' @return A list
+#' @examples
+#' \dontrun{
+#' account_attrs()
+#' }
 #' @export
 account_attrs <- function(attribute, ...) {
     query <- list(Action = "DescribeAccountAttributes")
@@ -25,6 +29,10 @@ account_attrs <- function(attribute, ...) {
 #' @param filter \dots
 #' @template dots
 #' @return A list
+#' @references
+#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html}
+#' @seealso \code{\link{describe_regions}}
+#' @export
 describe_zones <- function(zone, filter, ...) {
     query <- list(Action = "DescribeAvailabilityZones")
     if (!missing(zone)) {
@@ -40,7 +48,9 @@ describe_zones <- function(zone, filter, ...) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(lapply(r$availabilityZoneInfo, `class<-`, "ec2_zone"))
+    return(unname(lapply(r$availabilityZoneInfo, function(z) {
+        structure(unlist(z, recursive = FALSE), class = "ec2_zone")
+    })))
 }
 
 #' @title Describe Regions
@@ -49,6 +59,12 @@ describe_zones <- function(zone, filter, ...) {
 #' @param filter \dots
 #' @template dots
 #' @return A list
+#' @examples
+#' \dontrun{
+#' decribe_regions()
+#' }
+#' @seealso \code{\link{describe_zones}}
+#' @export
 describe_regions <- function(region, filter, ...) {
     query <- list(Action = "DescribeRegions")
     if (!missing(region)) {
@@ -64,5 +80,7 @@ describe_regions <- function(region, filter, ...) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(lapply(r$regionInfo, `class<-`, "ec2_region"))
+    return(unname(lapply(r$regionInfo, function(z) {
+        structure(unlist(z, recursive = FALSE), class = "ec2_region")
+    })))
 }

@@ -17,4 +17,9 @@ A list
 \description{
 Retrieve Account Attributes
 }
+\examples{
+\dontrun{
+account_attrs()
+}
+}
 
