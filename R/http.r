@@ -51,15 +51,10 @@ ec2HTTP <- function(query = list(),
     } else {
         r <- GET(url, H, ...)
     }
-    if (http_status(r)$category == "client error") {
+    if (http_error(r)) {
         tmp <- gsub("\n\\s*", "", content(r, "text"))
         x <- try(as_list(read_xml(tmp)), silent = TRUE)
-        warn_for_status(r)
-        h <- headers(r)
-        out <- structure(x, headers = h, class = "aws_error")
-        attr(out, "request_canonical") <- S$CanonicalRequest
-        attr(out, "request_string_to_sign") <- S$StringToSign
-        attr(out, "request_signature") <- S$SignatureHeader
+        stop(paste0(parse_errors(x), collapse = "\n"))
     } else {
         tmp <- gsub("\n\\s*", "", content(r, "text"))
         out <- try(as_list(read_xml(tmp)), silent = TRUE)
@@ -68,4 +63,10 @@ ec2HTTP <- function(query = list(),
         }
     }
     return(out)
+}
+
+parse_errors <- function(error) {
+    unname(unlist(lapply(error$Errors, function(z) {
+        paste0(z$Code[[1]], ": ", z$Message[[1]], "\n")
+    })))
 }
