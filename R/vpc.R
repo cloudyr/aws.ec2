@@ -47,6 +47,7 @@ delete_vpc <- function(vpc, ...) {
 #' @return A list.
 #' @references
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html}
+#' @examples
 #' \dontrun{
 #' describe_vpcs()
 #' }
@@ -118,7 +119,7 @@ set_vpc_attr <- function(vpc, dns, hostnames, ...) {
     }
 }
 
-#' @rdname vpc_attr
+#' @rdname vpc_attrs
 #' @export
 get_vpc_attr <- function(vpc, attribute = c("enableDnsSupport", "enableDnsHostnames"), ...) {
     query <- list(Action = "DescribeVpcAttribute", VpcId = get_vpcid(vpc))

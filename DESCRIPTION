@@ -1,7 +1,7 @@
 Package: aws.ec2
 Type: Package
 Title: AWS EC2 Client Package
-Version: 0.1.7
+Version: 0.1.8
 Date: 2016-03-28
 Author: Thomas J. Leeper
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
@@ -17,4 +17,4 @@ Suggests:
     testthat
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 5.0.1

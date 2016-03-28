@@ -19,11 +19,13 @@ A list.
 \description{
 List/describe VPC(s)
 }
-\references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html}
+\examples{
 \dontrun{
 describe_vpcs()
 }
+}
+\references{
+\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html}
 }
 \seealso{
 \code{\link{create_vpc}}, \code{\link{get_vpc_attr}}

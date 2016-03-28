@@ -23,7 +23,7 @@
 #' delete_acl(acl)
 #' delete_vpc(v)
 #' }
-#' @seealso \code{\link{describe_network_acls}}
+#' @seealso \code{\link{describe_netacls}}
 #' @keywords security
 #' @export
 create_netacl <- function(vpc, ...) {

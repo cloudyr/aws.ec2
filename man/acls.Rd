@@ -45,7 +45,7 @@ delete_vpc(v)
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAcl.html}
 }
 \seealso{
-\code{\link{describe_network_acls}}
+\code{\link{describe_netacls}}
 }
 \keyword{security}
 

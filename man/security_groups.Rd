@@ -10,7 +10,7 @@ describe_sgroups(sgroup, name, filter, ...)
 
 create_sgroup(name, description, vpc, ...)
 
-delete_sgroup(name, id, ...)
+delete_sgroup(name, sgroup, ...)
 }
 \arguments{
 \item{sgroup}{A character vector specifying one or more Security Group IDs, or (a list of) objects of class \dQuote{ec2_security_group}.}
@@ -32,7 +32,7 @@ For \code{describe_sgroups} and \code{create_sgroup}, a list of objects of class
 Describe, create, and delete Security Groups
 }
 \details{
-Security groups provide a layer of security for a Virtual Private Cloud (VPC) for an EC2 instance or set of instances. These can be used in tandem with or in lieu of network Access Control Lists (ACLs) (see \code{\link{describe_network_acls}}). Any given instance can be in multiple security groups, which can be confusing.
+Security groups provide a layer of security for a Virtual Private Cloud (VPC) for an EC2 instance or set of instances. These can be used in tandem with or in lieu of network Access Control Lists (ACLs) (see \code{\link{describe_netacls}}). Any given instance can be in multiple security groups, which can be confusing.
 }
 \examples{
 \dontrun{
