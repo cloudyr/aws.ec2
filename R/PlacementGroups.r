@@ -67,11 +67,3 @@ describe_placements <- function(group, filter, ...) {
         structure(flatten_list(z), class = "ec2_placement_group")
     })))
 }
-
-get_pgname <- function(x) {
-    if (inherits(x, "ec2_placement_group")) {
-        return(x$groupName[[1]])
-    } else if (is.character(x)) {
-        return(x)
-    } 
-}

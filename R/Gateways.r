@@ -8,6 +8,7 @@
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway.html}
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway.html}
 #' @seealso \code{\link{create_gateway}}, \code{\link{describe_gateways}}
+#' @keywords security
 #' @export
 create_gateway <- function(...) {
     query <- list(Action = "CreateInternetGateway")
@@ -38,6 +39,7 @@ delete_gateway <- function(gateway, ...) {
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachInternetGateway.html}
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html}
 #' @seealso \code{\link{create_gateway}}, \code{\link{describe_gateways}}
+#' @keywords security
 #' @export
 attach_gateway <- function(gateway, vpc, ...) {
     query <- list(Action = "AttachInternetGateway",
@@ -66,6 +68,7 @@ detach_gateway <- function(gateway, vpc, ...) {
 #' @references
 #' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInternetGateways.html}
 #' @seealso \code{\link{create_gateway}}, \code{\link{attach_gateway}}
+#' @keywords security
 #' @export
 describe_gateways <- function(gateway, filter, ...) {
     query <- list(Action = "DescribeInternetGateways")
@@ -85,15 +88,4 @@ describe_gateways <- function(gateway, filter, ...) {
     }
     r <- ec2HTTP(query = query, ...)
     return(structure(r$customerGatewaySet, requestId = r$requestId[[1]]))
-}
-
-
-# utils
-
-get_gatewayid <- function(x) {
-    if (inherits(x, "ec2_internet_gateway")) {
-        x$internetGatewayId
-    } else {
-        x
-    }
 }

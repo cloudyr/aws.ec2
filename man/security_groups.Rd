@@ -6,14 +6,14 @@
 \alias{describe_sgroups}
 \title{Security Groups}
 \usage{
-describe_sgroups(id, name, filter, ...)
+describe_sgroups(sgroup, name, filter, ...)
 
 create_sgroup(name, description, vpc, ...)
 
 delete_sgroup(name, id, ...)
 }
 \arguments{
-\item{id}{A character string specifying a security group ID.}
+\item{sgroup}{A character vector specifying one or more Security Group IDs, or (a list of) objects of class \dQuote{ec2_security_group}.}
 
 \item{name}{A character string (max 255 characters) specifying a security group name.}
 
@@ -30,6 +30,9 @@ For \code{describe_sgroups} and \code{create_sgroup}, a list of objects of class
 }
 \description{
 Describe, create, and delete Security Groups
+}
+\details{
+Security groups provide a layer of security for a Virtual Private Cloud (VPC) for an EC2 instance or set of instances. These can be used in tandem with or in lieu of network Access Control Lists (ACLs) (see \code{\link{describe_network_acls}}). Any given instance can be in multiple security groups, which can be confusing.
 }
 \examples{
 \dontrun{
@@ -51,4 +54,8 @@ sg2 <- create_sgroup("test_group2", "new security group", vpc = vpc)
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSecurityGroup.html}
 }
+\seealso{
+\code{\link{authorize_ingress}}
+}
+\keyword{security}
 

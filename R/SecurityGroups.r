@@ -1,7 +1,8 @@
 #' @rdname security_groups
 #' @title Security Groups
 #' @description Describe, create, and delete Security Groups
-#' @param id A character string specifying a security group ID.
+#' @details Security groups provide a layer of security for a Virtual Private Cloud (VPC) for an EC2 instance or set of instances. These can be used in tandem with or in lieu of network Access Control Lists (ACLs) (see \code{\link{describe_network_acls}}). Any given instance can be in multiple security groups, which can be confusing.
+#' @template sgroup
 #' @param name A character string (max 255 characters) specifying a security group name.
 #' @param description A character string specifying a security group description.
 #' @param vpc A character string specifying a VPC Id (required for a VPC).
@@ -26,19 +27,21 @@
 #' vpc <- describe_ips(vpc)[[1]]
 #' sg2 <- create_sgroup("test_group2", "new security group", vpc = vpc)
 #' }
+#' @seealso \code{\link{authorize_ingress}}
+#' @keywords security
 #' @export
-describe_sgroups <- function(id, name, filter, ...) {
+describe_sgroups <- function(sgroup, name, filter, ...) {
     query <- list(Action = "DescribeSecurityGroups")
-    if (!missing(id)) {
-        if (inherits(id, "ec2_security_group")) {
-            id <- list(get_sgid(id))
-        } else if (is.character(id)) {
-            id <- as.list(get_sgid(id))
+    if (!missing(sgroup)) {
+        if (inherits(sgroup, "ec2_security_group")) {
+            sgroup <- list(get_sgid(sgroup))
+        } else if (is.character(sgroup)) {
+            sgroup <- as.list(get_sgid(sgroup))
         } else {
-            id <- lapply(id, get_sgid)
+            sgroup <- lapply(sgroup, get_sgid)
         }
-        names(id) <- paste0("GroupId.", 1:length(id))
-        query <- c(query, id)
+        names(sgroup) <- paste0("GroupId.", 1:length(sgroup))
+        query <- c(query, sgroup)
     }
     if (!missing(name)) {
         if (inherits(name, "ec2_security_group")) {
@@ -108,40 +111,13 @@ delete_sgroup <- function(name, id, ...) {
     }
 }
 
-authorize_ingress <- function() {}
-
-revoke_ingress <- function() {}
-
-authorize_egress <- function() {}
-
-revoke_egress <- function() {}
-
-
 print.ec2_security_group <- function(x, ...) {
     cat("ownerId:          ", x$ownerId, "\n")
     cat("groupId:          ", x$groupId, "\n")
     cat("groupName:        ", x$groupName, "\n")
     cat("groupDescription: ", x$groupDescription, "\n")
     cat("vpcId:            ", x$vpcId , "\n")
-    cat("ipPermissions:    ", length(x$ipPermissions), "\n")
+    cat("ipPermissions:       ", length(x$ipPermissions), "\n")
+    cat("ipPermissionsEgress: ", length(x$ipPermissionsEgress), "\n")
     invisible(x)
-}
-
-
-# utils
-get_sgid <- function(x) {
-    if (inherits(x, "ec2_security_group")) {
-        return(x$groupId[[1]])
-    } else if (is.character(x)) {
-        return(x)
-    }     
-}
-
-get_sgname <- function(x) {
-    if (inherits(x, "ec2_security_group")) {
-        return(x$groupName[[1]])
-    } else if (is.character(x)) {
-        return(x)
-    } 
-
 }

@@ -20,16 +20,17 @@
 #' # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 #' describe_images("ami-7f9dc615")
 #' s <- describe_subnets()
-#' g <- describe_security_groups()
+#' g <- create_sgroup("my_security_group", "a security group", vpc = s[[1]])
 #' i <- run_instances(image = "ami-7f9dc615", 
 #'                    type = "t2.micro", 
 #'                    subnet = s[[1]], 
-#'                    sgroup = g[[1]]$groupId[[1]])
+#'                    sgroup = g[[1]])
 #'
 #' stop_instances(i[[1]])
 #' terminate_instances(i[[1]])
 #' }
 #' @seealso \code{\link{describe_instances}}, \code{\link{start_instances}}, \code{\link{terminate_instances}}
+#' @keywords instances
 #' @export
 run_instances <- 
 function(image, type, min = 1, max = min, keypair, subnet, sgroup, 
@@ -46,8 +47,14 @@ function(image, type, min = 1, max = min, keypair, subnet, sgroup,
         query$SubnetId <- get_subnetid(subnet)
     }
     if (!missing(sgroup)) {
-        sgroup <- as.list(sgroup)
-        names(sgroup) <- paste0("SecurityGroupId.", seq_along(sgroup))
+        if (inherits(sgroup, "ec2_security_group")) {
+            sgroup <- list(get_sgid(sgroup))
+        } else if (is.character(sgroup)) {
+            sgroup <- as.list(get_sgid(sgroup))
+        } else {
+            sgroup <- lapply(sgroup, get_sgid)
+        }
+        names(sgroup) <- paste0("SecurityGroupId.", 1:length(sgroup))
         query <- c(query, sgroup)
     }
     if (!missing(userdata)) {
@@ -85,6 +92,7 @@ function(image, type, min = 1, max = min, keypair, subnet, sgroup,
 #' terminate_instances(i[[1]])
 #' }
 #' @seealso \code{\link{describe_instances}}, \code{\link{run_instances}}
+#' @keywords instances
 #' @export
 start_instances <- function(instance, info, ...) {
     query <- list(Action = "StartInstances")
@@ -170,17 +178,6 @@ reboot_instances <- function(instance, ...) {
     }
     r <- ec2HTTP(query = query, ...)
     return(r$return)
-}
-
-
-# utils
-
-get_instanceid <- function(x) {
-    if (inherits(x, "ec2_instance")) {
-        return(x$instanceId[[1]])
-    } else if (is.character(x)) {
-        return(x)
-    } 
 }
 
 print.ec2_instance <- function(x, ...) {

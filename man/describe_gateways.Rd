@@ -25,4 +25,5 @@ Describe Network Gateways
 \seealso{
 \code{\link{create_gateway}}, \code{\link{attach_gateway}}
 }
+\keyword{security}
 

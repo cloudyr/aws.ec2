@@ -20,7 +20,7 @@ run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
 
 \item{subnet}{A character string containing the name of a subnet, or an object of class \dQuote{ec2_subnet}.}
 
-\item{sgroup}{A character vector specifying one or more Security Group IDs.}
+\item{sgroup}{A character vector specifying one or more Security Group IDs, or (a list of) objects of class \dQuote{ec2_security_group}.}
 
 \item{userdata}{Optionally, a character string specifying a script to run during launch.}
 
@@ -41,11 +41,11 @@ Run/launch a new EC2 Instance
 # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 describe_images("ami-7f9dc615")
 s <- describe_subnets()
-g <- describe_security_groups()
+g <- create_sgroup("my_security_group", "a security group", vpc = s[[1]])
 i <- run_instances(image = "ami-7f9dc615", 
                    type = "t2.micro", 
                    subnet = s[[1]], 
-                   sgroup = g[[1]]$groupId[[1]])
+                   sgroup = g[[1]])
 
 stop_instances(i[[1]])
 terminate_instances(i[[1]])
@@ -58,4 +58,5 @@ terminate_instances(i[[1]])
 \seealso{
 \code{\link{describe_instances}}, \code{\link{start_instances}}, \code{\link{terminate_instances}}
 }
+\keyword{instances}
 

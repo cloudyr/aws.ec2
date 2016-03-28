@@ -12,6 +12,7 @@
 #' describe_keypairs()
 #' delete_keypair(k)
 #' }
+#' @keywords security
 #' @export
 describe_keypairs <- function(keypair, filter, ...) {
     query <- list(Action = "DescribeKeyPairs")
@@ -81,14 +82,6 @@ import_keypair <- function(keypair, publickey, ...) {
     query$PublicKeyMaterial <- base64encode(charToRaw(publickey))
     r <- ec2HTTP(query = query, ...)
     return(r)    
-}
-
-get_keypairname <- function(x) {
-    if (is.character(x)) {
-        return(x)
-    } else if (inherits(x, "ec2_keypair")) {
-        return(x$keyName[[1]])
-    }
 }
 
 print.ec2_keypair <- function(x, ...) {

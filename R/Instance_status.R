@@ -20,6 +20,7 @@
 #' stop_instances(i[[1]])
 #' terminate_instances(i[[1]])
 #' }
+#' @keywords instances
 #' @export
 describe_instances <- function(instance, filter, n, token, ...) {
     query <- list(Action = "DescribeInstances")

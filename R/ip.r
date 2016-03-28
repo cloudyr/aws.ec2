@@ -283,6 +283,8 @@ print.ec2_ip <- function(x, ...) {
     invisible(x)
 }
 
+#' @rdname sg_ingress
+#' @export
 my_ip <- function() {
     readLines("http://checkip.amazonaws.com/")
 }

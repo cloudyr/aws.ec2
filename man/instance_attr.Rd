@@ -41,4 +41,5 @@ terminate_instances(i[[1]])
 \seealso{
 \code{\link{describe_instances}}, \code{\link{create_tags}}
 }
+\keyword{instances}
 

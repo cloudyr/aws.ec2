@@ -18,6 +18,7 @@
 #' terminate_instances(i[[1]])
 #' }
 #' @seealso \code{\link{describe_instances}}
+#' @keywords instances
 #' @export
 monitor_instances <- function(instance, ...) {
     query <- list(Action = "MonitorInstances")

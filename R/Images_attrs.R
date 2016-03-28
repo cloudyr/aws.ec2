@@ -16,6 +16,7 @@
 #' # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 #' get_image_attr("ami-7f9dc615", "description")
 #' }
+#' @keywords images
 #' @export
 get_image_attr <- function(image, attribute, ...) {
     val <- c("description", "kernel", "ramdisk", "launchPermission", "productCodes", "blockDeviceMapping", "sriovNetSupport")

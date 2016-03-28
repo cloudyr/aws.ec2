@@ -31,6 +31,9 @@ A list of objects of class \dQuote{ec2_subnet}.
 \description{
 Get, create, and delete subnets
 }
+\details{
+Use \code{\link{create_netacl}} and \code{\link{associate_netacl}} to specify a non-default Access Control List (ACL) for the subnet
+}
 \examples{
 \dontrun{
 # describe existing subnets
@@ -53,4 +56,8 @@ s <- create_subnet(aid, cidr = "10.0.1.0/24")
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSubnet.html}
 }
+\seealso{
+\code{\link{create_vpc}}, \code{\link{create_netacl}}, \code{\link{associate_netacl}}
+}
+\keyword{security}
 

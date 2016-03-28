@@ -44,4 +44,5 @@ Get, set, and reset AMI attributes
 get_image_attr("ami-7f9dc615", "description")
 }
 }
+\keyword{images}
 

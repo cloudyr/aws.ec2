@@ -42,4 +42,5 @@ terminate_instances(i[[1]])
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceStatus.html}
 }
+\keyword{instances}
 

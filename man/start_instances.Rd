@@ -48,4 +48,5 @@ terminate_instances(i[[1]])
 \seealso{
 \code{\link{describe_instances}}, \code{\link{run_instances}}
 }
+\keyword{instances}
 

@@ -47,4 +47,5 @@ copy_image("example-rstudio-ami", "ami-7f9dc615", "This is a description")
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopyImage.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html}
 }
+\keyword{images}
 

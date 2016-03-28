@@ -18,6 +18,7 @@
 #' }
 #' @seealso \code{\link{describe_instances}}, \code{\link{create_tags}}
 #' @importFrom base64enc base64decode
+#' @keywords instances
 #' @export
 get_instance_attr <- function(instance, attribute, ...) {
     val <- c("instanceType", "kernel", "ramdisk", "userData", "disableApiTermination", "instanceInitiatedShutdownBehavior", "rootDeviceName", "blockDeviceMapping", "productCodes", "sourceDestCheck", "groupSet", "ebsOptimized", "sriovNetSupport")
@@ -75,6 +76,7 @@ reset_instance_attr <- function(instance, attribute, ...) {
 #' terminate_instances(i[[1]])
 #' }
 #' @seealso \code{\link{get_instance_attr}}, \code{\link{describe_instances}}, \code{\link{get_password_data}}
+#' @keywords instances
 #' @importFrom base64enc base64decode
 #' @export
 get_console_output <- function(instance, ...) {
@@ -98,6 +100,7 @@ get_console_output <- function(instance, ...) {
 #' terminate_instances(i[[1]])
 #' }
 #' @seealso \code{\link{describe_instances}}, \code{\link{get_console_output}}
+#' @keywords instances
 #' @export
 get_password_data <- function(instance, ...) {
     query <- list(Action = "GetPasswordData", InstanceId = get_instanceid(instance))

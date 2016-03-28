@@ -27,6 +27,10 @@ Search/Describe AMI(s)
 \dontrun{
 # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 describe_images("ami-7f9dc615")
+
+# Amazon Linux AMI from: http://aws.amazon.com/amazon-linux-ami/
+describe_images("ami-08111162")
 }
 }
+\keyword{images}
 

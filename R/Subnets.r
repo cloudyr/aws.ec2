@@ -1,10 +1,11 @@
 #' @rdname subnets
 #' @title Subnets
 #' @description Get, create, and delete subnets
+#' @details Use \code{\link{create_netacl}} and \code{\link{associate_netacl}} to specify a non-default Access Control List (ACL) for the subnet
 #' @template subnet
 #' @template filter
 #' @template vpc
-#' @param cidr A character string specifying a network range for the subnet in CIDR notation.
+#' @template cidr
 #' @param zone Optionally, a character string specifying an availability zone (see \code{\link{describe_zones}}) or an object of class \dQuote{ec2_zone}. If omitted, a zone is selected automatically.
 #' @template dots
 #' @return A list of objects of class \dQuote{ec2_subnet}.
@@ -28,6 +29,8 @@
 #' # delete a subnet
 #' 
 #' }
+#' @seealso \code{\link{create_vpc}}, \code{\link{create_netacl}}, \code{\link{associate_netacl}}
+#' @keywords security
 #' @export
 describe_subnets <- function(subnet, filter, ...) {
     query <- list(Action = "DescribeSubnets")
@@ -76,28 +79,6 @@ delete_subnet <- function(subnet, ...) {
         return(TRUE)
     } else { 
         return(FALSE)
-    }
-}
-
-get_subnetid <- function(x) {
-    if (is.character(x)) {
-        return(x)
-    } else if (inherits(x, "ec2_subnet")) {
-        return(x$subnetId[[1]])
-    }
-}
-
-# set_subnet_attr
-
-get_vpcid <- function(x) {
-    if (inherits(x, "ec2_ip")) {
-        if (x$domain == "vpc") {
-            return(x$allocationId)
-        } else {
-            stop("'x' does not appear to be a VPC")
-        }
-    } else {
-        return(x)
     }
 }
 

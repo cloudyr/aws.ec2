@@ -19,10 +19,14 @@ A list of objects of class \dQuote{ec2_network_acl}.
 \description{
 Describe Network ACL(s)
 }
+\details{
+Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see \code{\link{describe_sgroups}}).
+}
 \references{
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkAcls.html}
 }
 \seealso{
 \code{\link{describe_subnets}}, \code{\link{describe_ips}}
 }
+\keyword{security}
 

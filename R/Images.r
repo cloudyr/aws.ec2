@@ -19,6 +19,7 @@
 #' copy_image("example-rstudio-ami", "ami-7f9dc615", "This is a description")
 #' 
 #' }
+#' @keywords images
 #' @export
 copy_image <- function(name, image, description, region = getOption("AWS_DEFAULT_REGION", "us-east-1"), token, ...) {
     query <- list(Action = "CopyImage", 
@@ -60,6 +61,7 @@ create_image <- function(instance, name, description,
 
 # \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html}
 # \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RegisterImage.html}
+#' @keywords images
 register_image <- function() {
     
     # NEED TO DO THIS
@@ -86,7 +88,11 @@ deregister_image <- function(image, ...) {
 #' \dontrun{
 #' # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 #' describe_images("ami-7f9dc615")
+#' 
+#' # Amazon Linux AMI from: http://aws.amazon.com/amazon-linux-ami/
+#' describe_images("ami-08111162")
 #' }
+#' @keywords images
 #' @export
 describe_images <- function(image, filter, availableto, owner, ...) {
     query <- list(Action = "DescribeImages")
@@ -127,12 +133,4 @@ print.ec2_image <- function(x, ...) {
     cat("description:  ", strwrap(x$description[[1]], width = 72, prefix = "  "), sep = "\n")
     cat("Public?", if(x$isPublic[[1]] == "true") "TRUE" else "FALSE", "\n")
     invisible(x)
-}
-
-get_imageid <- function(x) {
-    if (inherits(x, "ec2_image")) {
-        return(x$imageId[[1]])
-    } else if (is.character(x)) {
-        return(x)
-    } 
 }

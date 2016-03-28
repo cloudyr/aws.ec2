@@ -37,4 +37,5 @@ describe_keypairs()
 delete_keypair(k)
 }
 }
+\keyword{security}
 

@@ -21,6 +21,7 @@
 #' delete_tags("i-b79cfd34", list("foo" = "bar"))
 #' }
 #' @seealso \code{\link{describe_instances}}, \code{\link{get_instance_attr}}, \code{\link{associate_ip}}
+#' @keywords instances
 #' @export
 create_tags <- function(resource, tag, ...) {
     query <- list(Action = "CreateTags")
