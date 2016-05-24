@@ -1,1 +1,1 @@
-#' @param filter \dots
+#' @param filter One or more filters can be specified by a named list or vector where the keys are the names of the list/vector items and the values are the list/vector values. Refer to the corresponding version of the AWS REST API documentation used by \link{ec2HTTP} in issuing your command for a list of available key names.
