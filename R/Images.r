@@ -84,6 +84,7 @@ deregister_image <- function(image, ...) {
 #' @param owner \dots
 #' @template dots
 #' @return A list
+#' @seealso \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html}
 #' @examples
 #' \dontrun{
 #' # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
