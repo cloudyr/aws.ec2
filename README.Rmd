@@ -22,7 +22,7 @@ A really simple example is to launch an instance that comes preloaded with an RS
 
 ```{r}
 # describe the AMI (from: http://www.louisaslett.com/RStudio_AMI/)
-image <- "ami-7f9dc615"
+image <- "ami-b1b0c3c2"
 describe_images(image)
 
 # check your VPC and Security Group settings
