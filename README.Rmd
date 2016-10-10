@@ -22,7 +22,8 @@ A really simple example is to launch an instance that comes preloaded with an RS
 
 ```{r}
 # describe the AMI (from: http://www.louisaslett.com/RStudio_AMI/)
-describe_images("ami-7f9dc615")
+image <- "ami-b1b0c3c2"
+describe_images(image)
 
 # check your VPC and Security Group settings
 ## To actually use the 
@@ -30,7 +31,7 @@ s <- describe_subnets()
 g <- describe_sgroups()
 
 # launch the instance using appropriate settings
-i <- run_instances(image = "ami-7f9dc615", 
+i <- run_instances(image = image, 
                    type = "t2.micro", # <- you might want to change this
                    subnet = s[[1]], 
                    sgroup = g[[1]])
