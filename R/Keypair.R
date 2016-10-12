@@ -84,6 +84,7 @@ import_keypair <- function(keypair, publickey, ...) {
     return(r)    
 }
 
+#' @export
 print.ec2_keypair <- function(x, ...) {
     cat("keyName:        ", x$keyName[[1]], "\n")
     cat("keyFingerprint: ", x$keyFingerprint[[1]], "\n")
