@@ -12,7 +12,8 @@ Imports:
     aws.signature,
     httr,
     xml2,
-    base64enc
+    base64enc, 
+    utils
 Suggests:
     testthat
 URL: https://github.com/cloudyr/aws.ec2

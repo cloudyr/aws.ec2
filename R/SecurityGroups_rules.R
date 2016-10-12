@@ -43,6 +43,7 @@ authorize_ingress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port, protoc
     }
 }
 
+#' @importFrom utils head tail
 #' @rdname sg_ingress
 #' @export
 revoke_ingress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port, protocol = "-1", ...) {
