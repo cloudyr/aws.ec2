@@ -1,7 +1,7 @@
 .makelist <- function(list, type = "Filter") {
     tmp <- as.list(c(names(list), list))
-    names(tmp) <- c(paste0(type,".",1:length(list),".Key"),
-                    paste0(type,".",1:length(list),".Value"))
+    names(tmp) <- c(paste0(type, ".", 1:length(list), ".Key"),
+                    paste0(type, ".", 1:length(list), ".Value"))
     return(tmp)
 }
 
@@ -21,9 +21,7 @@ flatten_list <- function(x) {
     }
 }
 
-
-# get ID functions
-
+# Get ID functions
 get_subnetid <- function(x) {
     if (is.character(x)) {
         return(x)
@@ -41,7 +39,7 @@ get_associd <- function(x) {
 }
 
 get_vpcid <- function(x) {
-    if (inherits(x, "ec2_vpc") | inherits(x, "ec2_subnet")) {
+    if (inherits(x, "ec2_vpc") || inherits(x, "ec2_subnet")) {
         return(x$vpcId)
     } else {
         return(x)
@@ -62,7 +60,6 @@ get_sgname <- function(x) {
     } else if (is.character(x)) {
         return(x)
     } 
-
 }
 
 get_pgname <- function(x) {
@@ -99,9 +96,9 @@ get_imageid <- function(x) {
 
 get_gatewayid <- function(x) {
     if (inherits(x, "ec2_internet_gateway")) {
-        x$internetGatewayId
+        return(x$internetGatewayId)
     } else {
-        x
+        return(x)
     }
 }
 
