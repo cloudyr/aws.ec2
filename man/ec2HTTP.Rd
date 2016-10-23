@@ -6,7 +6,8 @@
 \usage{
 ec2HTTP(query = list(), dryrun, region = Sys.getenv("AWS_DEFAULT_REGION",
   "us-east-1"), key = Sys.getenv("AWS_ACCESS_KEY_ID"),
-  secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), version = "2015-10-01", ...)
+  secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), version = "2015-10-01",
+  clean_response = TRUE, ...)
 }
 \arguments{
 \item{query}{A named list of query string parameters.}

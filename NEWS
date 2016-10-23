@@ -1,13 +1,18 @@
-# CHANGES TO aws.ec2 0.1.7 #
+# CHANGES TO aws.ec2 0.1.9
+
+* `create_keypair()` gains a `path` argument to save a .pem file. (#17, h/t Colin Gillespie)
+* Noted that `instance` arguments can accept a single instance or vector/list of instances. (#19, h/t Colin Gillespie)
+
+# CHANGES TO aws.ec2 0.1.7
 
 * Implemented VPCs and Network ACLs.
 * Expanded documentation, especially cross-references.
 
-# CHANGES TO aws.ec2 0.1.6 #
+# CHANGES TO aws.ec2 0.1.6
 
 * Several breaking API changes and substantial changes to return values of various functions to increase consistency across the package.
 * Considerable expansion of documentation.
 
-# CHANGES TO aws.ec2 0.1.1 #
+# CHANGES TO aws.ec2 0.1.1
 
 * Initial release.

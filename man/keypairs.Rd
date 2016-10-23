@@ -9,7 +9,7 @@
 \usage{
 describe_keypairs(keypair, filter, ...)
 
-create_keypair(keypair, ...)
+create_keypair(keypair, path, ...)
 
 delete_keypair(keypair, ...)
 
@@ -21,6 +21,8 @@ import_keypair(keypair, publickey, ...)
 \item{filter}{\dots}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+
+\item{path}{A character string specifying a filepath (or filename) to use as a .pem file for the keypair.}
 
 \item{publickey}{\dots}
 }

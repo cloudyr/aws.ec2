@@ -18,6 +18,7 @@ ec2HTTP <- function(query = list(),
                     key = Sys.getenv("AWS_ACCESS_KEY_ID"), 
                     secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), 
                     version = "2015-10-01",
+                    clean_response = TRUE,
                     ...) {
     if (!missing(dryrun)) {
         query$DryRun <- tolower(as.character(dryrun))
@@ -56,7 +57,11 @@ ec2HTTP <- function(query = list(),
         x <- try(as_list(read_xml(tmp)), silent = TRUE)
         stop(paste0(parse_errors(x), collapse = "\n"))
     } else {
-        tmp <- gsub("\n\\s*", "", content(r, "text"))
+        if (isTRUE(clean_response)) {
+            tmp <- gsub("\n\\s*", "", content(r, "text"))
+        } else {
+            tmp <- content(r, "text")
+        }
         out <- try(as_list(read_xml(tmp)), silent = TRUE)
         if (inherits(out, "try-error")) {
             out <- structure(content(r, "text"))

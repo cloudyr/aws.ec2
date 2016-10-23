@@ -41,16 +41,21 @@ describe_keypairs <- function(keypair, filter, ...) {
 }
 
 #' @rdname keypairs
+#' @param path A character string specifying a filepath (or filename) to use as a .pem file for the keypair.
 #' @export
-create_keypair <- function(keypair, ...) {
+create_keypair <- function(keypair, path, ...) {
     query <- list(Action = "CreateKeyPair")
     keypair <- get_keypairname(keypair)
     if (nchar(keypair) > 255) {
         stop("'keypair' must be <= 255 characters")
     }
-    query$KeyName <- keypair
-    r <- ec2HTTP(query = query, ...)
-    return(structure(flatten_list(r), class = "ec2_keypair"))
+    query[["KeyName"]] <- keypair
+    r <- ec2HTTP(query = query, clean_response = FALSE, ...)
+    out <- structure(flatten_list(r), class = "ec2_keypair")
+    if (!missing(path)) {
+        cat(out[["keyMaterial"]], file = path)
+    }
+    return(out)
 }
 
 #' @rdname keypairs
