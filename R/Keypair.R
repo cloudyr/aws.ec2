@@ -35,9 +35,11 @@ describe_keypairs <- function(keypair, filter, ...) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
-    return(unname(lapply(r$keySet, function(z) {
+    out <- unname(lapply(r$keySet, function(z) {
         structure(flatten_list(z), class = "ec2_keypair")
-    })))
+    }))
+    names(out) <- unlist(lapply(out, `[[`, "keyName"))
+    return(out)
 }
 
 #' @rdname keypairs

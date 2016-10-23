@@ -1,5 +1,6 @@
 # CHANGES TO aws.ec2 0.1.9
 
+* `describe_keypairs()` now returns a named list, where names reflect keypair names. (#18, h/t Colin Gillespie)
 * `create_keypair()` gains a `path` argument to save a .pem file. (#17, h/t Colin Gillespie)
 * Noted that `instance` arguments can accept a single instance or vector/list of instances. (#19, h/t Colin Gillespie)
 
