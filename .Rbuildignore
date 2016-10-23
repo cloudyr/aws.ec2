@@ -5,3 +5,4 @@ knitreadme.sh
 ^.*\.Rproj$
 ^\.Rproj\.user$
 man-roxygen
+CONTRIBUTING.md
