@@ -6,6 +6,7 @@
 #' @param key A character string containing an AWS Access Key ID. If missing, defaults to value stored in environment variable \dQuote{AWS_ACCESS_KEY_ID}.
 #' @param secret A character string containing an AWS Secret Access Key.  If missing, defaults to value stored in environment variable \dQuote{AWS_SECRET_ACCESS_KEY}.
 #' @param version A character string specifying an API version. Default is \dQuote{2015-10-01}.
+#' @param clean_response A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).
 #' @param ... Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return A list
 #' @importFrom aws.signature signature_v4_auth
