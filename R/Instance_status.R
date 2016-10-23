@@ -24,7 +24,7 @@
 #' @export
 describe_instances <- function(instance, filter, n, token, ...) {
     query <- list(Action = "DescribeInstances")
-    if(!missing(instance)) {
+    if (!missing(instance) && length(instance) > 0) {
         if (inherits(instance, "ec2_instance")) {
             instance <- list(get_instanceid(instance))
         } else if (is.character(instance)) {
