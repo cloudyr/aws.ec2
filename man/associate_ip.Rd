@@ -10,7 +10,7 @@ associate_ip(instance, ip, private, netinterface, allow, ...)
 disassociate_ip(ip, ...)
 }
 \arguments{
-\item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}.}
+\item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}
 
 \item{ip}{An object of class \dQuote{ec2_ip} or an allocationId (for a VPC IP) or publicIp (for a standard IP).}
 

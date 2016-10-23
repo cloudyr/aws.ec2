@@ -1,1 +1,1 @@
-#' @param instance A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}.
+#' @param instance A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.

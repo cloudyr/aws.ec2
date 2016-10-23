@@ -7,7 +7,7 @@
 get_console_output(instance, ...)
 }
 \arguments{
-\item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}.}
+\item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 }

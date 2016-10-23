@@ -13,7 +13,7 @@ set_instance_attr(instance, attribute, ...)
 reset_instance_attr(instance, attribute, ...)
 }
 \arguments{
-\item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}.}
+\item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}
 
 \item{attribute}{For \code{get_instance_attr} and \code{reset_instance_attr}, a character string. For \code{set_instance_attr}, a named character string, where the name is an attribute name. Valid attribute names are: \dQuote{instanceType}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{userData}, \dQuote{disableApiTermination}, \dQuote{instanceInitiatedShutdownBehavior}, \dQuote{rootDeviceName}, \dQuote{blockDeviceMapping}, \dQuote{productCodes}, \dQuote{sourceDestCheck}, \dQuote{groupSet}, \dQuote{ebsOptimized}, \dQuote{sriovNetSupport}.}
 
