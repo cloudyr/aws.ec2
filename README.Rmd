@@ -47,7 +47,9 @@ terminate_instances(i[[1]])
 ## Installation ##
 
 [![CRAN](http://www.r-pkg.org/badges/version/aws.ec2)](http://cran.r-project.org/package=aws.ec2)
-[![Travis Build Status](https://travis-ci.org/cloudyr/aws.ec2.png?branch=master)](https://travis-ci.org/cloudyr/aws.ec2) [![codecov.io](http://codecov.io/github/cloudyr/aws.ec2/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/aws.ec2?branch=master)
+![Downloads](https://cranlogs.r-pkg.org/badges/aws.ec2)
+[![Travis Build Status](https://travis-ci.org/cloudyr/aws.ec2.png?branch=master)](https://travis-ci.org/cloudyr/aws.ec2)
+[![codecov.io](http://codecov.io/github/cloudyr/aws.ec2/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/aws.ec2?branch=master)
 
 This package is not yet on CRAN. To install the latest development version you can install from the cloudyr drat repository:
 
