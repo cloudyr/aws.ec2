@@ -97,9 +97,9 @@ deregister_image <- function(image, ...) {
 describe_images <- function(image, filter, availableto, owner, ...) {
     query <- list(Action = "DescribeImages")
     if (!missing(availableto)) {
-        avialableto <- as.list(avialableto)
-        names(avialableto) <- paste0("ExecutableBy.", 1:length(avialableto))
-        query <- c(query, avialableto)
+        availableto <- as.list(availableto)
+        names(availableto) <- paste0("ExecutableBy.", 1:length(availableto))
+        query <- c(query, availableto)
     }
     if (!missing(owner)) {
         owner <- as.list(owner)
