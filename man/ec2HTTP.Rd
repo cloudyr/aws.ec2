@@ -5,20 +5,21 @@
 \title{EC2 API Requests}
 \usage{
 ec2HTTP(query = list(), dryrun, region = Sys.getenv("AWS_DEFAULT_REGION",
-  "us-east-1"), key = Sys.getenv("AWS_ACCESS_KEY_ID"),
-  secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), version = "2015-10-01",
-  clean_response = TRUE, ...)
+  "us-east-1"), key = NULL, secret = NULL, session_token = NULL,
+  version = "2015-10-01", clean_response = TRUE, ...)
 }
 \arguments{
 \item{query}{A named list of query string parameters.}
 
 \item{dryrun}{An optional logical specifying whether to execute a consequence-free \dQuote{dry run} of the request.}
 
-\item{region}{A character string containing the AWS region. If missing, defaults to \dQuote{us-east-1}.}
+\item{region}{A character string specifying an AWS region. See \code{\link[aws.signature]{locate_credentials}}.}
 
-\item{key}{A character string containing an AWS Access Key ID. If missing, defaults to value stored in environment variable \dQuote{AWS_ACCESS_KEY_ID}.}
+\item{key}{A character string specifying an AWS Access Key. See \code{\link[aws.signature]{locate_credentials}}.}
 
-\item{secret}{A character string containing an AWS Secret Access Key.  If missing, defaults to value stored in environment variable \dQuote{AWS_SECRET_ACCESS_KEY}.}
+\item{secret}{A character string specifying an AWS Secret Key. See \code{\link[aws.signature]{locate_credentials}}.}
+
+\item{session_token}{Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See \code{\link[aws.signature]{locate_credentials}}.}
 
 \item{version}{A character string specifying an API version. Default is \dQuote{2015-10-01}.}
 

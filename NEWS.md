@@ -1,6 +1,8 @@
 # CHANGES TO aws.ec2 0.1.11
 
 * Export `release_ip()` function (h/t Sean Davis)
+* Bump **aws.signature** version to 0.3.4 to use `locate_credentials()`.
+* Updated README
 
 # CHANGES TO aws.ec2 0.1.10
 

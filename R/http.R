@@ -2,9 +2,10 @@
 #' @description Execute an EC2 API Request
 #' @param query A named list of query string parameters.
 #' @param dryrun An optional logical specifying whether to execute a consequence-free \dQuote{dry run} of the request.
-#' @param region A character string containing the AWS region. If missing, defaults to \dQuote{us-east-1}.
-#' @param key A character string containing an AWS Access Key ID. If missing, defaults to value stored in environment variable \dQuote{AWS_ACCESS_KEY_ID}.
-#' @param secret A character string containing an AWS Secret Access Key.  If missing, defaults to value stored in environment variable \dQuote{AWS_SECRET_ACCESS_KEY}.
+#' @param region A character string specifying an AWS region. See \code{\link[aws.signature]{locate_credentials}}.
+#' @param key A character string specifying an AWS Access Key. See \code{\link[aws.signature]{locate_credentials}}.
+#' @param secret A character string specifying an AWS Secret Key. See \code{\link[aws.signature]{locate_credentials}}.
+#' @param session_token Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See \code{\link[aws.signature]{locate_credentials}}.
 #' @param version A character string specifying an API version. Default is \dQuote{2015-10-01}.
 #' @param clean_response A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).
 #' @param ... Additional arguments passed to \code{\link[httr]{GET}}.
@@ -16,8 +17,9 @@
 ec2HTTP <- function(query = list(), 
                     dryrun, 
                     region = Sys.getenv("AWS_DEFAULT_REGION","us-east-1"), 
-                    key = Sys.getenv("AWS_ACCESS_KEY_ID"), 
-                    secret = Sys.getenv("AWS_SECRET_ACCESS_KEY"), 
+                    key = NULL, 
+                    secret = NULL, 
+                    session_token = NULL,
                     version = "2015-10-01",
                     clean_response = TRUE,
                     ...) {
@@ -31,23 +33,27 @@ ec2HTTP <- function(query = list(),
         url <- paste0("https://ec2.",region,".amazonaws.com")
     }
     d_timestamp <- format(Sys.time(), "%Y%m%dT%H%M%SZ", tz = "UTC")
-    if (key == "") {
-        H <- add_headers(`X-Amz-Date` = d_timestamp)
-    } else {
-        S <- signature_v4_auth(
-               datetime = d_timestamp,
-               region = region,
-               service = "ec2",
-               verb = "GET",
-               action = "/",
-               query_args = query,
-               canonical_headers = list(host = if (region == "us-east-1") "ec2.amazonaws.com" else paste0("ec2.",region,".amazonaws.com"),
-                                        `X-Amz-Date` = d_timestamp),
-               request_body = "",
-               key = key, secret = secret)
-        H <- add_headers(`X-Amz-Date` = d_timestamp, 
-                         Authorization = S$SignatureHeader)
+    Sig <- signature_v4_auth(
+           datetime = d_timestamp,
+           region = region,
+           service = "ec2",
+           verb = "GET",
+           action = "/",
+           query_args = query,
+           canonical_headers = list(host = if (region == "us-east-1") "ec2.amazonaws.com" else paste0("ec2.",region,".amazonaws.com"),
+                                    `X-Amz-Date` = d_timestamp),
+           request_body = "",
+           key = key, 
+           secret = secret,
+           session_token = session_token)
+    headers <- list()
+    headers[["x-amz-date"]] <- d_timestamp
+    headers[["Authorization"]] <- Sig[["SignatureHeader"]]
+    if (!is.null(session_token) && session_token != "") {
+        headers[["x-amz-security-token"]] <- session_token
     }
+    H <- do.call(add_headers, headers)
+    
     if (length(query)) {
         r <- GET(url, H, query = query, ...)
     } else {
