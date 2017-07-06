@@ -40,6 +40,7 @@ allocate_ip <- function(domain = c("vpc", "standard"), ...) {
 }
 
 #' @rdname allocate_ip
+#' @export
 release_ip <- function(ip, ...) {
     query <- list(Action = "ReleaseAddress")
     if (inherits(ip, "ec2_ip")) {
