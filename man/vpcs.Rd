@@ -41,4 +41,3 @@ delete_vpc(v)
 \code{\link{describe_vpcs}}, \code{\link{get_vpc_attr}}
 }
 \keyword{security}
-

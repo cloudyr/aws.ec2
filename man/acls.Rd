@@ -48,4 +48,3 @@ delete_vpc(v)
 \code{\link{describe_netacls}}
 }
 \keyword{security}
-

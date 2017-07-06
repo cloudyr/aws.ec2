@@ -31,4 +31,3 @@ describe_vpcs()
 \code{\link{create_vpc}}, \code{\link{get_vpc_attr}}
 }
 \keyword{security}
-

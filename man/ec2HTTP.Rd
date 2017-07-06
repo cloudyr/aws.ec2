@@ -32,4 +32,3 @@ A list
 \description{
 Execute an EC2 API Request
 }
-

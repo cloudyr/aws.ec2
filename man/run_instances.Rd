@@ -59,4 +59,3 @@ terminate_instances(i[[1]])
 \code{\link{describe_instances}}, \code{\link{start_instances}}, \code{\link{terminate_instances}}
 }
 \keyword{instances}
-

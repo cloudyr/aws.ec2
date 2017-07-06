@@ -25,4 +25,3 @@ Retrieve Zone Details
 \seealso{
 \code{\link{describe_regions}}
 }
-

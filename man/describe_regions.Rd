@@ -27,4 +27,3 @@ decribe_regions()
 \seealso{
 \code{\link{describe_zones}}
 }
-

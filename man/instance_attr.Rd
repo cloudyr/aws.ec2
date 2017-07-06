@@ -2,8 +2,8 @@
 % Please edit documentation in R/Instance_attr.R
 \name{get_instance_attr}
 \alias{get_instance_attr}
-\alias{reset_instance_attr}
 \alias{set_instance_attr}
+\alias{reset_instance_attr}
 \title{EC2 Instance Attributes}
 \usage{
 get_instance_attr(instance, attribute, ...)
@@ -42,4 +42,3 @@ terminate_instances(i[[1]])
 \code{\link{describe_instances}}, \code{\link{create_tags}}
 }
 \keyword{instances}
-

@@ -19,4 +19,3 @@ A list
 \description{
 Get information about one or more IP addresses.
 }
-

@@ -1,7 +1,7 @@
 Package: aws.ec2
 Type: Package
 Title: Amazon Web Services EC2 Client Package
-Version: 0.1.10
+Version: 0.1.11
 Date: 2017-07-06
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"))
@@ -20,4 +20,4 @@ Suggests:
     aws.efs
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

@@ -49,4 +49,3 @@ delete_tags("i-b79cfd34", list("foo" = "bar"))
 \code{\link{describe_instances}}, \code{\link{get_instance_attr}}, \code{\link{associate_ip}}
 }
 \keyword{instances}
-

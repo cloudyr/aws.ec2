@@ -32,4 +32,3 @@ terminate_instances(i[[1]])
 \code{\link{get_instance_attr}}, \code{\link{describe_instances}}, \code{\link{get_password_data}}
 }
 \keyword{instances}
-

@@ -2,8 +2,8 @@
 % Please edit documentation in R/Images_attrs.R
 \name{get_image_attr}
 \alias{get_image_attr}
-\alias{reset_image_attr}
 \alias{set_image_attr}
+\alias{reset_image_attr}
 \title{AMI Attributes}
 \usage{
 get_image_attr(image, attribute, ...)
@@ -45,4 +45,3 @@ get_image_attr("ami-7f9dc615", "description")
 }
 }
 \keyword{images}
-

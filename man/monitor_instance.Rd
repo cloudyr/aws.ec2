@@ -39,4 +39,3 @@ terminate_instances(i[[1]])
 \code{\link{describe_instances}}
 }
 \keyword{instances}
-

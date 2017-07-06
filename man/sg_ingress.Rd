@@ -2,8 +2,8 @@
 % Please edit documentation in R/SecurityGroups_rules.R, R/ip.R
 \name{authorize_ingress}
 \alias{authorize_ingress}
-\alias{my_ip}
 \alias{revoke_ingress}
+\alias{my_ip}
 \title{Security Group Ingress}
 \usage{
 authorize_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port,
@@ -45,4 +45,3 @@ revoke_ingress(g, port = 80, protocol = "tcp")
 \code{\link{create_sgroup}}
 }
 \keyword{security}
-

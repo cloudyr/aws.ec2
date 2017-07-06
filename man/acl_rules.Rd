@@ -2,8 +2,8 @@
 % Please edit documentation in R/network_acls.R
 \name{create_netacl_rule}
 \alias{create_netacl_rule}
-\alias{delete_netacl_rule}
 \alias{replace_netacl_rule}
+\alias{delete_netacl_rule}
 \title{ACL Rules}
 \usage{
 create_netacl_rule(acl, rule, cidr, port, protocol = "-1",
@@ -71,4 +71,3 @@ delete_vpc(v)
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAclEntry.html}
 }
 \keyword{security}
-

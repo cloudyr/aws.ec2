@@ -32,4 +32,3 @@ terminate_instances(i[[1]])
 \code{\link{describe_instances}}, \code{\link{get_console_output}}
 }
 \keyword{instances}
-

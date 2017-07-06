@@ -1,3 +1,11 @@
+# CHANGES TO aws.ec2 0.1.11
+
+* Export `release_ip()` function (h/t Sean Davis)
+
+# CHANGES TO aws.ec2 0.1.10
+
+* Suggest **aws.efs**.
+
 # CHANGES TO aws.ec2 0.1.9
 
 * `describe_keypairs()` now returns a named list, where names reflect keypair names. (#18, h/t Colin Gillespie)

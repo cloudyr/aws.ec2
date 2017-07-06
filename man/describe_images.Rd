@@ -33,4 +33,3 @@ describe_images("ami-08111162")
 }
 }
 \keyword{images}
-

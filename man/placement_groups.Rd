@@ -41,4 +41,3 @@ delete_placement("examplepg")
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreatePlacementGroup.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeletePlacementGroup.html}
 }
-

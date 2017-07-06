@@ -43,4 +43,3 @@ release_ip(a2$allocationId)
 \seealso{
 \code{\link{associate_ip}}, \code{\link{describe_ips}}, \code{\link{release_ip}}, \code{\link{make_ip_vpc}}/\code{\link{make_ip_classic}}
 }
-

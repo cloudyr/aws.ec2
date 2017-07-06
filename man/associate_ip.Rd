@@ -36,4 +36,3 @@ Associate/Disassociate IP with Instance
 \seealso{
 \code{\link{allocate_ip}}, \code{\link{describe_ips}}, \code{\link{release_ip}}
 }
-

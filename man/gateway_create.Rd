@@ -26,4 +26,3 @@ Create and delete Network Gateways for a VPC
 \code{\link{create_gateway}}, \code{\link{describe_gateways}}
 }
 \keyword{security}
-

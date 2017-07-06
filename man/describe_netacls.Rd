@@ -29,4 +29,3 @@ Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of
 \code{\link{describe_subnets}}, \code{\link{describe_ips}}
 }
 \keyword{security}
-
