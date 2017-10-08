@@ -26,12 +26,15 @@ allocate_ip <- function(domain = c("vpc", "standard"), ...) {
     if (!missing(domain)) {
         domain <- match.arg(domain)
         query$Domain <- domain
-    }
+    } 
     r <- ec2HTTP(query = query, ...)
-    if ("publicIp" %in% names(r)) {
+    if (r$domain == "standard" ) {
         out <- list(publicIp = r$publicIp[[1]], domain = r$domain[[1]])
+    } else if(r$domain == "vpc") {
+        out <- list(publicIp = r$publicIp[[1]], allocationId = r$allocationId[[1]], domain = r$domain[[1]])
     } else {
-        out <- list(allocationId = r$allocationId[[1]], domain = r$domain[[1]])
+        print("Unrecognized domain. NOT ALLOCATING ADDRESS")
+        return(NULL)
     }
     return(structure(out, 
                      class = "ec2_ip", 
