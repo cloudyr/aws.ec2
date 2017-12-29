@@ -1,3 +1,11 @@
+#' gets a parameter from the parameter store
+#'
+#' @param name The parameter name
+#' @param with_decryption Specifies if the parameter should be decripted. Defaults to \code{TRUE}
+#' @param ... Additional arguments passed to \code{ec2HTTP}
+#'
+#' @return The value of the parameter
+#' @export
 get_parameter <- function(name, with_decryption=TRUE, ...) {
   query <- list(Action = "GetParameter")
   if (missing(name)) {

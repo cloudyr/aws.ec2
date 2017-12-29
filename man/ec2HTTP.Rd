@@ -6,7 +6,7 @@
 \usage{
 ec2HTTP(query = list(), dryrun, region = Sys.getenv("AWS_DEFAULT_REGION",
   "us-east-1"), key = NULL, secret = NULL, session_token = NULL,
-  version = "2015-10-01", clean_response = TRUE, ...)
+  version = "2015-10-01", service = "ec2", clean_response = TRUE, ...)
 }
 \arguments{
 \item{query}{A named list of query string parameters.}
@@ -22,6 +22,8 @@ ec2HTTP(query = list(), dryrun, region = Sys.getenv("AWS_DEFAULT_REGION",
 \item{session_token}{Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See \code{\link[aws.signature]{locate_credentials}}.}
 
 \item{version}{A character string specifying an API version. Default is \dQuote{2015-10-01}.}
+
+\item{service}{A character string specifying a service to query. Default is \dQuote{ec2}.}
 
 \item{clean_response}{A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).}
 
