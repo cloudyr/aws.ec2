@@ -6,3 +6,4 @@ knitreadme.sh
 ^\.Rproj\.user$
 man-roxygen
 CONTRIBUTING.md
+^\.github/
