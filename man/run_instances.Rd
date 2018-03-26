@@ -5,7 +5,8 @@
 \title{Run an EC2 Instance}
 \usage{
 run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
-  userdata, shutdown = c("stop", "terminate"), token, ...)
+  userdata, shutdown = c("stop", "terminate"), token, spot_options,
+  query_extra = list(), ...)
 }
 \arguments{
 \item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}.}
@@ -27,6 +28,10 @@ run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
 \item{shutdown}{A character string specifying either \dQuote{stop} or \dQuote{terminate}, to control the behavior of a shutdown action taken from within the instance.}
 
 \item{token}{A (max 64-character) string containing a unique user-defined token. This can be used to ensure idempotency of requests in the event of a user-side failure. See \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html} for details.}
+
+\item{spot_options}{Optionally, an empty \code{list()} to request a spot instance with API defaults, or list of spot-market options. See \url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html} for available options}
+
+\item{query_extra}{Optionally, additional query parameters to be passed to the RunInstances API. See \url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html} for available parameters.}
 
 \item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
 }
