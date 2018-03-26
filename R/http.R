@@ -20,7 +20,7 @@ ec2HTTP <- function(query = list(),
                     key = NULL, 
                     secret = NULL, 
                     session_token = NULL,
-                    version = "2015-10-01",
+                    version = "2016-11-15",
                     clean_response = TRUE,
                     ...) {
     if (!missing(dryrun)) {
