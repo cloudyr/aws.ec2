@@ -10,6 +10,8 @@
 #' @param userdata Optionally, a character string specifying a script to run during launch.
 #' @param shutdown A character string specifying either \dQuote{stop} or \dQuote{terminate}, to control the behavior of a shutdown action taken from within the instance.
 #' @template token
+#' @param spot_options Optionally, an empty \code{list()} to request a spot instance with API defaults, or list of spot-market options. See \url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html} for available options
+#' @param query_extra Optionally, additional query parameters to be passed to the RunInstances API. See \url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html} for available parameters.
 #' @template dots
 #' @return A list
 #' @references
@@ -34,7 +36,8 @@
 #' @export
 run_instances <- 
 function(image, type, min = 1, max = min, keypair, subnet, sgroup, 
-         userdata, shutdown = c("stop", "terminate"), token, ...) {
+         userdata, shutdown = c("stop", "terminate"), token, 
+         spot_options, query_extra=list(), ...) {
     query <- list(Action = "RunInstances", 
                   ImageId = get_imageid(image),
                   InstanceType = type,
@@ -66,6 +69,14 @@ function(image, type, min = 1, max = min, keypair, subnet, sgroup,
     if (!missing(token)) {
         query$ClientToken <- token
     }
+    if(!missing(spot_options) && !is.null(spot_options)) {
+      query$InstanceMarketOptions.MarketType <- "spot"
+      if(length(spot_options)) {
+        names(spot_options) <- paste0("InstanceMarketOptions.SpotOptions.",names(spot_options))
+        query <- c(query, spot_options) 
+      }
+    }
+    query <- c(query, query_extra)
     r <- ec2HTTP(query = query, ...)
     return(lapply(r$instancesSet, `class<-`, "ec2_instance"))
 }
