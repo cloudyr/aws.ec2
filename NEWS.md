@@ -1,3 +1,8 @@
+# CHANGES TO aws.ec2 0.1.12
+
+* Default to EC2 API version 2016-11-15.
+* Add functionality to start spot instances (#9, h/t Peter Foley).
+
 # CHANGES TO aws.ec2 0.1.11
 
 * Export `release_ip()` function (h/t Sean Davis)
