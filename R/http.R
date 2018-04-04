@@ -7,6 +7,7 @@
 #' @param secret A character string specifying an AWS Secret Key. See \code{\link[aws.signature]{locate_credentials}}.
 #' @param session_token Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See \code{\link[aws.signature]{locate_credentials}}.
 #' @param version A character string specifying an API version. Default is \dQuote{2015-10-01}.
+#' @param service A character string specifying a service to query. Default is \dQuote{ec2}.
 #' @param clean_response A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).
 #' @param ... Additional arguments passed to \code{\link[httr]{GET}}.
 #' @return A list
@@ -21,26 +22,27 @@ ec2HTTP <- function(query = list(),
                     secret = NULL, 
                     session_token = NULL,
                     version = "2015-10-01",
+                    service = "ec2",
                     clean_response = TRUE,
                     ...) {
     if (!missing(dryrun)) {
         query$DryRun <- tolower(as.character(dryrun))
     }
     query$Version <- version
-    if (region == "us-east-1") {
-        url <- paste0("https://ec2.amazonaws.com")
+    if (region == "us-east-1" && service == "ec2") {
+      url <- paste0("https://", service, ".amazonaws.com")
     } else {
-        url <- paste0("https://ec2.",region,".amazonaws.com")
+      url <- paste0("https://", service, ".", region, ".amazonaws.com")
     }
     d_timestamp <- format(Sys.time(), "%Y%m%dT%H%M%SZ", tz = "UTC")
     Sig <- signature_v4_auth(
            datetime = d_timestamp,
            region = region,
-           service = "ec2",
+           service = service,
            verb = "GET",
            action = "/",
            query_args = query,
-           canonical_headers = list(host = if (region == "us-east-1") "ec2.amazonaws.com" else paste0("ec2.",region,".amazonaws.com"),
+           canonical_headers = list(host = if (region == "us-east-1" && service == "ec2") paste0(service, ".amazonaws.com") else paste0(service, ".", region, ".amazonaws.com"),
                                     `X-Amz-Date` = d_timestamp),
            request_body = "",
            key = key, 
