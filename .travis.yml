@@ -3,27 +3,26 @@ sudo: false
 cache: packages
 matrix:
   include:
-    - os: linux
-      dist: trusty
-      sudo: required
-      env: R_CODECOV=true
-    - os: osx
-      osx_image: xcode9.2
-    - os: osx
-      osx_image: xcode7.3
-      r_build_args: '--no-build-vignettes'
-      r_check_args: '--ignore-vignettes --no-examples'
+  - os: linux
+    dist: trusty
+    sudo: required
+    env: DRAT_DEPLOY=true
+  - os: osx
+    osx_image: xcode9.2
+  - os: osx
+    osx_image: xcode7.3
+    r_build_args: "--no-build-vignettes"
+    r_check_args: "--ignore-vignettes --no-examples"
 r_packages:
 - covr
 - drat
 r_github_packages:
-- cloudyr/aws.efs
 - cloudyr/travisci
 after_success:
-- Rscript -e 'library("covr");codecov()'
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
-  drat.sh
-- Rscript -e "travisci::restart_last_build('cloudyr/awspack')"
+- R -q -e 'library("covr");codecov()'
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && test
+  $DRAT_DEPLOY == "true" && bash drat.sh
+- R -q -e "travisci::restart_last_build('cloudyr/awspack')"
 env:
   global:
-    secure: dafV0ErhpPQlsTk3JGug7k3NclItCz2IGX9Zoq/KPJYGR7qjERPV2zie1DLozLVZRoXzIiqE5K9r37FkB3rWv/qvmRzYhS+ioqXWng2hqO4VWQ9fcvV0JVqva7ZRssyz7BcLBxRJ/ICDcOAzAZ6RohPDQLRQlKjj1GkNS0DalK0=
+    secure: ZuFPRGKmR8wOAjeHqJHet0J97GL7BivMGlR49bS5auXomse2y6DVivaokC6UzU4kYCnTFaxeqsg/XmV3cz2XfRzn1xCYI5M5t/1Qmf/JxB8YjTcl11su197Kwkdhwf4Gitju6eo2PH2DjEP4k/uQ5fcyIJosMo4HLBE5U0Mgi/c=
