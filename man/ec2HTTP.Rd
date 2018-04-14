@@ -4,14 +4,20 @@
 \alias{ec2HTTP}
 \title{EC2 API Requests}
 \usage{
-ec2HTTP(query = list(), dryrun, region = Sys.getenv("AWS_DEFAULT_REGION",
-  "us-east-1"), key = NULL, secret = NULL, session_token = NULL,
-  version = "2016-11-15", clean_response = TRUE, ...)
+ec2HTTP(query = list(), headers = list(), dryrun,
+  verbose = getOption("verbose", FALSE),
+  region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"), key = NULL,
+  secret = NULL, session_token = NULL, version = "2016-11-15",
+  clean_response = TRUE, ...)
 }
 \arguments{
 \item{query}{A named list of query string parameters.}
 
+\item{headers}{A list of headers to pass to the HTTP request.}
+
 \item{dryrun}{An optional logical specifying whether to execute a consequence-free \dQuote{dry run} of the request.}
+
+\item{verbose}{A logical indicating whether to be verbose. Default is given by \code{options("verbose")}.}
 
 \item{region}{A character string specifying an AWS region. See \code{\link[aws.signature]{locate_credentials}}.}
 
@@ -25,7 +31,7 @@ ec2HTTP(query = list(), dryrun, region = Sys.getenv("AWS_DEFAULT_REGION",
 
 \item{clean_response}{A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).}
 
-\item{...}{Additional arguments passed to \code{\link[httr]{GET}}.}
+\item{\dots}{Additional arguments passed to \code{\link[httr]{GET}}.}
 }
 \value{
 A list
