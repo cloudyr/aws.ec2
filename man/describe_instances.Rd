@@ -18,7 +18,7 @@ instance_status(instance, filter, runningonly, n, token, ...)
 
 \item{token}{A (max 64-character) string containing a unique user-defined token. This can be used to ensure idempotency of requests in the event of a user-side failure. See \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html} for details.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{runningonly}{\dots}
 }

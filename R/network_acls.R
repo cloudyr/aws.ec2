@@ -1,15 +1,15 @@
 #' @rdname acls
 #' @title EC2 Network ACLs
 #' @description Create/Delete Network ACL for VPC
-#' @details Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see \code{\link{describe_sgroups}}).
+#' @details Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see [describe_sgroups()]).
 #' @template vpc
 #' @template acl
 #' @template dots
-#' @return For \code{create_netacl}, a list of class \dQuote{ec2_acl}. For \code{delete_netacl}, a logical indicating whether the operation succeeded.
+#' @return For `create_netacl`, a list of class \dQuote{ec2_acl}. For `delete_netacl`, a logical indicating whether the operation succeeded.
 #' @references
-#' \url{http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Security.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAcl.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAcl.html}
+#' <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Security.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAcl.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAcl.html>
 #' @examples
 #' \dontrun{
 #' # create a VPC
@@ -23,7 +23,7 @@
 #' delete_acl(acl)
 #' delete_vpc(v)
 #' }
-#' @seealso \code{\link{describe_netacls}}
+#' @seealso [describe_netacls()]
 #' @keywords security
 #' @export
 create_netacl <- function(vpc, ...) {
@@ -49,20 +49,20 @@ delete_netacl <- function(acl, ...) {
 #' @rdname acl_rules
 #' @title ACL Rules
 #' @description Set/Replace/Delete ACL Rules
-#' @details Network ACL rules control inbound and outbound traffic. An ACL is, by default, created without any rules. \code{create_netacl_rule} adds a new rule. Each Network ACL rule consists of a a unique identifying number, an access protocol, an action (\dQuote{allow} or \dQuote{deny}), a direction (ingress or egress), a CIDR block, and a port range. Rules cannot be modified, but they can be deleted and replaced. \code{replace_netacl_rule} replaces an existing rule. \code{delete_netacl_rule} deletes an existing rule.
+#' @details Network ACL rules control inbound and outbound traffic. An ACL is, by default, created without any rules. `create_netacl_rule` adds a new rule. Each Network ACL rule consists of a a unique identifying number, an access protocol, an action (\dQuote{allow} or \dQuote{deny}), a direction (ingress or egress), a CIDR block, and a port range. Rules cannot be modified, but they can be deleted and replaced. `replace_netacl_rule` replaces an existing rule. `delete_netacl_rule` deletes an existing rule.
 #' @template acl
 #' @param rule A positive integer between 1 and 32766 to identify the rule. AWS advises staggering rule numbers (e.g., by 10s).
 #' @template cidr
 #' @param port A one- or two-element integer vector, specifying a port or port range.
 #' @param protocol A character string specifying a protocol. A value of \dQuote{-1} (the default) means all protocols.
 #' @param action A character vector specifying one of \dQuote{allow} (the default) or \dQuote{deny}.
-#' @param direction A character vector specifying one of \dQuote{ingress} (the default) or \code{egress}.
+#' @param direction A character vector specifying one of \dQuote{ingress} (the default) or `egress`.
 #' @template dots
 #' @return A logical indicating whether the operation succeeded.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAclEntry.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclEntry.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAclEntry.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAclEntry.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclEntry.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAclEntry.html>
 #' @examples
 #' \dontrun{
 #' # create a VPC
@@ -167,13 +167,13 @@ delete_netacl_rule <- function(acl, rule, protocol = "-1", direction = c("ingres
 #' @description Associate a Network ACL with a Subnet
 #' @details This function modifies the ACL associated with a Subnet. By default when you create a Subnet, it is automatically associated with the default network ACL. This can be used to change that association.
 #' @template acl
-#' @param association A character string specifying a Network ACL Association, or an object of class \dQuote{ec2_network_association} (possibly returned by \code{\link{describe_netacls}}). This should be the association that you want to replace.
+#' @param association A character string specifying a Network ACL Association, or an object of class \dQuote{ec2_network_association} (possibly returned by [describe_netacls()]). This should be the association that you want to replace.
 #' @template dots
 #' @return A list
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclAssociation.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclAssociation.html>
 #' @keywords security
-#' @seealso \code{\link{create_netacl}}, \code{\link{create_subnet}}
+#' @seealso [create_netacl()], [create_subnet()]
 #' @export
 associate_netacl <- function(acl, association, ...) {
     query <- list(Action = "ReplaceNetworkAclAssociation")
@@ -186,14 +186,14 @@ associate_netacl <- function(acl, association, ...) {
 
 #' @title describe_network_acls
 #' @description Describe Network ACL(s)
-#' @details Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see \code{\link{describe_sgroups}}).
+#' @details Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see [describe_sgroups()]).
 #' @template acl
 #' @template filter
 #' @template dots
 #' @return A list of objects of class \dQuote{ec2_network_acl}.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkAcls.html}
-#' @seealso \code{\link{describe_subnets}}, \code{\link{describe_ips}}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkAcls.html>
+#' @seealso [describe_subnets()], [describe_ips()]
 #' @keywords security
 #' @export
 describe_netacls <- function(acl, filter, ...) {

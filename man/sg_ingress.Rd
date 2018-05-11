@@ -23,7 +23,7 @@ my_ip()
 
 \item{protocol}{A character string specifying a protocol. A value of \dQuote{-1} (the default) means all protocols.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list
@@ -42,6 +42,6 @@ revoke_ingress(g, port = 80, protocol = "tcp")
 }
 }
 \seealso{
-\code{\link{create_sgroup}}
+\code{\link[=create_sgroup]{create_sgroup()}}
 }
 \keyword{security}

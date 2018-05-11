@@ -2,7 +2,7 @@
 #' @title Security Group Ingress
 #' @description Authorize/Revoke Security Group Ingress
 #' @template sgroup
-#' @param cidr A one- or two-element character vector specifying an IP or range of IP addresses. The default is your current machine's public IP as returned by \url{http://checkip.amazonaws.com/}.
+#' @param cidr A one- or two-element character vector specifying an IP or range of IP addresses. The default is your current machine's public IP as returned by <http://checkip.amazonaws.com/>.
 #' @param port A one- or two-element integer vector, specifying a port or port range.
 #' @param protocol A character string specifying a protocol. A value of \dQuote{-1} (the default) means all protocols.
 #' @template dots
@@ -17,7 +17,7 @@
 #' revoke_ingress(g, port = 80, protocol = "tcp")
 #' }
 #' @keywords security
-#' @seealso \code{\link{create_sgroup}}
+#' @seealso [create_sgroup()]
 #' @export
 authorize_ingress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port, protocol = "-1", ...) {
     query <- list(Action = "AuthorizeSecurityGroupIngress")

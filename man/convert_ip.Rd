@@ -12,7 +12,7 @@ make_ip_classic(ip, ...)
 \arguments{
 \item{ip}{An object of class \dQuote{ec2_ip} or an allocationId (for a VPC IP) or publicIp (for a standard IP).}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list.

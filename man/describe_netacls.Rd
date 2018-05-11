@@ -11,7 +11,7 @@ describe_netacls(acl, filter, ...)
 
 \item{filter}{\dots}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list of objects of class \dQuote{ec2_network_acl}.
@@ -20,12 +20,12 @@ A list of objects of class \dQuote{ec2_network_acl}.
 Describe Network ACL(s)
 }
 \details{
-Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see \code{\link{describe_sgroups}}).
+Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see \code{\link[=describe_sgroups]{describe_sgroups()}}).
 }
 \references{
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkAcls.html}
 }
 \seealso{
-\code{\link{describe_subnets}}, \code{\link{describe_ips}}
+\code{\link[=describe_subnets]{describe_subnets()}}, \code{\link[=describe_ips]{describe_ips()}}
 }
 \keyword{security}

@@ -5,10 +5,10 @@
 #' @param tenancy A character string specifying either \dQuote{default} or \dQuote{dedicated} (single-tenant) hardware for instances launched within the VPC.
 #' @template vpc
 #' @template dots
-#' @return For \code{create_vpc}, a list of class \dQuote{ec2_vpc}. For \code{delete_vpc}, a logical indicating whether the operation succeeded.
+#' @return For `create_vpc`, a list of class \dQuote{ec2_vpc}. For `delete_vpc`, a logical indicating whether the operation succeeded.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpc.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpc.html>
 #' @examples
 #' \dontrun{
 #' v <- create_vpc(cidr = "10.0.0.0/16")
@@ -17,7 +17,7 @@
 #' # delete VPC
 #' delete_vpc(v)
 #' }
-#' @seealso \code{\link{describe_vpcs}}, \code{\link{get_vpc_attr}}
+#' @seealso [describe_vpcs()], [get_vpc_attr()]
 #' @keywords security
 #' @export
 create_vpc <- function(cidr, tenancy = c("default", "dedicated"), ...) {
@@ -46,12 +46,12 @@ delete_vpc <- function(vpc, ...) {
 #' @template dots
 #' @return A list.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html>
 #' @examples
 #' \dontrun{
 #' describe_vpcs()
 #' }
-#' @seealso \code{\link{create_vpc}}, \code{\link{get_vpc_attr}}
+#' @seealso [create_vpc()], [get_vpc_attr()]
 #' @keywords security
 #' @export
 describe_vpcs <- function(vpc, filter, ...) {
@@ -80,14 +80,14 @@ describe_vpcs <- function(vpc, filter, ...) {
 #' @title VPC Attributes
 #' @description Get and set VPC attributes
 #' @template vpc
-#' @param dns A logical indicating whether DNS resolution is supported for the VPC. A request can only specify only \code{dns} xor \code{hostnames}.
-#' @param hostnames A logical indicating whether instances launched in the VPC get DNS hostnames. A request can only specify only \code{dns} xor \code{hostnames}.
+#' @param dns A logical indicating whether DNS resolution is supported for the VPC. A request can only specify only `dns` xor `hostnames`.
+#' @param hostnames A logical indicating whether instances launched in the VPC get DNS hostnames. A request can only specify only `dns` xor `hostnames`.
 #' @param attribute A character string specifying one of \dQuote{enableDnsSupport} or \dQuote{enableDnsHostnames}.
 #' @template dots
-#' @return For \code{get_vpc_attr}, a logical indicating the value of the attribute. For \code{set_vpc_attr}, a logical indicating whether the operation succeeded.
+#' @return For `get_vpc_attr`, a logical indicating the value of the attribute. For `set_vpc_attr`, a logical indicating whether the operation succeeded.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcAttribute.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcAttribute.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcAttribute.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcAttribute.html>
 #' @examples
 #' \dontrun{
 #' # create VPC
@@ -98,7 +98,7 @@ describe_vpcs <- function(vpc, filter, ...) {
 #' # cleanup
 #' delete_vpc(v)
 #' }
-#' @seealso \code{\link{describe_vpcs}}, \code{\link{create_vpc}}
+#' @seealso [describe_vpcs()], [create_vpc()]
 #' @keywords security
 #' @export
 set_vpc_attr <- function(vpc, dns, hostnames, ...) {
@@ -137,5 +137,18 @@ print.ec2_vpc <- function(x, ...) {
     cat("dhcpOptionsId:   ", x$dhcpOptionsId, "\n")
     cat("instanceTenancy: ", x$instanceTenancy, "\n")
     cat("isDefault:       ", x$isDefault, "\n")
+    cat("Tags:\n")
+    if (is.null(x$tagSet)) {
+        cat(" - NULL")
+    } else {
+        if (is.null(x$tagSet$item)) {
+            ts <- x$tagSet
+            cat(" -", ts$key, ":", ts$value, "\n")
+        } else {
+            lapply(x$tagSet, function(ts) {
+                cat(" -", ts$key, ":", ts$value, "\n")
+            })
+        }
+    }
     invisible(x)
 }

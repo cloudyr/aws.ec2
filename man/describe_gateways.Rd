@@ -11,7 +11,7 @@ describe_gateways(gateway, filter, ...)
 
 \item{filter}{\dots}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list.
@@ -23,6 +23,6 @@ Describe Network Gateways
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInternetGateways.html}
 }
 \seealso{
-\code{\link{create_gateway}}, \code{\link{attach_gateway}}
+\code{\link[=create_gateway]{create_gateway()}}, \code{\link[=attach_gateway]{attach_gateway()}}
 }
 \keyword{security}

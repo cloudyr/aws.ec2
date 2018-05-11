@@ -11,7 +11,7 @@ describe_regions(region, filter, ...)
 
 \item{filter}{\dots}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list
@@ -25,5 +25,5 @@ decribe_regions()
 }
 }
 \seealso{
-\code{\link{describe_zones}}
+\code{\link[=describe_zones]{describe_zones()}}
 }

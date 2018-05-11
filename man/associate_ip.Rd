@@ -20,7 +20,7 @@ disassociate_ip(ip, ...)
 
 \item{allow}{\dots}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list.
@@ -34,5 +34,5 @@ Associate/Disassociate IP with Instance
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html}
 }
 \seealso{
-\code{\link{allocate_ip}}, \code{\link{describe_ips}}, \code{\link{release_ip}}
+\code{\link[=allocate_ip]{allocate_ip()}}, \code{\link[=describe_ips]{describe_ips()}}, \code{\link[=release_ip]{release_ip()}}
 }

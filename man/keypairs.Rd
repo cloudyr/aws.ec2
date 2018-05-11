@@ -20,7 +20,7 @@ import_keypair(keypair, publickey, ...)
 
 \item{filter}{\dots}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{path}{A character string specifying a filepath (or filename) to use as a .pem file for the keypair.}
 

@@ -14,7 +14,7 @@ detach_gateway(gateway, vpc, ...)
 
 \item{vpc}{A character string specifying a VPC Allocation ID or an object of class \dQuote{ec2_ip}.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \description{
 Attach or Detacth Network Gateways for a VPC
@@ -24,6 +24,6 @@ Attach or Detacth Network Gateways for a VPC
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html}
 }
 \seealso{
-\code{\link{create_gateway}}, \code{\link{describe_gateways}}
+\code{\link[=create_gateway]{create_gateway()}}, \code{\link[=describe_gateways]{describe_gateways()}}
 }
 \keyword{security}

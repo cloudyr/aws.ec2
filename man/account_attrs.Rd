@@ -9,7 +9,7 @@ account_attrs(attribute, ...)
 \arguments{
 \item{attribute}{Optionally a character string specifying one or more of: \dQuote{supported-platforms}, \dQuote{vpc-max-security-groups-per-interface}, \dQuote{max-elastic-ips}, \dQuote{max-instances}, \dQuote{vpc-max-elastic-ips}, \dQuote{default-vpc}. If missing, all are returned.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list

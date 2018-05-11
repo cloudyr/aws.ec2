@@ -4,10 +4,10 @@
 #' @template gateway
 #' @template dots
 #' @references
-#' \url{http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway.html}
-#' @seealso \code{\link{create_gateway}}, \code{\link{describe_gateways}}
+#' <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway.html>
+#' @seealso [create_gateway()], [describe_gateways()]
 #' @keywords security
 #' @export
 create_gateway <- function(...) {
@@ -36,9 +36,9 @@ delete_gateway <- function(gateway, ...) {
 #' @template vpc
 #' @template dots
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachInternetGateway.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html}
-#' @seealso \code{\link{create_gateway}}, \code{\link{describe_gateways}}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachInternetGateway.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html>
+#' @seealso [create_gateway()], [describe_gateways()]
 #' @keywords security
 #' @export
 attach_gateway <- function(gateway, vpc, ...) {
@@ -66,8 +66,8 @@ detach_gateway <- function(gateway, vpc, ...) {
 #' @template dots
 #' @return A list.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInternetGateways.html}
-#' @seealso \code{\link{create_gateway}}, \code{\link{attach_gateway}}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInternetGateways.html>
+#' @seealso [create_gateway()], [attach_gateway()]
 #' @keywords security
 #' @export
 describe_gateways <- function(gateway, filter, ...) {

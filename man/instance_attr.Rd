@@ -17,7 +17,7 @@ reset_instance_attr(instance, attribute, ...)
 
 \item{attribute}{For \code{get_instance_attr} and \code{reset_instance_attr}, a character string. For \code{set_instance_attr}, a named character string, where the name is an attribute name. Valid attribute names are: \dQuote{instanceType}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{userData}, \dQuote{disableApiTermination}, \dQuote{instanceInitiatedShutdownBehavior}, \dQuote{rootDeviceName}, \dQuote{blockDeviceMapping}, \dQuote{productCodes}, \dQuote{sourceDestCheck}, \dQuote{groupSet}, \dQuote{ebsOptimized}, \dQuote{sriovNetSupport}.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list
@@ -39,6 +39,6 @@ terminate_instances(i[[1]])
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html}
 }
 \seealso{
-\code{\link{describe_instances}}, \code{\link{create_tags}}
+\code{\link[=describe_instances]{describe_instances()}}, \code{\link[=create_tags]{create_tags()}}
 }
 \keyword{instances}

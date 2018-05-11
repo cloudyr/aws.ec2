@@ -30,7 +30,7 @@ delete_netacl_rule(acl, rule, protocol = "-1", direction = c("ingress",
 
 \item{direction}{A character vector specifying one of \dQuote{ingress} (the default) or \code{egress}.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A logical indicating whether the operation succeeded.

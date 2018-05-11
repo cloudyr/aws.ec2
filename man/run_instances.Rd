@@ -6,16 +6,21 @@
 \usage{
 run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
   userdata, shutdown = c("stop", "terminate"), token, spot_options,
-  query_extra = list(), ...)
+  query_extra = list(), launch_template, ...)
 }
 \arguments{
 \item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}.}
 
-\item{type}{A character string specifying the type of EC2 instance to use. See \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html} for details of types and available options.}
+\item{type}{A character string specifying the type of EC2 instance to use.
+See
+\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html}
+for details of types and available options.}
 
-\item{min}{An integer specifying a minimum number of instances to launch. Defaults to 1.}
+\item{min}{An integer specifying a minimum number of instances to launch.
+Defaults to 1.}
 
-\item{max}{An integer specifying a minimum number of instances to launch. Defaults to \code{min}.}
+\item{max}{An integer specifying a minimum number of instances to launch.
+Defaults to \code{min}.}
 
 \item{keypair}{A character string (max 255 character) containing the name of a keypair, or an object of class \dQuote{ec2_keypair}.}
 
@@ -23,17 +28,28 @@ run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
 
 \item{sgroup}{A character vector specifying one or more Security Group IDs, or (a list of) objects of class \dQuote{ec2_security_group}.}
 
-\item{userdata}{Optionally, a character string specifying a script to run during launch.}
+\item{userdata}{Optionally, a character string specifying a script to run
+during launch.}
 
-\item{shutdown}{A character string specifying either \dQuote{stop} or \dQuote{terminate}, to control the behavior of a shutdown action taken from within the instance.}
+\item{shutdown}{A character string specifying either \dQuote{stop} or
+\dQuote{terminate}, to control the behavior of a shutdown action taken from
+within the instance.}
 
 \item{token}{A (max 64-character) string containing a unique user-defined token. This can be used to ensure idempotency of requests in the event of a user-side failure. See \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html} for details.}
 
-\item{spot_options}{Optionally, an empty \code{list()} to request a spot instance with API defaults, or list of spot-market options. See \url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html} for available options}
+\item{spot_options}{Optionally, an empty \code{list()} to request a spot instance
+with API defaults, or list of spot-market options. See
+\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html}
+for available options}
 
-\item{query_extra}{Optionally, additional query parameters to be passed to the RunInstances API. See \url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html} for available parameters.}
+\item{query_extra}{Optionally, additional query parameters to be passed to
+the RunInstances API. See
+\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html}
+for available parameters.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{launch_template}{LaunchTemplate}
+
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list
@@ -47,9 +63,9 @@ Run/launch a new EC2 Instance
 describe_images("ami-7f9dc615")
 s <- describe_subnets()
 g <- create_sgroup("my_security_group", "a security group", vpc = s[[1]])
-i <- run_instances(image = "ami-7f9dc615", 
-                   type = "t2.micro", 
-                   subnet = s[[1]], 
+i <- run_instances(image = "ami-7f9dc615",
+                   type = "t2.micro",
+                   subnet = s[[1]],
                    sgroup = g[[1]])
 
 stop_instances(i[[1]])
@@ -61,6 +77,6 @@ terminate_instances(i[[1]])
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html}
 }
 \seealso{
-\code{\link{describe_instances}}, \code{\link{start_instances}}, \code{\link{terminate_instances}}
+\code{\link[=describe_instances]{describe_instances()}}, \code{\link[=start_instances]{start_instances()}}, \code{\link[=terminate_instances]{terminate_instances()}}
 }
 \keyword{instances}

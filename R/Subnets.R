@@ -1,19 +1,19 @@
 #' @rdname subnets
 #' @title Subnets
 #' @description Get, create, and delete subnets
-#' @details Use \code{\link{create_netacl}} and \code{\link{associate_netacl}} to specify a non-default Access Control List (ACL) for the subnet
+#' @details Use [create_netacl()] and [associate_netacl()] to specify a non-default Access Control List (ACL) for the subnet
 #' @template subnet
 #' @template filter
 #' @template vpc
 #' @template cidr
-#' @param zone Optionally, a character string specifying an availability zone (see \code{\link{describe_zones}}) or an object of class \dQuote{ec2_zone}. If omitted, a zone is selected automatically.
+#' @param zone Optionally, a character string specifying an availability zone (see [describe_zones()]) or an object of class \dQuote{ec2_zone}. If omitted, a zone is selected automatically.
 #' @template dots
 #' @return A list of objects of class \dQuote{ec2_subnet}.
 #' @references
-#' \url{http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSubnet.html}
+#' <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSubnet.html>
 #' @examples
 #' \dontrun{
 #' # describe existing subnets
@@ -29,7 +29,7 @@
 #' # delete a subnet
 #' 
 #' }
-#' @seealso \code{\link{create_vpc}}, \code{\link{create_netacl}}, \code{\link{associate_netacl}}
+#' @seealso [create_vpc()], [create_netacl()], [associate_netacl()]
 #' @keywords security
 #' @export
 describe_subnets <- function(subnet, filter, ...) {

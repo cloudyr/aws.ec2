@@ -30,8 +30,8 @@ account_attrs <- function(attribute, ...) {
 #' @template dots
 #' @return A list
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html}
-#' @seealso \code{\link{describe_regions}}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html>
+#' @seealso [describe_regions()]
 #' @export
 describe_zones <- function(zone, filter, ...) {
     query <- list(Action = "DescribeAvailabilityZones")
@@ -63,7 +63,7 @@ describe_zones <- function(zone, filter, ...) {
 #' \dontrun{
 #' decribe_regions()
 #' }
-#' @seealso \code{\link{describe_zones}}
+#' @seealso [describe_zones()]
 #' @export
 describe_regions <- function(region, filter, ...) {
     query <- list(Action = "DescribeRegions")

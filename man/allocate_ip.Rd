@@ -12,7 +12,7 @@ release_ip(ip, ...)
 \arguments{
 \item{domain}{Optionally, a character string specifying \dQuote{vpc} or \dQuote{standard}.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{ip}{An object of class \dQuote{ec2_ip} or an allocationId (for a VPC IP) or publicIp (for a standard IP).}
 }
@@ -23,7 +23,7 @@ For \code{allocate_ip}, a list containing the IP address. For \code{release_ip},
 Allocate or release VPC or standard IP Address
 }
 \details{
-This function is used to allocate IP addresses either to EC2 classic (if it is available on your account; see \code{\link{account_attrs}}) or on a Virtual Private Cloud (VPC). The default for new AWS EC2 accounts is only to be able to create VPC configurations. Due to limitations in the IPv4 universe, users are typically restricted to 5 IP addresses, which can dynamically be allocated to instances via a VPC. Use \code{\link{associate_ip}}/\code{\link{disassociate_ip}} to link an IP address to a specific instance.
+This function is used to allocate IP addresses either to EC2 classic (if it is available on your account; see \code{\link[=account_attrs]{account_attrs()}}) or on a Virtual Private Cloud (VPC). The default for new AWS EC2 accounts is only to be able to create VPC configurations. Due to limitations in the IPv4 universe, users are typically restricted to 5 IP addresses, which can dynamically be allocated to instances via a VPC. Use \code{\link[=associate_ip]{associate_ip()}}/\code{\link[=disassociate_ip]{disassociate_ip()}} to link an IP address to a specific instance.
 }
 \examples{
 \dontrun{
@@ -41,5 +41,5 @@ release_ip(a2$allocationId)
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseAddress.html}
 }
 \seealso{
-\code{\link{associate_ip}}, \code{\link{describe_ips}}, \code{\link{release_ip}}, \code{\link{make_ip_vpc}}/\code{\link{make_ip_classic}}
+\code{\link[=associate_ip]{associate_ip()}}, \code{\link[=describe_ips]{describe_ips()}}, \code{\link[=release_ip]{release_ip()}}, \code{\link[=make_ip_vpc]{make_ip_vpc()}}/\code{\link[=make_ip_classic]{make_ip_classic()}}
 }

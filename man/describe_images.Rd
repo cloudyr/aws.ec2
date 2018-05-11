@@ -11,11 +11,17 @@ describe_images(image, filter, availableto, owner, ...)
 
 \item{filter}{\dots}
 
-\item{availableto}{\dots}
+\item{availableto}{Scopes the images by users with explicit launch
+permissions. Specify an AWS account ID, \code{"self"} (the sender of the
+request), or `"all"`` (public AMIs).}
 
-\item{owner}{\dots}
+\item{owner}{Filters the images by the owner. Specify an AWS account ID,
+\code{"self"} (owner is the sender of the request), or an AWS owner alias (valid
+values are \code{"amazon"} | \code{"aws-marketplace"} | \code{"microsoft"}). Omitting this
+option returns all images for which you have launch permissions, regardless
+of ownership.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list
@@ -31,5 +37,8 @@ describe_images("ami-7f9dc615")
 # Amazon Linux AMI from: http://aws.amazon.com/amazon-linux-ami/
 describe_images("ami-08111162")
 }
+}
+\references{
+https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
 }
 \keyword{images}

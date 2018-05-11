@@ -1,1 +1,1 @@
-#' @param ... Additional arguments passed to \code{\link{ec2HTTP}}.
+#' @param ... Additional arguments passed to [ec2HTTP()].

@@ -5,13 +5,13 @@
 #' @param strategy A character string specifying \dQuote{cluster}. No other values are currently allowed.
 #' @template filter
 #' @template dots
-#' @return For \code{describe_placements}, a list of objects of class \dQuote{ec2_placement_group}. Otherwise, a logical.
+#' @return For `describe_placements`, a list of objects of class \dQuote{ec2_placement_group}. Otherwise, a logical.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribePlacementGroups.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreatePlacementGroup.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeletePlacementGroup.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribePlacementGroups.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreatePlacementGroup.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeletePlacementGroup.html>
 #' @examples
 #' \dontrun{
 #' pg <- create_placement("examplepg")

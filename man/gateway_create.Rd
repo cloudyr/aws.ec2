@@ -10,7 +10,7 @@ create_gateway(...)
 delete_gateway(gateway, ...)
 }
 \arguments{
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{gateway}{A character string specifying an Internet Gateway ID, or an object of class \dQuote{ec2_internet_gateway}.}
 }
@@ -23,6 +23,6 @@ Create and delete Network Gateways for a VPC
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway.html}
 }
 \seealso{
-\code{\link{create_gateway}}, \code{\link{describe_gateways}}
+\code{\link[=create_gateway]{create_gateway()}}, \code{\link[=describe_gateways]{describe_gateways()}}
 }
 \keyword{security}

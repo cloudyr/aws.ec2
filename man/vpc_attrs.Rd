@@ -17,7 +17,7 @@ get_vpc_attr(vpc, attribute = c("enableDnsSupport", "enableDnsHostnames"),
 
 \item{hostnames}{A logical indicating whether instances launched in the VPC get DNS hostnames. A request can only specify only \code{dns} xor \code{hostnames}.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{attribute}{A character string specifying one of \dQuote{enableDnsSupport} or \dQuote{enableDnsHostnames}.}
 }
@@ -43,6 +43,6 @@ delete_vpc(v)
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcAttribute.html}
 }
 \seealso{
-\code{\link{describe_vpcs}}, \code{\link{create_vpc}}
+\code{\link[=describe_vpcs]{describe_vpcs()}}, \code{\link[=create_vpc]{create_vpc()}}
 }
 \keyword{security}

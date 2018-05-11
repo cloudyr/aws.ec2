@@ -22,3 +22,4 @@ Suggests:
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues
 RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)

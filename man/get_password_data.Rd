@@ -9,7 +9,7 @@ get_password_data(instance, ...)
 \arguments{
 \item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list
@@ -29,6 +29,6 @@ terminate_instances(i[[1]])
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html}
 }
 \seealso{
-\code{\link{describe_instances}}, \code{\link{get_console_output}}
+\code{\link[=describe_instances]{describe_instances()}}, \code{\link[=get_console_output]{get_console_output()}}
 }
 \keyword{instances}

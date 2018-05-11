@@ -11,7 +11,7 @@ describe_vpcs(vpc, filter, ...)
 
 \item{filter}{\dots}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list.
@@ -28,6 +28,6 @@ describe_vpcs()
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html}
 }
 \seealso{
-\code{\link{create_vpc}}, \code{\link{get_vpc_attr}}
+\code{\link[=create_vpc]{create_vpc()}}, \code{\link[=get_vpc_attr]{get_vpc_attr()}}
 }
 \keyword{security}

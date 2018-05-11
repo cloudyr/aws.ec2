@@ -2,13 +2,13 @@
 #' @title EC2 Instance Attributes
 #' @description Get, set, and reset attributes for an EC2 instance
 #' @template instance
-#' @param attribute For \code{get_instance_attr} and \code{reset_instance_attr}, a character string. For \code{set_instance_attr}, a named character string, where the name is an attribute name. Valid attribute names are: \dQuote{instanceType}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{userData}, \dQuote{disableApiTermination}, \dQuote{instanceInitiatedShutdownBehavior}, \dQuote{rootDeviceName}, \dQuote{blockDeviceMapping}, \dQuote{productCodes}, \dQuote{sourceDestCheck}, \dQuote{groupSet}, \dQuote{ebsOptimized}, \dQuote{sriovNetSupport}.
+#' @param attribute For `get_instance_attr` and `reset_instance_attr`, a character string. For `set_instance_attr`, a named character string, where the name is an attribute name. Valid attribute names are: \dQuote{instanceType}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{userData}, \dQuote{disableApiTermination}, \dQuote{instanceInitiatedShutdownBehavior}, \dQuote{rootDeviceName}, \dQuote{blockDeviceMapping}, \dQuote{productCodes}, \dQuote{sourceDestCheck}, \dQuote{groupSet}, \dQuote{ebsOptimized}, \dQuote{sriovNetSupport}.
 #' @template dots
 #' @return A list
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html>
 #' @examples
 #' \dontrun{
 #' i <- run_instances()
@@ -16,7 +16,7 @@
 #' stop_instances(i[[1]])
 #' terminate_instances(i[[1]])
 #' }
-#' @seealso \code{\link{describe_instances}}, \code{\link{create_tags}}
+#' @seealso [describe_instances()], [create_tags()]
 #' @importFrom base64enc base64decode
 #' @keywords instances
 #' @export
@@ -67,7 +67,7 @@ reset_instance_attr <- function(instance, attribute, ...) {
 #' @template dots
 #' @return A character string
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html>
 #' @examples
 #' \dontrun{
 #' i <- run_instances()
@@ -75,7 +75,7 @@ reset_instance_attr <- function(instance, attribute, ...) {
 #' stop_instances(i[[1]])
 #' terminate_instances(i[[1]])
 #' }
-#' @seealso \code{\link{get_instance_attr}}, \code{\link{describe_instances}}, \code{\link{get_password_data}}
+#' @seealso [get_instance_attr()], [describe_instances()], [get_password_data()]
 #' @keywords instances
 #' @importFrom base64enc base64decode
 #' @export
@@ -91,7 +91,7 @@ get_console_output <- function(instance, ...) {
 #' @template dots
 #' @return A list
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html>
 #' @examples
 #' \dontrun{
 #' i <- run_instances()
@@ -99,7 +99,7 @@ get_console_output <- function(instance, ...) {
 #' stop_instances(i[[1]])
 #' terminate_instances(i[[1]])
 #' }
-#' @seealso \code{\link{describe_instances}}, \code{\link{get_console_output}}
+#' @seealso [describe_instances()], [get_console_output()]
 #' @keywords instances
 #' @export
 get_password_data <- function(instance, ...) {

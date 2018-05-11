@@ -20,7 +20,7 @@ reboot_instances(instance, ...)
 
 \item{info}{\dots}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{force}{\dots}
 }
@@ -46,6 +46,6 @@ terminate_instances(i[[1]])
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RebootInstances.html}
 }
 \seealso{
-\code{\link{describe_instances}}, \code{\link{run_instances}}
+\code{\link[=describe_instances]{describe_instances()}}, \code{\link[=run_instances]{run_instances()}}
 }
 \keyword{instances}

@@ -12,7 +12,7 @@ delete_netacl(acl, ...)
 \arguments{
 \item{vpc}{A character string specifying a VPC Allocation ID or an object of class \dQuote{ec2_ip}.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{acl}{\dots}
 }
@@ -23,7 +23,7 @@ For \code{create_netacl}, a list of class \dQuote{ec2_acl}. For \code{delete_net
 Create/Delete Network ACL for VPC
 }
 \details{
-Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see \code{\link{describe_sgroups}}).
+Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see \code{\link[=describe_sgroups]{describe_sgroups()}}).
 }
 \examples{
 \dontrun{
@@ -45,6 +45,6 @@ delete_vpc(v)
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAcl.html}
 }
 \seealso{
-\code{\link{describe_netacls}}
+\code{\link[=describe_netacls]{describe_netacls()}}
 }
 \keyword{security}

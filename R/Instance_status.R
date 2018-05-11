@@ -7,10 +7,10 @@
 #' @param n \dots
 #' @template token
 #' @template dots
-#' @return For \code{describe_instances}, a list containing several lists of elements, including one or more \dQuote{instancesSet} elements that lists various instances. For \code{instance_status}, a possibly empty list.
+#' @return For `describe_instances`, a list containing several lists of elements, including one or more \dQuote{instancesSet} elements that lists various instances. For `instance_status`, a possibly empty list.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceStatus.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceStatus.html>
 #' @examples
 #' \dontrun{
 #' i <- run_instances()
@@ -55,6 +55,7 @@ describe_instances <- function(instance, filter, n, token, ...) {
         }))
         `class<-`(x, "ec2_reservation")
     }))
+    class(out) <-  "ec2_reservation_set"
     return(out)
 }
 

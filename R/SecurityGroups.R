@@ -1,19 +1,19 @@
 #' @rdname security_groups
 #' @title Security Groups
 #' @description Describe, create, and delete Security Groups
-#' @details Security groups provide a layer of security for a Virtual Private Cloud (VPC) for an EC2 instance or set of instances. These can be used in tandem with or in lieu of network Access Control Lists (ACLs) (see \code{\link{describe_netacls}}). Any given instance can be in multiple security groups, which can be confusing.
+#' @details Security groups provide a layer of security for a Virtual Private Cloud (VPC) for an EC2 instance or set of instances. These can be used in tandem with or in lieu of network Access Control Lists (ACLs) (see [describe_netacls()]). Any given instance can be in multiple security groups, which can be confusing.
 #' @template sgroup
 #' @param name A character string (max 255 characters) specifying a security group name.
 #' @param description A character string specifying a security group description.
 #' @param vpc A character string specifying a VPC Id (required for a VPC).
 #' @template filter
 #' @template dots
-#' @return For \code{describe_sgroups} and \code{create_sgroup}, a list of objects of class \dQuote{ec2_security_group}. For \code{delete_sgroup}, a logical.
+#' @return For `describe_sgroups` and `create_sgroup`, a list of objects of class \dQuote{ec2_security_group}. For `delete_sgroup`, a logical.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSecurityGroup.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSecurityGroup.html>
 #' @examples
 #' \dontrun{
 #' describe_sgroups()
@@ -27,7 +27,7 @@
 #' vpc <- describe_ips(vpc)[[1]]
 #' sg2 <- create_sgroup("test_group2", "new security group", vpc = vpc)
 #' }
-#' @seealso \code{\link{authorize_ingress}}
+#' @seealso [authorize_ingress()]
 #' @keywords security
 #' @export
 describe_sgroups <- function(sgroup, name, filter, ...) {
@@ -51,7 +51,7 @@ describe_sgroups <- function(sgroup, name, filter, ...) {
         } else {
             name <- lapply(name, get_sgname)
         }
-        names(name) <- paste0("GroupName.", 1:length(name))
+        names(name) <- paste0("GroupName.", seq_along(name))
         query <- c(query, name)
     }
     if (!missing(filter)) {

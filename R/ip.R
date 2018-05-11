@@ -1,14 +1,14 @@
 #' @rdname allocate_ip
 #' @title Allocate/Release IP Addresses
 #' @description Allocate or release VPC or standard IP Address
-#' @details This function is used to allocate IP addresses either to EC2 classic (if it is available on your account; see \code{\link{account_attrs}}) or on a Virtual Private Cloud (VPC). The default for new AWS EC2 accounts is only to be able to create VPC configurations. Due to limitations in the IPv4 universe, users are typically restricted to 5 IP addresses, which can dynamically be allocated to instances via a VPC. Use \code{\link{associate_ip}}/\code{\link{disassociate_ip}} to link an IP address to a specific instance.
+#' @details This function is used to allocate IP addresses either to EC2 classic (if it is available on your account; see [account_attrs()]) or on a Virtual Private Cloud (VPC). The default for new AWS EC2 accounts is only to be able to create VPC configurations. Due to limitations in the IPv4 universe, users are typically restricted to 5 IP addresses, which can dynamically be allocated to instances via a VPC. Use [associate_ip()]/[disassociate_ip()] to link an IP address to a specific instance.
 #' @param domain Optionally, a character string specifying \dQuote{vpc} or \dQuote{standard}.
 #' @template ip 
 #' @template dots
-#' @return For \code{allocate_ip}, a list containing the IP address. For \code{release_ip}, a logical.
+#' @return For `allocate_ip`, a list containing the IP address. For `release_ip`, a logical.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateAddress.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseAddress.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateAddress.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseAddress.html>
 #' @examples
 #' \dontrun{
 #' # create a classic/"standard" IP address
@@ -19,7 +19,7 @@
 #' a2 <- allocate_ip("vpc")
 #' release_ip(a2$allocationId)
 #' }
-#' @seealso \code{\link{associate_ip}}, \code{\link{describe_ips}}, \code{\link{release_ip}}, \code{\link{make_ip_vpc}}/\code{\link{make_ip_classic}}
+#' @seealso [associate_ip()], [describe_ips()], [release_ip()], [make_ip_vpc()]/[make_ip_classic()]
 #' @export
 allocate_ip <- function(domain = c("vpc", "standard"), ...) {
     query <- list(Action = "AllocateAddress")
@@ -81,16 +81,16 @@ release_ip <- function(ip, ...) {
 #' @description Associate/Disassociate IP with Instance
 #' @template instance
 #' @template ip 
-#' @param private For a VPC \code{ip}, the primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
-#' @param netinterface For a VCP \code{ip}, the ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.
+#' @param private For a VPC `ip`, the primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
+#' @param netinterface For a VCP `ip`, the ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.
 #' @param allow \dots
 #' @template dots
 #' @return A list.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html}
-#' @seealso \code{\link{allocate_ip}}, \code{\link{describe_ips}}, \code{\link{release_ip}}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html>
+#' @seealso [allocate_ip()], [describe_ips()], [release_ip()]
 #' @export
 associate_ip <- 
 function(instance, 
@@ -226,8 +226,8 @@ describe_ips <- function(ip, filter, ...) {
 #' @template dots
 #' @return A list.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html>
 #' @export
 make_ip_vpc <- function(ip, ...) {
     query <- list(Action = "MoveAddressToVpc")

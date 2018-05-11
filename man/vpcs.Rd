@@ -14,7 +14,7 @@ delete_vpc(vpc, ...)
 
 \item{tenancy}{A character string specifying either \dQuote{default} or \dQuote{dedicated} (single-tenant) hardware for instances launched within the VPC.}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{vpc}{A character string specifying a VPC Allocation ID or an object of class \dQuote{ec2_ip}.}
 }
@@ -38,6 +38,6 @@ delete_vpc(v)
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpc.html}
 }
 \seealso{
-\code{\link{describe_vpcs}}, \code{\link{get_vpc_attr}}
+\code{\link[=describe_vpcs]{describe_vpcs()}}, \code{\link[=get_vpc_attr]{get_vpc_attr()}}
 }
 \keyword{security}

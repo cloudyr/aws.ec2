@@ -5,9 +5,9 @@
 #' @template dots
 #' @return A list.
 #' @references
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_MonitorInstances.html}
-#' \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UnmonitorInstances.html}
+#' <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_MonitorInstances.html>
+#' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UnmonitorInstances.html>
 #' @examples
 #' \dontrun{
 #' i <- run_instances()
@@ -17,7 +17,7 @@
 #' stop_instances(i[[1]])
 #' terminate_instances(i[[1]])
 #' }
-#' @seealso \code{\link{describe_instances}}
+#' @seealso [describe_instances()]
 #' @keywords instances
 #' @export
 monitor_instances <- function(instance, ...) {

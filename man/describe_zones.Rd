@@ -11,7 +11,7 @@ describe_zones(zone, filter, ...)
 
 \item{filter}{\dots}
 
-\item{...}{Additional arguments passed to \code{\link{ec2HTTP}}.}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 }
 \value{
 A list
@@ -23,5 +23,5 @@ Retrieve Zone Details
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html}
 }
 \seealso{
-\code{\link{describe_regions}}
+\code{\link[=describe_regions]{describe_regions()}}
 }
