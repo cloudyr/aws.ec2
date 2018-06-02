@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.Renviron
+aws.ec2.Rproj
+revdep/
+^revdep/.?$
