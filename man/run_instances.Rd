@@ -5,7 +5,7 @@
 \title{Run an EC2 Instance}
 \usage{
 run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
-  userdata, shutdown = c("stop", "terminate"), token, spot_options,
+  userdata, shutdown = c("stop", "terminate"), token, tags, spot_options,
   query_extra = list(), launch_template, ...)
 }
 \arguments{

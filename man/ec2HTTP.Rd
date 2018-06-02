@@ -5,7 +5,7 @@
 \title{EC2 API Requests}
 \usage{
 ec2HTTP(query = list(), headers = list(), dryrun,
-  verbose = getOption("verbose", FALSE),
+  verbose = getOption("AWS_VERBOSE_REQUEST", FALSE),
   region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"), key = NULL,
   secret = NULL, session_token = NULL, version = "2016-11-15",
   clean_response = TRUE, ...)
