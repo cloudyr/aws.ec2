@@ -9,6 +9,7 @@
 #' @param secret A character string specifying an AWS Secret Key. See [aws.signature::locate_credentials()].
 #' @param session_token Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See [aws.signature::locate_credentials()].
 #' @param version A character string specifying an API version. Default is \dQuote{2015-10-01}.
+#' @param service The AWS service (`ec2` or `ssm`). Defaults to `ec2`.
 #' @param clean_response A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).
 #' @param \dots Additional arguments passed to [httr::GET()].
 #' @return A list
@@ -16,6 +17,7 @@
 #' @importFrom aws.signature locate_credentials
 #' @importFrom httr add_headers headers content warn_for_status http_status http_error GET
 #' @importFrom xml2 read_xml as_list
+#' @importFrom jsonlite fromJSON
 #' @export
 ec2HTTP <- 
   function(
