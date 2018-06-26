@@ -1,3 +1,7 @@
+# aws.ec2 0.1.14
+
+* Support for reading SSM parameters (#4)
+
 # aws.ec2 0.1.13
 
 * Merge major PR (#38) from Andrie de Vries.
