@@ -15,7 +15,8 @@ Imports:
     aws.signature (>= 0.4.0),
     httr,
     xml2,
-    base64enc
+    base64enc,
+    jsonlite
 Suggests:
     testthat,
     aws.ec2metadata,

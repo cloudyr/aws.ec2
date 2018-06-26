@@ -28,6 +28,7 @@ ec2HTTP <-
     secret = NULL, 
     session_token = NULL,
     version = "2016-11-15",
+    service = "ec2",
     clean_response = TRUE,
     ...
   ) {
@@ -43,21 +44,21 @@ ec2HTTP <-
       query$DryRun <- tolower(as.character(dryrun))
     }
     query$Version <- version
-    if (region == "us-east-1") {
+    if (region == "us-east-1" && service == "ec2") {
       url <- paste0("https://ec2.amazonaws.com")
     } else {
-      url <- paste0("https://ec2.",region,".amazonaws.com")
+      url <- paste0("https://",service,".",region,".amazonaws.com")
     }
     d_timestamp <- format(Sys.time(), "%Y%m%dT%H%M%SZ", tz = "UTC")
     Sig <- signature_v4_auth(
       datetime = d_timestamp,
       region = region,
-      service = "ec2",
+      service = service,
       verb = "GET",
       action = "/",
       query_args = query,
       canonical_headers = list(
-        host = if (region == "us-east-1") "ec2.amazonaws.com" else paste0("ec2.",region,".amazonaws.com"),
+        host = if (region == "us-east-1" && service == "ec2") paste0("ec2.amazonaws.com") else paste0(service, ".",region,".amazonaws.com"),
         `X-Amz-Date` = d_timestamp),
       request_body = "",
       key = key, 
@@ -83,8 +84,8 @@ ec2HTTP <-
     }
     if (http_error(r)) {
       tmp <- gsub("\n\\s*", "", content(r, "text"))
-      x <- try(as_list(read_xml(tmp)), silent = TRUE)
-      msg <- paste0(parse_errors(x), collapse = "\n")
+      x <- get(service, parse_response)(tmp)
+      msg <- paste0(get(service, parse_errors)(x), collapse = "\n")
       stop(msg, call. = FALSE)
     } else {
       if (isTRUE(clean_response)) {
@@ -92,7 +93,7 @@ ec2HTTP <-
       } else {
         tmp <- content(r, "text")
       }
-      out <- try(as_list(read_xml(tmp)), silent = TRUE)
+      out <- get(service, parse_response)(tmp)
       if (inherits(out, "try-error")) {
         out <- structure(content(r, "text"))
       }
@@ -101,10 +102,21 @@ ec2HTTP <-
     return(out)
   }
 
-parse_errors <- function(error) {
+parse_response = list()
+parse_response$ec2 <- function(res) try(as_list(read_xml(res)), silent = TRUE)
+parse_response$ssm <- function(res) try(fromJSON(res), silent = TRUE)
+
+
+parse_errors = list()
+parse_errors$ec2 <- function(error) {
   messages <- if (!is.null(error$Errors)) error$Errors else error$Response$Errors
   sapply(messages, function(z) {
     paste(z$Code[[1]], z$Message[[1]], sep = " : \n - ", collapse = "\n")
   },
   USE.NAMES = FALSE)
 }
+parse_errors$ssm <- function(error) {
+  messages <- if (!is.null(error$Error)) error$Error else error$Response$Error
+  paste0(messages$Code, " : ", messages$message)
+}
+
