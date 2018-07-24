@@ -106,6 +106,13 @@ print.ec2_instance_status <- function(x, ...) {
 #' @rdname describe_instances
 #' @export
 get_instance_public_ip <- function(instance, ...) {
+    if (is.character(instance)) {
+        instance_ids <- instance
+    } else if (inherits(instance, "ec2_instance")) {
+        instance_ids <- get_instanceid(instance)
+    } else {
+        instance_ids <- unlist(lapply(instance, get_instanceid))
+    }
     instance_list <- describe_instances(instance, ...)
     if (length(instance) > 1L) {
         out <- unlist(lapply(instance_list, function(x) {
@@ -122,13 +129,20 @@ get_instance_public_ip <- function(instance, ...) {
             out <- NA_character_
         }
     }
-    names(out) <- instance
+    names(out) <- instance_ids
     return(out)
 }
 
 #' @rdname describe_instances
 #' @export
 get_instance_private_ip <- function(instance, ...) {
+    if (is.character(instance)) {
+        instance_ids <- instance
+    } else if (inherits(instance, "ec2_instance")) {
+        instance_ids <- get_instanceid(instance)
+    } else {
+        instance_ids <- unlist(lapply(instance, get_instanceid))
+    }
     instance_list <- describe_instances(instance, ...)
     if (length(instance) > 1L) {
         out <- unlist(lapply(instance_list, function(x) x$instancesSet[[1L]]$privateIpAddress))
@@ -138,6 +152,6 @@ get_instance_private_ip <- function(instance, ...) {
             out <- NA_character_
         }
     }
-    names(out) <- instance
+    names(out) <- instance_ids
     return(out)
 }

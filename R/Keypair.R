@@ -45,7 +45,7 @@ describe_keypairs <- function(keypair, filter, ...) {
 #' @rdname keypairs
 #' @param path A character string specifying a filepath (or filename) to use as a .pem file for the keypair.
 #' @export
-create_keypair <- function(keypair, path, ...) {
+create_keypair <- function(keypair, path = NULL, ...) {
     query <- list(Action = "CreateKeyPair")
     keypair <- get_keypairname(keypair)
     if (nchar(keypair) > 255) {
