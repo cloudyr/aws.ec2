@@ -27,7 +27,7 @@
                     )
     tmp <- as.list(c(names(list), list))
     names(tmp) <- c(paste0(type, ".", seq_along(list), .name),
-                    paste0(type, ".", seq_along(list), ".Value"))
+                    paste0(type, ".", seq_along(list), ".Value.1"))
     return(tmp)
 }
 

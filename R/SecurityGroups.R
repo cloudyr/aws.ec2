@@ -30,7 +30,7 @@
 #' @seealso [authorize_ingress()]
 #' @keywords security
 #' @export
-describe_sgroups <- function(sgroup, name, filter, ...) {
+describe_sgroups <- function(sgroup, name, filter = NULL, ...) {
     query <- list(Action = "DescribeSecurityGroups")
     if (!missing(sgroup)) {
         if (inherits(sgroup, "ec2_security_group")) {
@@ -54,7 +54,7 @@ describe_sgroups <- function(sgroup, name, filter, ...) {
         names(name) <- paste0("GroupName.", seq_along(name))
         query <- c(query, name)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
