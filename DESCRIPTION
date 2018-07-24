@@ -1,7 +1,7 @@
 Package: aws.ec2
 Type: Package
 Title: Amazon Web Services EC2 Client Package
-Version: 0.1.14
+Version: 0.1.15
 Date: 2018-07-24
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com",

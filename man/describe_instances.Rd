@@ -3,11 +3,17 @@
 \name{describe_instances}
 \alias{describe_instances}
 \alias{instance_status}
+\alias{get_instance_public_ip}
+\alias{get_instance_private_ip}
 \title{EC2 Instance Status}
 \usage{
 describe_instances(instance, filter, n, token, ...)
 
 instance_status(instance, filter, runningonly, n, token, ...)
+
+get_instance_public_ip(instance, ...)
+
+get_instance_private_ip(instance, ...)
 }
 \arguments{
 \item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}

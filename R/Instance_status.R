@@ -93,3 +93,51 @@ instance_status <- function(instance, filter, runningonly, n, token, ...) {
     r <- ec2HTTP(query = query, ...)
     return(lapply(r$instanceStatusSet, `class<-`, "ec2_instance_status"))
 }
+
+print.ec2_instance_status <- function(x, ...) {
+    cat(sprintf("instanceId:       %s\n", x$instanceId[[1L]]))
+    cat(sprintf("availabilityZone: %s\n", x$availabilityZone[[1L]]))
+    cat(sprintf("instanceState:    %s (%s)\n", x$instanceState$code[[1L]], x$instanceState$name[[1L]]))
+    cat(sprintf("systemStatus:     %s\n", x$systemStatus$status[[1L]]))
+    cat(sprintf("instanceStatus:   %s\n", x$instanceStatus$status[[1L]]))
+    invisible(x)
+}
+
+#' @rdname describe_instances
+#' @export
+get_instance_public_ip <- function(instance, ...) {
+    instance_list <- describe_instances(instance, ...)
+    if (length(instance) > 1L) {
+        out <- unlist(lapply(instance_list, function(x) {
+            address <- x$instancesSet[[1L]]$ipAddress
+            if (is.null(address)) {
+                NA_character_
+            } else {
+                address
+            }
+        }))
+    } else {
+        out <- instance_list[[1L]]$instancesSet[[1L]]$ipAddress
+        if (is.null(out)) {
+            out <- NA_character_
+        }
+    }
+    names(out) <- instance
+    return(out)
+}
+
+#' @rdname describe_instances
+#' @export
+get_instance_private_ip <- function(instance, ...) {
+    instance_list <- describe_instances(instance, ...)
+    if (length(instance) > 1L) {
+        out <- unlist(lapply(instance_list, function(x) x$instancesSet[[1L]]$privateIpAddress))
+    } else {
+        out <- instance_list[[1L]]$instancesSet[[1L]]$privateIpAddress
+        if (is.null(out)) {
+            out <- NA_character_
+        }
+    }
+    names(out) <- instance
+    return(out)
+}

@@ -73,7 +73,7 @@ function(
         } else {
             sgroup <- lapply(sgroup, get_sgid)
         }
-        names(sgroup) <- paste0("SecurityGroupId.", 1:length(sgroup))
+        names(sgroup) <- paste0("SecurityGroupId.", seq_along(sgroup))
         query <- c(query, sgroup)
     }
     if (!missing(userdata)) {

@@ -75,7 +75,7 @@ try(authorize_egress(my_sg))
 
 # or log in to instance using SSH
 library("ssh")
-session <- ssh::ssh_connect(paste0("ubuntu@", ips[[1L]]$publicIp), keyfile = pem_file, passwd = "rstudio")
+session <- ssh::ssh_connect(paste0("ubuntu@", get_instance_public_ip(i)), keyfile = pem_file, passwd = "rstudio")
 
 # write a quick little R script to execute
 cat("'hello world!'\nsprintf('2+2 is %d', 2+2)\n", file = "helloworld.R")

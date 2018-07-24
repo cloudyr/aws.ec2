@@ -82,7 +82,11 @@ reset_instance_attr <- function(instance, attribute, ...) {
 get_console_output <- function(instance, ...) {
     query <- list(Action = "GetConsoleOutput", InstanceId = get_instanceid(instance))
     r <- ec2HTTP(query = query, ...)
-    return(rawToChar(base64decode(r$output[[1]])))
+    if (is.list(r)) {
+        r
+    } else {
+        rawToChar(base64enc::base64decode(r$output[[1]]))
+    }
 }
 
 #' @title Get EC2 Instance Password Data

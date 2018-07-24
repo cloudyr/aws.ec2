@@ -6,7 +6,7 @@
 \alias{delete_sgroup}
 \title{Security Groups}
 \usage{
-describe_sgroups(sgroup, name, filter, ...)
+describe_sgroups(sgroup, name, filter = NULL, ...)
 
 create_sgroup(name, description, vpc, ...)
 

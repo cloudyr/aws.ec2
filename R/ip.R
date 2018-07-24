@@ -23,7 +23,7 @@
 #' @export
 allocate_ip <- function(domain = c("vpc", "standard"), ...) {
     query <- list(Action = "AllocateAddress")
-    if (!missing(domain)) {
+    if (!is.null(domain)) {
         query$Domain <- match.arg(domain)
     } 
     r <- ec2HTTP(query = query, ...)
