@@ -9,7 +9,7 @@
 \usage{
 describe_keypairs(keypair, filter, ...)
 
-create_keypair(keypair, path, ...)
+create_keypair(keypair, path = NULL, ...)
 
 delete_keypair(keypair, ...)
 
