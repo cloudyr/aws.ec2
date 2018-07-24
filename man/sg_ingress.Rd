@@ -3,13 +3,21 @@
 \name{authorize_ingress}
 \alias{authorize_ingress}
 \alias{revoke_ingress}
+\alias{authorize_egress}
+\alias{revoke_egress}
 \alias{my_ip}
-\title{Security Group Ingress}
+\title{Security Group Egress/Ingress}
 \usage{
-authorize_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port,
+authorize_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
   protocol = "-1", ...)
 
 revoke_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port, protocol = "-1",
+  ...)
+
+authorize_egress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
+  protocol = "-1", ...)
+
+revoke_egress(sgroup, cidr = paste0(my_ip(), "/32"), port, protocol = "-1",
   ...)
 
 my_ip()
@@ -29,16 +37,18 @@ my_ip()
 A list
 }
 \description{
-Authorize/Revoke Security Group Ingress
+Authorize/Revoke Security Group Egress/Ingress
 }
 \examples{
 \dontrun{
 s <- describe_subnets()
 g <- create_sgroup("test_group", "new security group", vpc = s[[1]])
 authorize_ingress(g, port = 80, protocol = "tcp")
+authorize_egress(g, port = 80, protocol = "tcp")
 
 # cleanup
 revoke_ingress(g, port = 80, protocol = "tcp")
+revoke_egress(g, port = 80, protocol = "tcp")
 }
 }
 \seealso{

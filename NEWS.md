@@ -1,3 +1,8 @@
+# aws.ec2 0.1.14
+
+* Updated README
+* Exposed `revoke_egress() and `revoke_ingress()` functions.
+
 # aws.ec2 0.1.13
 
 * Merge major PR (#38) from Andrie de Vries.

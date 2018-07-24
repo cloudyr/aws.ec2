@@ -137,7 +137,7 @@ function(instance,
         query$AllowReassociation <- tolower(as.character(allow))
     }
     r <- ec2HTTP(query = query, ...)
-    return(r)
+    return(if (r$return[[1L]] == "true") TRUE else FALSE)
 }
 
 #' @rdname associate_ip

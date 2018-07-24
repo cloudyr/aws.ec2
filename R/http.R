@@ -40,13 +40,13 @@ ec2HTTP <-
     
     # generate request signature
     if (!missing(dryrun)) {
-      query$DryRun <- tolower(as.character(dryrun))
+        query$DryRun <- tolower(as.character(dryrun))
     }
     query$Version <- version
     if (region == "us-east-1") {
-      url <- paste0("https://ec2.amazonaws.com")
+        url <- paste0("https://ec2.amazonaws.com")
     } else {
-      url <- paste0("https://ec2.",region,".amazonaws.com")
+        url <- paste0("https://ec2.",region,".amazonaws.com")
     }
     d_timestamp <- format(Sys.time(), "%Y%m%dT%H%M%SZ", tz = "UTC")
     Sig <- signature_v4_auth(
@@ -69,33 +69,37 @@ ec2HTTP <-
     # headers[["x-amz-target"]] <- target
     headers[["Authorization"]] <- Sig[["SignatureHeader"]]
     if (!is.null(session_token) && session_token != "") {
-      headers[["x-amz-security-token"]] <- session_token
+        headers[["x-amz-security-token"]] <- session_token
     }
     H <- do.call(add_headers, headers)
     
-    verbosity <- if (verbose) httr::verbose() else NULL
+    verbosity <- if (isTRUE(verbose)) {
+        httr::verbose() 
+    } else {
+        NULL
+    }
     
     # execute request
     if (length(query)) {
-      r <- GET(url, H, query = query, ..., verbosity)
+        r <- GET(url, H, query = query, ..., verbosity)
     } else {
-      r <- GET(url, H, ..., verbosity)
+        r <- GET(url, H, ..., verbosity)
     }
     if (http_error(r)) {
-      tmp <- gsub("\n\\s*", "", content(r, "text"))
-      x <- try(as_list(read_xml(tmp)), silent = TRUE)
-      msg <- paste0(parse_errors(x), collapse = "\n")
-      stop(msg, call. = FALSE)
+        tmp <- gsub("\n\\s*", "", content(r, "text", encoding = "UTF-8"))
+        x <- try(as_list(read_xml(tmp)), silent = TRUE)
+        msg <- paste0(parse_errors(x), collapse = "\n")
+        stop(msg, call. = FALSE)
     } else {
-      if (isTRUE(clean_response)) {
-        tmp <- gsub("\n\\s*", "", content(r, "text"))
-      } else {
-        tmp <- content(r, "text")
-      }
-      out <- try(as_list(read_xml(tmp)), silent = TRUE)
-      if (inherits(out, "try-error")) {
-        out <- structure(content(r, "text"))
-      }
+        if (isTRUE(clean_response)) {
+            tmp <- gsub("\n\\s*", "", content(r, "text", encoding = "UTF-8"))
+        } else {
+            tmp <- content(r, "text")
+        }
+        out <- try(as_list(read_xml(tmp)), silent = TRUE)
+        if (inherits(out, "try-error")) {
+            out <- structure(content(r, "text", encoding = "UTF-8"))
+        }
     }
     out <- out[[1]]
     return(out)

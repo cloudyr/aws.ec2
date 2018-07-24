@@ -38,63 +38,64 @@ The basic idea of the package is to be able to launch and control EC2 instances.
 A really simple example is to launch an instance that comes preloaded with an RStudio Server Amazon Machine Image ([AMI](http://www.louisaslett.com/RStudio_AMI/)):
 
 
-```r
+```R
 # Describe the AMI (from: http://www.louisaslett.com/RStudio_AMI/)
-image <- "ami-b1b0c3c2"
+image <- "ami-3b0c205e" # us-east-1
+#image <- "ami-93805fea" # eu-west-1
 describe_images(image)
-```
 
-```
-## Error in describe_images(image): could not find function "describe_images"
-```
-
-```r
 # Check your VPC and Security Group settings
-s <- describe_subnets()
-```
+## subnet
+subnets <- describe_subnets()
+## security group
+my_sg <- create_sgroup("r-ec2-sg", "Allow my IP")
+## ip address
+ips <- describe_ips()
 
-```
-## Error in describe_subnets(): could not find function "describe_subnets"
-```
+# create an SSH keypair
+my_keypair <- create_keypair("r-ec2-example")
+pem_file <- tempfile(fileext = ".pem")
+cat(key$keyMaterial, file = pem_file)
 
-```r
-g <- describe_sgroups()
-```
-
-```
-## Error in describe_sgroups(): could not find function "describe_sgroups"
-```
-
-```r
 # Launch the instance using appropriate settings
 i <- run_instances(image = image, 
                    type = "t2.micro", # <- you might want to change this
-                   subnet = s[[1]], 
-                   sgroup = g[[1]])
-```
+                   subnet = subnets[[1]], 
+                   sgroup = sgs[[1]],
+                   keypair = my_keypair)
+Sys.sleep(5L) # wait for instance to boot
 
-```
-## Error in run_instances(image = image, type = "t2.micro", subnet = s[[1]], : could not find function "run_instances"
-```
+# associate IP address with instance
+associate_ip(i, ips[[1]])
+# authorize access from this IP
+try(authorize_ingress(my_sg))
+try(authorize_egress(my_sg))
 
-```r
-# RStudio Server will be available at the "publicIp" address returned in `i`
-# Note: the default security settings prohibit outbound traffic
+# open RStudio server in browser
+# browseURL(paste0("http://", ips[[1L]]$publicIp))
 
-# Stop and terminate the instances
+# or log in to instance using SSH
+library("ssh")
+session <- ssh::ssh_connect(paste0("ubuntu@", ips[[1L]]$publicIp), keyfile = pem_file, passwd = "rstudio")
+
+# write a quick little R script to execute
+cat("'hello world!'\nsprintf('2+2 is %d', 2+2)\n", file = "helloworld.R")
+# upload it to instance
+invisible(ssh::scp_upload(session, "helloworld.R"))
+
+# execute script on instance
+x <- ssh::ssh_exec_wait(session, "Rscript helloworld.R")
+
+# cleanup
+## disconnect from instance
+ssh_disconnect(session)
+## stop and terminate the instances
 stop_instances(i[[1]])
-```
-
-```
-## Error in stop_instances(i[[1]]): could not find function "stop_instances"
-```
-
-```r
 terminate_instances(i[[1]])
-```
-
-```
-## Error in terminate_instances(i[[1]]): could not find function "terminate_instances"
+## revoke access from this IP to security group
+try(revoke_ingress(my_sg))
+try(revoke_egress(my_sg))
+delete_keypair(my_keypair)
 ```
 
 

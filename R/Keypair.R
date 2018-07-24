@@ -54,7 +54,7 @@ create_keypair <- function(keypair, path, ...) {
     query[["KeyName"]] <- keypair
     r <- ec2HTTP(query = query, clean_response = FALSE, ...)
     out <- structure(flatten_list(r), class = "ec2_keypair")
-    if (!missing(path)) {
+    if (!is.null(path)) {
         cat(out[["keyMaterial"]], file = path)
     }
     return(out)
