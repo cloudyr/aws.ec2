@@ -18,8 +18,7 @@ Imports:
     base64enc
 Suggests:
     testthat,
-    aws.ec2metadata,
-    aws.efs
+    aws.ec2metadata
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues
 RoxygenNote: 6.0.1
