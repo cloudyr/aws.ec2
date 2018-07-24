@@ -1,31 +1,18 @@
 #' @title Run an EC2 Instance
 #' @description Run/launch a new EC2 Instance
 #' @template image
-#' @param type A character string specifying the type of EC2 instance to use.
-#'   See
-#'   <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html>
-#'   for details of types and available options.
-#' @param min An integer specifying a minimum number of instances to launch.
-#'   Defaults to 1.
-#' @param max An integer specifying a minimum number of instances to launch.
-#'   Defaults to `min`.
+#' @param type A character string specifying the type of EC2 instance to use. See <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html> for details of types and available options.
+#' @param min An integer specifying a minimum number of instances to launch. Defaults to 1.
+#' @param max An integer specifying a minimum number of instances to launch. Defaults to `min`.
 #' @template keypair
 #' @template subnet
 #' @template sgroup
-#' @param userdata Optionally, a character string specifying a script to run
-#'   during launch.
-#' @param shutdown A character string specifying either \dQuote{stop} or
-#'   \dQuote{terminate}, to control the behavior of a shutdown action taken from
-#'   within the instance.
+#' @param userdata Optionally, a character string specifying a script to run during launch.
+#' @param shutdown A character string specifying either \dQuote{stop} or \dQuote{terminate}, to control the behavior of a shutdown action taken from within the instance.
 #' @template token
-#' @param spot_options Optionally, an empty `list()` to request a spot instance
-#'   with API defaults, or list of spot-market options. See
-#'   <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html>
-#'   for available options
-#' @param query_extra Optionally, additional query parameters to be passed to
-#'   the RunInstances API. See
-#'   <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html>
-#'   for available parameters.
+#' @param tags A named list of tags.
+#' @param spot_options Optionally, an empty `list()` to request a spot instance with API defaults, or list of spot-market options. See <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html> for available options
+#' @param query_extra Optionally, additional query parameters to be passed to the RunInstances API. See <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html> for available parameters.
 #'@param launch_template LaunchTemplate
 #' @template dots
 #' @return A list
@@ -50,9 +37,23 @@
 #' @keywords instances
 #' @export
 run_instances <- 
-function(image, type, min = 1, max = min, keypair, subnet, sgroup, 
-         userdata, shutdown = c("stop", "terminate"), token, tags,
-         spot_options, query_extra=list(), launch_template, ...) {
+function(
+  image,
+  type,
+  min = 1,
+  max = min,
+  keypair,
+  subnet,
+  sgroup,
+  userdata,
+  shutdown = c("stop", "terminate"),
+  token,
+  tags,
+  spot_options,
+  query_extra = list(),
+  launch_template,
+  ...
+) {
     query <- list(Action = "RunInstances", 
                   ImageId = get_imageid(image),
                   InstanceType = type,
@@ -85,19 +86,19 @@ function(image, type, min = 1, max = min, keypair, subnet, sgroup,
         query$ClientToken <- token
     }
     if (!missing(spot_options) && !is.null(spot_options)) {
-      query$InstanceMarketOptions.MarketType <- "spot"
-      if (length(spot_options)) {
-        names(spot_options) <- paste0("InstanceMarketOptions.SpotOptions.",names(spot_options))
-        query <- c(query, spot_options) 
-      }
+        query$InstanceMarketOptions.MarketType <- "spot"
+        if (length(spot_options)) {
+            names(spot_options) <- paste0("InstanceMarketOptions.SpotOptions.",names(spot_options))
+            query <- c(query, spot_options) 
+        }
     }
     if (!missing(launch_template) && !is.null(launch_template)) {
-      names(launch_template) <- "LaunchTemplate"
-      query <- c(query, launch_template)
+        names(launch_template) <- "LaunchTemplate"
+        query <- c(query, launch_template)
     }
     if (!missing(tags) && !is.null(tags)) {
-      tags <- .tag_specification(resource_type = "instance", tags)
-      query <- c(query, tags)
+        tags <- .tag_specification(resource_type = "instance", tags)
+        query <- c(query, tags)
     }
     query <- c(query, query_extra)
     r <- ec2HTTP(query = query, ...)
