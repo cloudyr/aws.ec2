@@ -18,60 +18,59 @@
 #' @importFrom xml2 read_xml as_list
 #' @export
 ec2HTTP <- 
-  function(
-    query = list(), 
+function(
+    query = list(),
     headers = list(),
-    dryrun, 
-    verbose = getOption("AWS_VERBOSE_REQUEST", FALSE),
-    region = Sys.getenv("AWS_DEFAULT_REGION","us-east-1"), 
-    key = NULL, 
-    secret = NULL, 
+    dryrun = FALSE,
+    verbose = getOption("verbose", FALSE),
+    region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"),
+    key = NULL,
+    secret = NULL,
     session_token = NULL,
     version = "2016-11-15",
     clean_response = TRUE,
     ...
-  ) {
+) {
     # locate and validate credentials
-    credentials <- locate_credentials(key = key, secret = secret, session_token = session_token, region = region, verbose = verbose)
+    credentials <- aws.signature::locate_credentials(key = key, secret = secret, session_token = session_token, region = region, verbose = verbose)
     key <- credentials[["key"]]
     secret <- credentials[["secret"]]
     session_token <- credentials[["session_token"]]
     region <- credentials[["region"]]
     
     # generate request signature
-    if (!missing(dryrun)) {
-        query$DryRun <- tolower(as.character(dryrun))
+    if (isTRUE(dryrun)) {
+        query$DryRun <- "true"
     }
     query$Version <- version
     if (region == "us-east-1") {
         url <- paste0("https://ec2.amazonaws.com")
     } else {
-        url <- paste0("https://ec2.",region,".amazonaws.com")
+        url <- paste0("https://ec2.", region, ".amazonaws.com")
     }
     d_timestamp <- format(Sys.time(), "%Y%m%dT%H%M%SZ", tz = "UTC")
-    Sig <- signature_v4_auth(
-      datetime = d_timestamp,
-      region = region,
-      service = "ec2",
-      verb = "GET",
-      action = "/",
-      query_args = query,
-      canonical_headers = list(
-        host = if (region == "us-east-1") "ec2.amazonaws.com" else paste0("ec2.",region,".amazonaws.com"),
-        `X-Amz-Date` = d_timestamp),
-      request_body = "",
-      key = key, 
-      secret = secret,
-      session_token = session_token,
-      verbose = verbose)
-    # setup request headers
+    Sig <- aws.signature::signature_v4_auth(
+        datetime = d_timestamp,
+        region = region,
+        service = "ec2",
+        verb = "GET",
+        action = "/",
+        query_args = query,
+        canonical_headers = list(
+            host = if (region == "us-east-1") "ec2.amazonaws.com" else paste0("ec2.", region, ".amazonaws.com"),
+            `X-Amz-Date` = d_timestamp
+        ),
+        request_body = "",
+        key = key, 
+        secret = secret,
+        session_token = session_token,
+        verbose = verbose)
     headers[["x-amz-date"]] <- d_timestamp
-    # headers[["x-amz-target"]] <- target
     headers[["Authorization"]] <- Sig[["SignatureHeader"]]
     if (!is.null(session_token) && session_token != "") {
         headers[["x-amz-security-token"]] <- session_token
     }
-    H <- do.call(add_headers, headers)
+    H <- do.call(httr::add_headers, headers)
     
     verbosity <- if (isTRUE(verbose)) {
         httr::verbose() 
@@ -81,24 +80,24 @@ ec2HTTP <-
     
     # execute request
     if (length(query)) {
-        r <- GET(url, H, query = query, ..., verbosity)
+        r <- httr::GET(url, H, query = query, ..., verbosity)
     } else {
-        r <- GET(url, H, ..., verbosity)
+        r <- httr::GET(url, H, ..., verbosity)
     }
-    if (http_error(r)) {
-        tmp <- gsub("\n\\s*", "", content(r, "text", encoding = "UTF-8"))
-        x <- try(as_list(read_xml(tmp)), silent = TRUE)
+    if (httr::http_error(r)) {
+        tmp <- gsub("\n\\s*", "", httr::content(r, "text", encoding = "UTF-8"))
+        x <- try(xml2::as_list(xml2::read_xml(tmp)), silent = TRUE)
         msg <- paste0(parse_errors(x), collapse = "\n")
         stop(msg, call. = FALSE)
     } else {
         if (isTRUE(clean_response)) {
-            tmp <- gsub("\n\\s*", "", content(r, "text", encoding = "UTF-8"))
+            tmp <- gsub("\n\\s*", "", httr::content(r, "text", encoding = "UTF-8"))
         } else {
-            tmp <- content(r, "text")
+            tmp <- httr::content(r, "text")
         }
-        out <- try(as_list(read_xml(tmp)), silent = TRUE)
+        out <- try(xml2::as_list(xml2::read_xml(tmp)), silent = TRUE)
         if (inherits(out, "try-error")) {
-            out <- structure(content(r, "text", encoding = "UTF-8"))
+            out <- structure(httr::content(r, "text", encoding = "UTF-8"))
         }
     }
     out <- out[[1]]
@@ -106,9 +105,8 @@ ec2HTTP <-
   }
 
 parse_errors <- function(error) {
-  messages <- if (!is.null(error$Errors)) error$Errors else error$Response$Errors
-  sapply(messages, function(z) {
-    paste(z$Code[[1]], z$Message[[1]], sep = " : \n - ", collapse = "\n")
-  },
-  USE.NAMES = FALSE)
+    messages <- if (!is.null(error$Errors)) error$Errors else error$Response$Errors
+    unlist(lapply(messages, function(z) {
+        paste(z$Code[[1]], z$Message[[1]], sep = " : \n - ", collapse = "\n")
+    }))
 }
