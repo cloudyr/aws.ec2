@@ -192,7 +192,7 @@ function(
   ...
 ) {
     query <- list(Action = "DescribeVolumes")
-    if (!missing(volume)) {
+    if (!is.null(volume)) {
         if (inherits(volume, "ec2_image")) {
             volume <- list(get_volumeid(volume))
         } else if (is.character(volume)) {
@@ -203,7 +203,7 @@ function(
         names(volume) <- paste0("VolumeId.", 1:length(volume))
         query <- c(query, volume)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
@@ -219,7 +219,7 @@ function(
   ...
 ) {
     query <- list(Action = "DescribeVolumeStatus")
-    if (!missing(volume)) {
+    if (!is.null(volume)) {
         if (inherits(volume, "ec2_image")) {
             volume <- list(get_volumeid(volume))
         } else if (is.character(volume)) {
@@ -230,7 +230,7 @@ function(
         names(volume) <- paste0("VolumeId.", 1:length(volume))
         query <- c(query, volume)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)

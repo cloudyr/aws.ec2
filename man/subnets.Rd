@@ -6,9 +6,9 @@
 \alias{delete_subnet}
 \title{Subnets}
 \usage{
-describe_subnets(subnet, filter, ...)
+describe_subnets(subnet = NULL, filter = NULL, ...)
 
-create_subnet(vpc, cidr, zone, ...)
+create_subnet(vpc, cidr, zone = NULL, ...)
 
 delete_subnet(subnet, ...)
 }

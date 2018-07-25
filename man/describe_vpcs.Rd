@@ -4,7 +4,7 @@
 \alias{describe_vpcs}
 \title{Describe VPC(s)}
 \usage{
-describe_vpcs(vpc, filter, ...)
+describe_vpcs(vpc = NULL, filter = NULL, ...)
 }
 \arguments{
 \item{vpc}{A character string specifying a VPC Allocation ID or an object of class \dQuote{ec2_ip}.}

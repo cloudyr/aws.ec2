@@ -21,7 +21,11 @@
 #' }
 #' @seealso [associate_ip()], [describe_ips()], [release_ip()], [make_ip_vpc()]/[make_ip_classic()]
 #' @export
-allocate_ip <- function(domain = c("vpc", "standard"), ...) {
+allocate_ip <-
+function(
+  domain = c("vpc", "standard"),
+  ...
+) {
     query <- list(Action = "AllocateAddress")
     if (!is.null(domain)) {
         query$Domain <- match.arg(domain)

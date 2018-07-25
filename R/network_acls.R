@@ -35,7 +35,11 @@ create_netacl <- function(vpc, ...) {
 
 #' @rdname acls
 #' @export
-delete_netacl <- function(acl, ...) {
+delete_netacl <-
+function(
+  acl,
+  ...
+) {
     query <- list(Action = "DeleteNetworkAcl")
     query$NetworkAclId <- get_networkaclid(acl)
     r <- ec2HTTP(query = query, ...)
@@ -89,9 +93,16 @@ delete_netacl <- function(acl, ...) {
 #' @keywords security
 #' @export
 create_netacl_rule <- 
-function(acl, rule, cidr, port, protocol = "-1", 
-         action = c("allow", "deny"), 
-         direction = c("ingress", "egress"), ...) {
+function(
+  acl,
+  rule,
+  cidr,
+  port,
+  protocol = "-1", 
+  action = c("allow", "deny"), 
+  direction = c("ingress", "egress"),
+  ...
+) {
     query <- list(Action = "CreateNetworkAclEntry")
     query$NetworkAclId <- get_networkaclid(acl)
     query$RuleNumber <- rule
@@ -117,9 +128,16 @@ function(acl, rule, cidr, port, protocol = "-1",
 #' @rdname acl_rules
 #' @export
 replace_netacl_rule <- 
-function(acl, rule, cidr, port, protocol = "-1", 
-         action = c("allow", "deny"), 
-         direction = c("ingress", "egress"), ...) {
+function(
+  acl,
+  rule,
+  cidr,
+  port,
+  protocol = "-1",
+  action = c("allow", "deny"), 
+  direction = c("ingress", "egress"),
+  ...
+) {
     query <- list(Action = "ReplaceNetworkAclEntry")
     query$NetworkAclId <- get_networkaclid(acl)
     query$RuleNumber <- rule
@@ -144,7 +162,14 @@ function(acl, rule, cidr, port, protocol = "-1",
 
 #' @rdname acl_rules
 #' @export
-delete_netacl_rule <- function(acl, rule, protocol = "-1", direction = c("ingress", "egress"), ...) {
+delete_netacl_rule <-
+function(
+  acl,
+  rule,
+  protocol = "-1",
+  direction = c("ingress", "egress"),
+  ...
+) {
     query <- list(Action = "DeleteNetworkAclEntry")
     query$NetworkAclId <- get_networkaclid(acl)
     query$RuleNumber <- rule
@@ -175,7 +200,12 @@ delete_netacl_rule <- function(acl, rule, protocol = "-1", direction = c("ingres
 #' @keywords security
 #' @seealso [create_netacl()], [create_subnet()]
 #' @export
-associate_netacl <- function(acl, association, ...) {
+associate_netacl <-
+function(
+  acl,
+  association,
+  ...
+) {
     query <- list(Action = "ReplaceNetworkAclAssociation")
     query$NetworkAclId <- get_networkaclid(acl)
     query$AssociationId <- get_associd(association)
@@ -196,9 +226,14 @@ associate_netacl <- function(acl, association, ...) {
 #' @seealso [describe_subnets()], [describe_ips()]
 #' @keywords security
 #' @export
-describe_netacls <- function(acl, filter, ...) {
+describe_netacls <-
+function(
+  acl = NULL,
+  filter = NULL,
+  ...
+) {
     query <- list(Action = "DescribeNetworkAcls")
-    if (!missing(acl)) {
+    if (!is.null(acl)) {
         if (inherits(acl, "ec2_subnet")) {
             acl <- list(get_networkaclid(acl))
         } else if (is.character(acl)) {
@@ -209,7 +244,7 @@ describe_netacls <- function(acl, filter, ...) {
         names(acl) <- paste0("NetworkAclId.", seq_along(acl))
         query <- c(query, acl)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)

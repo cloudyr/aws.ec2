@@ -32,9 +32,14 @@
 #' @seealso [create_vpc()], [create_netacl()], [associate_netacl()]
 #' @keywords security
 #' @export
-describe_subnets <- function(subnet, filter, ...) {
+describe_subnets <-
+function(
+  subnet = NULL,
+  filter = NULL,
+  ...
+) {
     query <- list(Action = "DescribeSubnets")
-    if (!missing(subnet)) {
+    if (!is.null(subnet)) {
         if (inherits(subnet, "ec2_subnet")) {
             subnet <- list(get_subnetid(subnet))
         } else if (is.character(subnet)) {
@@ -45,7 +50,7 @@ describe_subnets <- function(subnet, filter, ...) {
         names(subnet) <- paste0("SubnetId.", seq_along(subnet))
         query <- c(query, subnet)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
@@ -56,10 +61,16 @@ describe_subnets <- function(subnet, filter, ...) {
 
 #' @rdname subnets
 #' @export
-create_subnet <- function(vpc, cidr, zone, ...) {
+create_subnet <-
+function(
+  vpc,
+  cidr,
+  zone = NULL,
+  ...
+) {
     query <- list(Action = "CreateSubnet", CidrBlock = cidr)
     query$VpcId <- get_vpcid(vpc)
-    if (!missing(zone)) {
+    if (!is.null(zone)) {
         if (inherits(zone, "ec2_zone")) {
             zone <- zone$zoneName
         }

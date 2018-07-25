@@ -22,9 +22,16 @@
 #' }
 #' @keywords instances
 #' @export
-describe_instances <- function(instance, filter, n, token, ...) {
+describe_instances <-
+function(
+  instance = NULL,
+  filter = NULL,
+  n = NULL,
+  token = NULL,
+  ...
+) {
     query <- list(Action = "DescribeInstances")
-    if (!missing(instance) && length(instance) > 0) {
+    if (!is.null(instance) && length(instance) > 0) {
         if (inherits(instance, "ec2_instance")) {
             instance <- list(get_instanceid(instance))
         } else if (is.character(instance)) {
@@ -35,17 +42,17 @@ describe_instances <- function(instance, filter, n, token, ...) {
         names(instance) <- paste0("InstanceId.", 1:length(instance))
         query <- c(query, instance)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
-    if (!missing(n)) {
+    if (!is.null(n)) {
         if(n > 1000) {
             warning("'n' coerced to 1000 (the maximum)")
             n <- 1000
         }
         query$MaxResults <- n
     }
-    if (!missing(token)) {
+    if (!is.null(token)) {
         query$NextToken <- token
     }
     r <- ec2HTTP(query = query, ...)
@@ -61,9 +68,17 @@ describe_instances <- function(instance, filter, n, token, ...) {
 
 #' @rdname describe_instances
 #' @export
-instance_status <- function(instance, filter, runningonly, n, token, ...) {
+instance_status <-
+function(
+  instance = NULL,
+  filter = NULL,
+  runningonly = NULL,
+  n = NULL,
+  token = NULL,
+  ...
+) {
     query <- list(Action = "DescribeInstanceStatus")
-    if (!missing(instance)) {
+    if (!is.null(instance)) {
         if (inherits(instance, "ec2_instance")) {
             instance <- list(get_instanceid(instance))
         } else if (is.character(instance)) {
@@ -74,17 +89,17 @@ instance_status <- function(instance, filter, runningonly, n, token, ...) {
         names(instance) <- paste0("InstanceId.", 1:length(instance))
         query <- c(query, instance)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
-    if (!missing(n)) {
+    if (!is.null(n)) {
         if (n > 1000) {
             warning("'n' coerced to 1000 (the maximum)")
             n <- 1000
         }
         query$MaxResults <- n
     }
-    if (!missing(token)) {
+    if (!is.null(token)) {
         query$NextToken <- token
     }
     if (!missing(runningonly)) {
@@ -105,7 +120,11 @@ print.ec2_instance_status <- function(x, ...) {
 
 #' @rdname describe_instances
 #' @export
-get_instance_public_ip <- function(instance, ...) {
+get_instance_public_ip <-
+function(
+  instance,
+  ...
+) {
     if (is.character(instance)) {
         instance_ids <- instance
     } else if (inherits(instance, "ec2_instance")) {
@@ -135,7 +154,11 @@ get_instance_public_ip <- function(instance, ...) {
 
 #' @rdname describe_instances
 #' @export
-get_instance_private_ip <- function(instance, ...) {
+get_instance_private_ip <-
+function(
+  instance,
+  ...
+) {
     if (is.character(instance)) {
         instance_ids <- instance
     } else if (inherits(instance, "ec2_instance")) {

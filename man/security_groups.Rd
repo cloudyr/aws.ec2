@@ -6,11 +6,11 @@
 \alias{delete_sgroup}
 \title{Security Groups}
 \usage{
-describe_sgroups(sgroup, name, filter = NULL, ...)
+describe_sgroups(sgroup = NULL, name = NULL, filter = NULL, ...)
 
-create_sgroup(name, description, vpc, ...)
+create_sgroup(name, description, vpc = NULL, ...)
 
-delete_sgroup(name, sgroup, ...)
+delete_sgroup(name = NULL, sgroup = NULL, ...)
 }
 \arguments{
 \item{sgroup}{A character vector specifying one or more Security Group IDs, or (a list of) objects of class \dQuote{ec2_security_group}.}

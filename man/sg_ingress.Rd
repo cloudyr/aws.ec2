@@ -11,14 +11,14 @@
 authorize_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
   protocol = "-1", ...)
 
-revoke_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port, protocol = "-1",
-  ...)
+revoke_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
+  protocol = "-1", ...)
 
 authorize_egress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
   protocol = "-1", ...)
 
-revoke_egress(sgroup, cidr = paste0(my_ip(), "/32"), port, protocol = "-1",
-  ...)
+revoke_egress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
+  protocol = "-1", ...)
 
 my_ip()
 }

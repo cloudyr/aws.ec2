@@ -20,9 +20,13 @@
 #' @seealso [describe_instances()]
 #' @keywords instances
 #' @export
-monitor_instances <- function(instance, ...) {
+monitor_instances <-
+function(
+  instance = NULL,
+  ...
+) {
     query <- list(Action = "MonitorInstances")
-    if(!missing(instance)) {
+    if (!is.null(instance)) {
         if (inherits(instance, "ec2_instance")) {
             instance <- list(get_instanceid(instance))
         } else if (is.character(instance)) {
@@ -39,9 +43,13 @@ monitor_instances <- function(instance, ...) {
 
 #' @rdname monitor_instance
 #' @export
-unmonitor_instances <- function(instance, ...) {
+unmonitor_instances <-
+function(
+  instance = NULL,
+  ...
+) {
     query <- list(Action = "UnmonitorInstances")
-    if(!missing(instance)) {
+    if (!is.null(instance)) {
         if (inherits(instance, "ec2_instance")) {
             instance <- list(get_instanceid(instance))
         } else if (is.character(instance)) {

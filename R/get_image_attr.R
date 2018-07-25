@@ -18,7 +18,12 @@
 #' }
 #' @keywords images
 #' @export
-get_image_attr <- function(image, attribute, ...) {
+get_image_attr <-
+function(
+  image,
+  attribute,
+  ...
+) {
     val <- c("description", "kernel", "ramdisk", "launchPermission", "productCodes", "blockDeviceMapping", "sriovNetSupport")
     if (!attribute %in% val) {
         stop(paste0("'attribute' must be one of: ", paste(val, sep = ", ")))
@@ -33,14 +38,17 @@ get_image_attr <- function(image, attribute, ...) {
 #' @rdname image_attrs
 #' @export
 set_image_attr <- 
-function(image, 
-         attribute, 
-         value,
-         description, 
-         operationtype, 
-         launchpermission, 
-         usergroup,
-         userid, ...) {
+function(
+  image, 
+  attribute, 
+  value,
+  description, 
+  operationtype, 
+  launchpermission, 
+  usergroup,
+  userid,
+  ...
+) {
     query <- list(Action = "DescribeImageAttribute", 
                   ImageId = get_imageid(image))
     
@@ -53,7 +61,12 @@ function(image,
 
 #' @rdname image_attrs
 #' @export
-reset_image_attr <- function(image, attribute, ...) {
+reset_image_attr <-
+function(
+  image,
+  attribute,
+  ...
+) {
     query <- list(Action = "ResetImageAttribute", 
                   ImageId = get_imageid(image),
                   Attribute = attribute)

@@ -5,12 +5,12 @@
 \alias{copy_image}
 \title{Create AMI}
 \usage{
-create_image(instance, name, description,
-  region = getOption("AWS_DEFAULT_REGION", "us-east-1"), mapping,
+create_image(instance, name, description = NULL,
+  region = getOption("AWS_DEFAULT_REGION", "us-east-1"), mapping = NULL,
   noreboot = FALSE, ...)
 
-copy_image(name, image, description, region = getOption("AWS_DEFAULT_REGION",
-  "us-east-1"), token, ...)
+copy_image(name, image, description = NULL,
+  region = getOption("AWS_DEFAULT_REGION", "us-east-1"), token = NULL, ...)
 }
 \arguments{
 \item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}

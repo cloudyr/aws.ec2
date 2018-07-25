@@ -42,16 +42,16 @@ function(
   type,
   min = 1,
   max = min,
-  keypair,
-  subnet,
-  sgroup,
-  userdata,
+  keypair = NULL,
+  subnet = NULL,
+  sgroup = NULL,
+  userdata = NULL,
   shutdown = c("stop", "terminate"),
-  token,
-  tags,
-  spot_options,
+  token = NULL,
+  tags = NULL,
+  spot_options = NULL,
   query_extra = list(),
-  launch_template,
+  launch_template = NULL,
   ...
 ) {
     query <- list(Action = "RunInstances", 
@@ -59,13 +59,13 @@ function(
                   InstanceType = type,
                   MinCount = min,
                   MaxCount = max)
-    if (!missing(keypair)) {
+    if (!is.null(keypair)) {
         query$KeyName <- get_keypairname(keypair)
     }
-    if (!missing(subnet)) {
+    if (!is.null(subnet)) {
         query$SubnetId <- get_subnetid(subnet)
     }
-    if (!missing(sgroup)) {
+    if (!is.null(sgroup)) {
         if (inherits(sgroup, "ec2_security_group")) {
             sgroup <- list(get_sgid(sgroup))
         } else if (is.character(sgroup)) {
@@ -76,27 +76,27 @@ function(
         names(sgroup) <- paste0("SecurityGroupId.", seq_along(sgroup))
         query <- c(query, sgroup)
     }
-    if (!missing(userdata)) {
+    if (!is.null(userdata)) {
         query$UserData <- userdata
     }
-    if (!missing(shutdown)) {
+    if (!is.null(shutdown)) {
         query$InstanceInitiatedShutdownBehavior <- match.arg(shutdown)
     }
-    if (!missing(token)) {
+    if (!is.null(token)) {
         query$ClientToken <- token
     }
-    if (!missing(spot_options) && !is.null(spot_options)) {
+    if (!is.null(spot_options) && !is.null(spot_options)) {
         query$InstanceMarketOptions.MarketType <- "spot"
         if (length(spot_options)) {
             names(spot_options) <- paste0("InstanceMarketOptions.SpotOptions.",names(spot_options))
             query <- c(query, spot_options) 
         }
     }
-    if (!missing(launch_template) && !is.null(launch_template)) {
+    if (!is.null(launch_template) && !is.null(launch_template)) {
         names(launch_template) <- "LaunchTemplate"
         query <- c(query, launch_template)
     }
-    if (!missing(tags) && !is.null(tags)) {
+    if (!is.null(tags) && !is.null(tags)) {
         tags <- .tag_specification(resource_type = "instance", tags)
         query <- c(query, tags)
     }

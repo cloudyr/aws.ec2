@@ -7,9 +7,9 @@
 \alias{reboot_instances}
 \title{Start, Stop, Reboot, or Terminate EC2 Instance}
 \usage{
-start_instances(instance, info, ...)
+start_instances(instance, info = NULL, ...)
 
-stop_instances(instance, force, ...)
+stop_instances(instance, force = FALSE, ...)
 
 terminate_instances(instance, ...)
 

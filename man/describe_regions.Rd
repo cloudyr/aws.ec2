@@ -4,7 +4,7 @@
 \alias{describe_regions}
 \title{Describe Regions}
 \usage{
-describe_regions(region, filter, ...)
+describe_regions(region = NULL, filter = NULL, ...)
 }
 \arguments{
 \item{region}{Optionally a character string specifying the name of one or more AWS regions. If missing, details about all are returned.}

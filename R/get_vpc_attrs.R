@@ -23,10 +23,16 @@
 #' @seealso [describe_vpcs()], [create_vpc()]
 #' @keywords security
 #' @export
-set_vpc_attr <- function(vpc, dns, hostnames, ...) {
+set_vpc_attr <-
+function(
+  vpc,
+  dns,
+  hostnames,
+  ...
+) {
     query <- list(Action = "ModifyVpcAttribute", 
                   VpcId = get_vpcid(vpc))
-    if (!missing(dns)) {
+    if (!is.null(dns)) {
         query$EnableDnsSupport.Value <- tolower(as.character(dns))
     } else if (!missing(hostnames)) {
         query$EnableDnsHostnames.Value <- tolower(as.character(hostnames))

@@ -25,9 +25,9 @@ create_image <-
 function(
   instance,
   name,
-  description,
+  description = NULL,
   region = getOption("AWS_DEFAULT_REGION", "us-east-1"),
-  mapping,
+  mapping = NULL,
   noreboot = FALSE,
   ...
 ) {
@@ -35,13 +35,13 @@ function(
                   Name = name,
                   InstanceId = instance,
                   SourceRegion = region)
-    if (!missing(description)) {
+    if (!is.null(description)) {
         query$Description <- description
     }
-    if (!missing(noreboot)) {
+    if (!is.null(noreboot)) {
         query$NoReboot <- tolower(as.character(noreboot))
     }
-    if (!missing(mapping)) {
+    if (!is.null(mapping)) {
         mapping <- as.list(mapping)
         names(mapping) <- paste0("BlockDeviceMapping.", 1:length(mapping))
         query <- c(query, mapping)
@@ -56,19 +56,19 @@ copy_image <-
 function(
   name,
   image,
-  description,
+  description = NULL,
   region = getOption("AWS_DEFAULT_REGION", "us-east-1"),
-  token,
+  token = NULL,
   ...
 ) {
     query <- list(Action = "CopyImage", 
                   Name = name,
                   SourceImageId = get_imageid(image),
                   SourceRegion = region)
-    if (!missing(description)) {
+    if (!is.null(description)) {
         query$Description <- description
     } 
-    if (!missing(token)) {
+    if (!is.null(token)) {
         query$ClientToken <- token
     }
     r <- ec2HTTP(query = query, ...)

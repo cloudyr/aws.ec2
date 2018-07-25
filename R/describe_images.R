@@ -25,19 +25,26 @@
 #' https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
 #'
 #' @export
-describe_images <- function(image, filter, availableto, owner, ...) {
+describe_images <-
+function(
+  image = NULL,
+  filter = NULL,
+  availableto = NULL,
+  owner = NULL,
+  ...
+) {
     query <- list(Action = "DescribeImages")
-    if (!missing(availableto)) {
+    if (!is.null(availableto)) {
         availableto <- as.list(availableto)
         names(availableto) <- paste0("ExecutableBy.", seq_along(availableto))
         query <- c(query, availableto)
     }
-    if (!missing(owner)) {
+    if (!is.null(owner)) {
         owner <- as.list(owner)
         names(owner) <- paste0("Owner.", seq_along(owner))
         query <- c(query, owner)
     }
-    if (!missing(image)) {
+    if (!is.null(image)) {
         if (inherits(image, "ec2_image")) {
             image <- list(get_imageid(image))
         } else if (is.character(image)) {
@@ -48,7 +55,7 @@ describe_images <- function(image, filter, availableto, owner, ...) {
         names(image) <- paste0("ImageId.", 1:length(image))
         query <- c(query, image)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)

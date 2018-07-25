@@ -21,7 +21,14 @@
 #' @keywords security
 #' @seealso [create_sgroup()]
 #' @export
-authorize_ingress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port = NULL, protocol = "-1", ...) {
+authorize_ingress <-
+function(
+  sgroup,
+  cidr = paste0(my_ip(),"/32"),
+  port = NULL,
+  protocol = "-1",
+  ...
+) {
     query <- list(Action = "AuthorizeSecurityGroupIngress")
     query$GroupId <- get_sgid(sgroup)
     if (!is.null(cidr)) {
@@ -48,20 +55,27 @@ authorize_ingress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port = NULL,
 #' @importFrom utils head tail
 #' @rdname sg_ingress
 #' @export
-revoke_ingress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port, protocol = "-1", ...) {
+revoke_ingress <-
+function(
+  sgroup,
+  cidr = paste0(my_ip(),"/32"),
+  port = NULL,
+  protocol = "-1",
+  ...
+) {
     query <- list(Action = "RevokeSecurityGroupIngress")
     query$GroupId <- get_sgid(sgroup)
-    if (!missing(cidr)) {
+    if (!is.null(cidr)) {
         query$IpPermissions.1.IpRanges.1.CidrIp <- head(cidr, 1)
         if (length(cidr) == 2) {
             query$IpPermissions.1.IpRanges.2.CidrIp <- tail(cidr, 1)        
         }
     }
-    if (!missing(port)) {
+    if (!is.null(port)) {
         query$IpPermissions.1.FromPort <- head(port, 1)
         query$IpPermissions.1.ToPort <- tail(port, 1)
     }
-    if (!missing(protocol)) {
+    if (!is.null(protocol)) {
         query$IpPermissions.1.IpProtocol <- protocol
     }
     r <- ec2HTTP(query = query, ...)
@@ -75,7 +89,14 @@ revoke_ingress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port, protocol 
 #' @importFrom utils head tail
 #' @rdname sg_ingress
 #' @export
-authorize_egress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port = NULL, protocol = "-1", ...) {
+authorize_egress <-
+function(
+  sgroup,
+  cidr = paste0(my_ip(),"/32"),
+  port = NULL,
+  protocol = "-1",
+  ...
+) {
     query <- list(Action = "AuthorizeSecurityGroupEgress")
     query$GroupId <- get_sgid(sgroup)
     if (!is.null(cidr)) {
@@ -102,20 +123,27 @@ authorize_egress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port = NULL, 
 #' @importFrom utils head tail
 #' @rdname sg_ingress
 #' @export
-revoke_egress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port, protocol = "-1", ...) {
+revoke_egress <-
+function(
+  sgroup,
+  cidr = paste0(my_ip(),"/32"),
+  port = NULL,
+  protocol = "-1",
+  ...
+) {
     query <- list(Action = "RevokeSecurityGroupEgress")
     query$GroupId <- get_sgid(sgroup)
-    if (!missing(cidr)) {
+    if (!is.null(cidr)) {
         query$IpPermissions.1.IpRanges.1.CidrIp <- head(cidr, 1)
         if (length(cidr) == 2) {
             query$IpPermissions.1.IpRanges.2.CidrIp <- tail(cidr, 1)        
         }
     }
-    if (!missing(port)) {
+    if (!is.null(port)) {
         query$IpPermissions.1.FromPort <- head(port, 1)
         query$IpPermissions.1.ToPort <- tail(port, 1)
     }
-    if (!missing(protocol)) {
+    if (!is.null(protocol)) {
         query$IpPermissions.1.IpProtocol <- protocol
     }
     r <- ec2HTTP(query = query, ...)

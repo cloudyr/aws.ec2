@@ -4,7 +4,7 @@
 \alias{describe_ips}
 \title{Describe IP(s)}
 \usage{
-describe_ips(ip, filter, ...)
+describe_ips(ip = NULL, filter = NULL, ...)
 }
 \arguments{
 \item{ip}{An object of class \dQuote{ec2_ip} or an allocationId (for a VPC IP) or publicIp (for a standard IP).}

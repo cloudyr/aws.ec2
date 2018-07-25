@@ -4,7 +4,7 @@
 \alias{describe_netacls}
 \title{describe_network_acls}
 \usage{
-describe_netacls(acl, filter, ...)
+describe_netacls(acl = NULL, filter = NULL, ...)
 }
 \arguments{
 \item{acl}{\dots}

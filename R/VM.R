@@ -4,25 +4,26 @@ import_instance <- function() {}
 
 import_volume <- function() {}
 
-describe_conversion <- function(conversion, filter, ...) {
+describe_conversion <- function(conversion = NULL, filter = NULL, ...) {
     query <- list(Action = "DescribeConversionTasks")
-    if(!missing(conversion)) {
+    if (!is.null(conversion)) {
         conversion <- as.list(conversion)
         names(conversion) <- paste0("ConversionTaskId.", 1:length(conversion))
         query <- c(query, conversion)
     }
-    if(!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)
     return(r)
 }
 
-cancel_conversion <- function(conversion, reason, ...) {
+cancel_conversion <- function(conversion, reason = NULL, ...) {
     query <- list(Action = "CancelConversionTask", 
                   ConversionTaskId = conversion)
-    if(!missing(reason))
+    if (!is.null(reason)) {
         query$ReasonMessage <- reason
+    }
     r <- ec2HTTP(query = query, ...)
     return(r)
 }
@@ -30,14 +31,14 @@ cancel_conversion <- function(conversion, reason, ...) {
 
 # export
 
-create_export <- function(instance, description, targetenv, s3, ...) {
+create_export <- function(instance, description = NULL, targetenv = NULL, s3 = NULL, ...) {
     query <- list(Action = "CreateInstanceExportTask", 
                   InstanceId = instance)
-    if(!missing(description))
+    if (!missing(description))
         query$Description <- description
-    if(!missing(targetenv)) {
+    if (!missing(targetenv)) {
         venv <- c("citrix", "vmware", "microsoft")
-        if(!targetenv %in% venv)
+        if (!targetenv %in% venv)
             stop("'targetenv' must be one of: ", paste0(venv, collapse = ", "))
     }
     if(!missing(s3)) {

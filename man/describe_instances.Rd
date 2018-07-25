@@ -7,9 +7,11 @@
 \alias{get_instance_private_ip}
 \title{EC2 Instance Status}
 \usage{
-describe_instances(instance, filter, n, token, ...)
+describe_instances(instance = NULL, filter = NULL, n = NULL,
+  token = NULL, ...)
 
-instance_status(instance, filter, runningonly, n, token, ...)
+instance_status(instance = NULL, filter = NULL, runningonly = NULL,
+  n = NULL, token = NULL, ...)
 
 get_instance_public_ip(instance, ...)
 

@@ -4,7 +4,7 @@
 \alias{describe_gateways}
 \title{describe_gateways}
 \usage{
-describe_gateways(gateway, filter, ...)
+describe_gateways(gateway = NULL, filter = NULL, ...)
 }
 \arguments{
 \item{gateway}{A character string specifying an Internet Gateway ID, or an object of class \dQuote{ec2_internet_gateway}.}

@@ -4,7 +4,7 @@
 \alias{describe_zones}
 \title{Describe Zones}
 \usage{
-describe_zones(zone, filter, ...)
+describe_zones(zone = NULL, filter = NULL, ...)
 }
 \arguments{
 \item{zone}{Optionally a character string specifying the name of one or more AWS zones. If missing, details about all are returned.}

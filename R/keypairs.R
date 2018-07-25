@@ -14,9 +14,14 @@
 #' }
 #' @keywords security
 #' @export
-describe_keypairs <- function(keypair, filter, ...) {
+describe_keypairs <-
+function(
+  keypair = NULL,
+  filter = NULL,
+  ...
+) {
     query <- list(Action = "DescribeKeyPairs")
-    if (!missing(keypair)) {
+    if (!is.null(keypair)) {
         if (inherits(keypair, "ec2_keypair")) {
             keypair <- list(get_keypairname(keypair))
         } else if (is.character(keypair)) {
@@ -27,7 +32,7 @@ describe_keypairs <- function(keypair, filter, ...) {
         names(keypair) <- paste0("KeyName.", 1:length(keypair))
         query <- c(query, keypair)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         vfilter <- c("fingerprint", "key-name")
         if (any(!names(filter) %in% vfilter)) {
             stop("'filter' must be in: ", paste0(vfilter, collapse = ", "))
@@ -45,7 +50,12 @@ describe_keypairs <- function(keypair, filter, ...) {
 #' @rdname keypairs
 #' @param path A character string specifying a filepath (or filename) to use as a .pem file for the keypair.
 #' @export
-create_keypair <- function(keypair, path = NULL, ...) {
+create_keypair <-
+function(
+  keypair,
+  path = NULL,
+  ...
+) {
     query <- list(Action = "CreateKeyPair")
     keypair <- get_keypairname(keypair)
     if (nchar(keypair) > 255) {
@@ -62,7 +72,11 @@ create_keypair <- function(keypair, path = NULL, ...) {
 
 #' @rdname keypairs
 #' @export
-delete_keypair <- function(keypair, ...) {
+delete_keypair <-
+function(
+  keypair,
+  ...
+) {
     query <- list(Action = "DeleteKeyPair")
     keypair <- get_keypairname(keypair)
     if (nchar(keypair) > 255) {
@@ -80,7 +94,12 @@ delete_keypair <- function(keypair, ...) {
 #' @rdname keypairs
 #' @importFrom base64enc base64encode
 #' @export
-import_keypair <- function(keypair, publickey, ...) {
+import_keypair <-
+function(
+  keypair,
+  publickey,
+  ...
+) {
     query <- list(Action = "ImportKeyPair")
     if (nchar(keypair) > 255) {
         stop("'keypair' must be <= 255 characters")

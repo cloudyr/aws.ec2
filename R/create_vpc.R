@@ -20,7 +20,12 @@
 #' @seealso [describe_vpcs()], [get_vpc_attr()]
 #' @keywords security
 #' @export
-create_vpc <- function(cidr, tenancy = c("default", "dedicated"), ...) {
+create_vpc <-
+function(
+  cidr,
+  tenancy = c("default", "dedicated"),
+  ...
+) {
     query <- list(Action = "CreateVpc", CidrBlock = cidr)
     query$InstanceTenancy <- match.arg(tenancy)
     r <- ec2HTTP(query = query, ...)
@@ -29,7 +34,11 @@ create_vpc <- function(cidr, tenancy = c("default", "dedicated"), ...) {
 
 #' @rdname vpcs
 #' @export
-delete_vpc <- function(vpc, ...) {
+delete_vpc <-
+function(
+  vpc,
+  ...
+) {
     query <- list(Action = "DeleteVpc", VpcId = get_vpcid(vpc))
     r <- ec2HTTP(query = query, ...)
     if (r$return[[1]] == "true") {

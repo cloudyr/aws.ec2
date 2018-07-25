@@ -10,14 +10,19 @@
 #' }
 #' @seealso [describe_zones()]
 #' @export
-describe_regions <- function(region, filter, ...) {
+describe_regions <-
+function(
+  region = NULL,
+  filter = NULL,
+  ...
+) {
     query <- list(Action = "DescribeRegions")
-    if (!missing(region)) {
+    if (!is.null(region)) {
         region <- as.list(region)
         names(region) <- paste0("RegionName.", 1:length(region))
         query <- c(query, region)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         vfilter <- c("endpoint", "region-name")
         if (any(!names(filter) %in% vfilter)) {
             stop("'filter' must be one or more of: ", paste0(vfilter, collapse = ", "))

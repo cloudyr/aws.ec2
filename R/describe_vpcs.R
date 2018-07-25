@@ -13,9 +13,14 @@
 #' @seealso [create_vpc()], [get_vpc_attr()]
 #' @keywords security
 #' @export
-describe_vpcs <- function(vpc, filter, ...) {
+describe_vpcs <-
+function(
+  vpc = NULL,
+  filter = NULL,
+  ...
+) {
     query <- list(Action = "DescribeVpcs")
-    if (!missing(vpc)) {
+    if (!is.null(vpc)) {
         if (inherits(vpc, "ec2_vpc")) {
             vpc <- list(get_vpcid(vpc))
         } else if (is.character(vpc)) {
@@ -26,7 +31,7 @@ describe_vpcs <- function(vpc, filter, ...) {
         names(vpc) <- paste0("VpcId.", 1:length(vpc))
         query <- c(query, vpc)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)

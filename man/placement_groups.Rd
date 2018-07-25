@@ -10,7 +10,7 @@ create_placement(group, strategy = "cluster", ...)
 
 delete_placement(group, ...)
 
-describe_placements(group, filter, ...)
+describe_placements(group = NULL, filter = NULL, ...)
 }
 \arguments{
 \item{group}{A character string specifying a placement group.}

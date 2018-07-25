@@ -9,9 +9,14 @@
 #' @seealso [create_gateway()], [attach_gateway()]
 #' @keywords security
 #' @export
-describe_gateways <- function(gateway, filter, ...) {
+describe_gateways <-
+function(
+  gateway = NULL,
+  filter = NULL,
+  ...
+) {
     query <- list(Action = "DescribeInternetGateways")
-    if (!missing(gateway)) {
+    if (!is.null(gateway)) {
         if (inherits(gateway, "ec2_internet_gateway")) {
             gateway <- list(get_instanceid(gateway))
         } else if (is.character(gateway)) {
@@ -22,7 +27,7 @@ describe_gateways <- function(gateway, filter, ...) {
         names(gateway) <- paste0("InternetGatewayId.", 1:length(gateway))
         query <- c(query, gateway)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)

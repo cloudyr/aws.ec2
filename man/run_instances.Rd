@@ -4,9 +4,10 @@
 \alias{run_instances}
 \title{Run an EC2 Instance}
 \usage{
-run_instances(image, type, min = 1, max = min, keypair, subnet, sgroup,
-  userdata, shutdown = c("stop", "terminate"), token, tags, spot_options,
-  query_extra = list(), launch_template, ...)
+run_instances(image, type, min = 1, max = min, keypair = NULL,
+  subnet = NULL, sgroup = NULL, userdata = NULL, shutdown = c("stop",
+  "terminate"), token = NULL, tags = NULL, spot_options = NULL,
+  query_extra = list(), launch_template = NULL, ...)
 }
 \arguments{
 \item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}.}

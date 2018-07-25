@@ -24,7 +24,7 @@ create_placement <- function(group, strategy = "cluster", ...) {
                   GroupName = group,
                   Strategy = strategy)
     r <- ec2HTTP(query = query, ...)
-    if (r$return[[1]] == "true") {
+    if (r$return[[1L]] == "true") {
         return(TRUE)
     } else {
         return(FALSE)
@@ -46,9 +46,9 @@ delete_placement <- function(group, ...) {
 
 #' @rdname placement_groups
 #' @export
-describe_placements <- function(group, filter, ...) {
+describe_placements <- function(group = NULL, filter = NULL, ...) {
     query <- list(Action = "DescribePlacementGroups")
-    if (!missing(group)) {
+    if (!is.null(group)) {
         if (inherits(group, "ec2_image")) {
             group <- list(get_pgname(group))
         } else if (is.character(group)) {
@@ -59,7 +59,7 @@ describe_placements <- function(group, filter, ...) {
         names(group) <- paste0("GroupName.", 1:length(group))
         query <- c(query, group)
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)

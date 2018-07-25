@@ -4,7 +4,8 @@
 \alias{describe_images}
 \title{Describe AMI(s)}
 \usage{
-describe_images(image, filter, availableto, owner, ...)
+describe_images(image = NULL, filter = NULL, availableto = NULL,
+  owner = NULL, ...)
 }
 \arguments{
 \item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}.}

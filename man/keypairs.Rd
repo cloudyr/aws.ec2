@@ -7,7 +7,7 @@
 \alias{import_keypair}
 \title{EC2 Keypairs}
 \usage{
-describe_keypairs(keypair, filter, ...)
+describe_keypairs(keypair = NULL, filter = NULL, ...)
 
 create_keypair(keypair, path = NULL, ...)
 

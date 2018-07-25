@@ -22,9 +22,9 @@
 #' @seealso [describe_instances()], [run_instances()]
 #' @keywords instances
 #' @export
-start_instances <- function(instance, info, ...) {
+start_instances <- function(instance, info = NULL, ...) {
     query <- list(Action = "StartInstances")
-    if (!missing(instance)) {
+    if (!is.null(instance)) {
         if (inherits(instance, "ec2_instance")) {
             instance <- list(get_instanceid(instance))
         } else if (is.character(instance)) {
@@ -35,7 +35,7 @@ start_instances <- function(instance, info, ...) {
         names(instance) <- paste0("InstanceId.", 1:length(instance))
         query <- c(query, instance)
     }
-    if (!missing(info)) {
+    if (!is.null(info)) {
         query$AdditionalInfo <- info
     }
     r <- ec2HTTP(query = query, ...)
@@ -46,7 +46,7 @@ start_instances <- function(instance, info, ...) {
 
 #' @rdname start_instances
 #' @export
-stop_instances <- function(instance, force, ...) {
+stop_instances <- function(instance, force = FALSE, ...) {
     query <- list(Action = "StopInstances")
     if (!missing(instance)) {
         if (inherits(instance, "ec2_instance")) {
@@ -59,8 +59,8 @@ stop_instances <- function(instance, force, ...) {
         names(instance) <- paste0("InstanceId.", 1:length(instance))
         query <- c(query, instance)
     }
-    if (!missing(force)) {
-        query$Force <- tolower(as.character(force))
+    if (isTRUE(force)) {
+        query$Force <- TRUE
     }
     r <- ec2HTTP(query = query, ...)
     return(unname(lapply(r$instancesSet, function(z) {

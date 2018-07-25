@@ -5,9 +5,9 @@
 \alias{unmonitor_instances}
 \title{EC2 Instance Monitoring}
 \usage{
-monitor_instances(instance, ...)
+monitor_instances(instance = NULL, ...)
 
-unmonitor_instances(instance, ...)
+unmonitor_instances(instance = NULL, ...)
 }
 \arguments{
 \item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}

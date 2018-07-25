@@ -8,9 +8,9 @@
 \usage{
 create_tags(resource, tag, ...)
 
-delete_tags(resource, tag, ...)
+delete_tags(resource, tag = NULL, ...)
 
-describe_tags(filter, n, page, ...)
+describe_tags(filter = NULL, n = NULL, page = NULL, ...)
 }
 \arguments{
 \item{resource}{A character vector specifying one or more resource IDs, typically EC2 instance IDs.}

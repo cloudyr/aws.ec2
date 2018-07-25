@@ -30,9 +30,9 @@
 #' @seealso [authorize_ingress()]
 #' @keywords security
 #' @export
-describe_sgroups <- function(sgroup, name, filter = NULL, ...) {
+describe_sgroups <- function(sgroup = NULL, name = NULL, filter = NULL, ...) {
     query <- list(Action = "DescribeSecurityGroups")
-    if (!missing(sgroup)) {
+    if (!is.null(sgroup)) {
         if (inherits(sgroup, "ec2_security_group")) {
             sgroup <- list(get_sgid(sgroup))
         } else if (is.character(sgroup)) {
@@ -43,7 +43,7 @@ describe_sgroups <- function(sgroup, name, filter = NULL, ...) {
         names(sgroup) <- paste0("GroupId.", 1:length(sgroup))
         query <- c(query, sgroup)
     }
-    if (!missing(name)) {
+    if (!is.null(name)) {
         if (inherits(name, "ec2_security_group")) {
             name <- list(get_sgname(name))
         } else if (is.character(name)) {
@@ -65,11 +65,11 @@ describe_sgroups <- function(sgroup, name, filter = NULL, ...) {
 
 #' @rdname security_groups
 #' @export
-create_sgroup <- function(name, description, vpc, ...) {
+create_sgroup <- function(name, description, vpc = NULL, ...) {
     query <- list(Action = "CreateSecurityGroup", 
                   GroupName = name,
                   GroupDescription = description)
-    if (!missing(vpc)) {
+    if (!is.null(vpc)) {
         query$VpcId <- get_vpcid(vpc)
     }
     r <- ec2HTTP(query = query, ...)
@@ -79,9 +79,9 @@ create_sgroup <- function(name, description, vpc, ...) {
 
 #' @rdname security_groups
 #' @export
-delete_sgroup <- function(name, sgroup, ...) {
+delete_sgroup <- function(name = NULL, sgroup = NULL, ...) {
     query <- list(Action = "DeleteSecurityGroup")
-    if (!missing(sgroup)) {
+    if (!is.null(sgroup)) {
         if (inherits(sgroup, "ec2_security_group")) {
             sgroup <- list(get_sgid(sgroup))
         } else if (is.character(sgroup)) {
@@ -92,7 +92,7 @@ delete_sgroup <- function(name, sgroup, ...) {
         names(sgroup) <- paste0("GroupId.", 1:length(sgroup))
         query <- c(query, sgroup)
     }
-    if (!missing(name)) {
+    if (!is.null(name)) {
         if (inherits(name, "ec2_security_group")) {
             name <- list(get_sgname(name))
         } else if (is.character(name)) {

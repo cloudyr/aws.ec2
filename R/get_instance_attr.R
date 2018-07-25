@@ -20,11 +20,14 @@
 #' @importFrom base64enc base64decode
 #' @keywords instances
 #' @export
-get_instance_attr <- function(instance, attribute, ...) {
+get_instance_attr <-
+function(
+  instance,
+  attribute,
+  ...
+) {
     val <- c("instanceType", "kernel", "ramdisk", "userData", "disableApiTermination", "instanceInitiatedShutdownBehavior", "rootDeviceName", "blockDeviceMapping", "productCodes", "sourceDestCheck", "groupSet", "ebsOptimized", "sriovNetSupport")
-    if (!attribute %in% val) {
-        stop("'attribute' must be one of: ", paste0(val, collapse = ", "))
-    }
+    attribute <- match.arg(attribute, val)
     query <- list(Action = "DescribeInstanceAttribute", 
                   InstanceId = get_instanceid(instance),
                   Attribute = attribute)
@@ -34,12 +37,15 @@ get_instance_attr <- function(instance, attribute, ...) {
 
 #' @rdname instance_attr
 #' @export
-set_instance_attr <- function(instance, attribute, ...) {
+set_instance_attr <-
+function(
+  instance,
+  attribute,
+  ...
+) {
     query <- list(Action = "ModifyInstanceAttribute", InstanceId = get_instanceid(instance))
     val <- c("instanceType", "kernel", "ramdisk", "userData", "disableApiTermination", "instanceInitiatedShutdownBehavior", "rootDeviceName", "blockDeviceMapping", "productCodes", "sourceDestCheck", "groupSet", "ebsOptimized", "sriovNetSupport")
-    if (!unname(attribute) %in% val) {
-        stop("'attribute' must be one of: ", paste0(val, collapse = ", "))
-    }
+    attribute <- match.arg(attribute, val)
     vl <- as.list(attribute)
     names(vl) <- paste0(names(vl), ".Value")
     query <- c(query, vl)
@@ -49,11 +55,14 @@ set_instance_attr <- function(instance, attribute, ...) {
 
 #' @rdname instance_attr
 #' @export
-reset_instance_attr <- function(instance, attribute, ...) {
+reset_instance_attr <-
+function(
+  instance,
+  attribute,
+  ...
+) {
     val <- c("instanceType", "kernel", "ramdisk", "userData", "disableApiTermination", "instanceInitiatedShutdownBehavior", "rootDeviceName", "blockDeviceMapping", "productCodes", "sourceDestCheck", "groupSet", "ebsOptimized", "sriovNetSupport")
-    if (!attribute %in% val) {
-        stop("'attribute' must be one of: ", paste0(val, collapse = ", "))
-    }
+    attribute <- match.arg(attribute, val)
     query <- list(Action = "ResetInstanceAttribute", 
                   InstanceId = get_instanceid(instance),
                   Attribute = attribute)

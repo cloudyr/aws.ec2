@@ -5,9 +5,14 @@
 #' @template dots
 #' @return A list
 #' @export
-describe_ips <- function(ip, filter, ...) {
+describe_ips <-
+function(
+  ip = NULL,
+  filter = NULL,
+  ...
+) {
     query <- list(Action = "DescribeAddresses")
-    if (!missing(ip)) {
+    if (!is.null(ip)) {
         if (inherits(ip, "ec2_ip")) {
             if (ip$domain == "vpc") {
                 query$AllocationId <- ip$allocationId
@@ -34,7 +39,7 @@ describe_ips <- function(ip, filter, ...) {
             stop("'ip' must be an allocationId, a publicIp, or an object of class 'ec2_ip'")
         }
     }
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         query <- c(query, .makelist(filter, type = "Filter"))
     }
     r <- ec2HTTP(query = query, ...)

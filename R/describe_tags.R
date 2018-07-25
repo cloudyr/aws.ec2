@@ -39,12 +39,12 @@ create_tags <- function(resource, tag, ...) {
 
 #' @rdname tags
 #' @export
-delete_tags <- function(resource, tag, ...) {
+delete_tags <- function(resource, tag = NULL, ...) {
     query <- list(Action = "DeleteTags")
     resource <- as.list(resource)
     names(resource) <- paste0("ResourceId.", 1:length(resource))
     query <- c(query, resource)
-    if (!missing(tag)) {
+    if (!is.null(tag)) {
         query <- c(query, .makelist(tag, type = "Tag"))
     }
     r <- ec2HTTP(query = query, ...)
@@ -57,20 +57,20 @@ delete_tags <- function(resource, tag, ...) {
 
 #' @rdname tags
 #' @export
-describe_tags <- function(filter, n, page, ...) {
+describe_tags <- function(filter = NULL, n = NULL, page = NULL, ...) {
     query <- list(Action = "DescribeTags")
-    if (!missing(filter)) {
+    if (!is.null(filter)) {
         filter <- as.list(filter)
         query <- c(query, .makelist(filter, type = "Filter"))
     }
-    if (!missing(n)) {
+    if (!is.null(n)) {
         if(n > 1000) {
             warning("'n' coerced to 1000 (the maximum)")
             n <- 1000
         }
         query$MaxResults <- n
     }
-    if (!missing(page)) {
+    if (!is.null(page)) {
         query$NextToken <- page
     }
     r <- ec2HTTP(query = query, ...)
