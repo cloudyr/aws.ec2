@@ -14,7 +14,7 @@ delete_snapshot(snapshot, ...)
 
 \item{description}{\dots}
 
-\item{\dots}{\dots}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{snapshot}{A character string containing an EBS Volume Snapshot snapshot ID or an object of class \dQuote{ec2_ebs_snapshot}.}
 

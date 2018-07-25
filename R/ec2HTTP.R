@@ -1,5 +1,5 @@
 #' @title EC2 API Requests
-#' @description Execute an EC2 API Request
+#' @description Internal workhorse function to execute an EC2 API Request
 #' @param query A named list of query string parameters.
 #' @param headers A list of headers to pass to the HTTP request.
 #' @param dryrun An optional logical specifying whether to execute a consequence-free \dQuote{dry run} of the request.
@@ -8,7 +8,7 @@
 #' @param key A character string specifying an AWS Access Key. See [aws.signature::locate_credentials()].
 #' @param secret A character string specifying an AWS Secret Key. See [aws.signature::locate_credentials()].
 #' @param session_token Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See [aws.signature::locate_credentials()].
-#' @param version A character string specifying an API version. Default is \dQuote{2015-10-01}.
+#' @param version A character string specifying an API version. Default is \dQuote{2016-11-15}.
 #' @param clean_response A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).
 #' @param \dots Additional arguments passed to [httr::GET()].
 #' @return A list

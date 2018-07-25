@@ -24,7 +24,7 @@ run_instances(image, type, min = 1, max = min, keypair = NULL,
 
 \item{sgroup}{A character vector specifying one or more Security Group IDs, or (a list of) objects of class \dQuote{ec2_security_group}.}
 
-\item{userdata}{Optionally, a character string specifying a script to run during launch.}
+\item{userdata}{Optionally, a character string specifying a script to run during launch. See \url{https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html}.}
 
 \item{shutdown}{A character string specifying either \dQuote{stop} or \dQuote{terminate}, to control the behavior of a shutdown action taken from within the instance.}
 
@@ -36,7 +36,7 @@ run_instances(image, type, min = 1, max = min, keypair = NULL,
 
 \item{query_extra}{Optionally, additional query parameters to be passed to the RunInstances API. See \url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html} for available parameters.}
 
-\item{launch_template}{LaunchTemplate}
+\item{launch_template}{A character string specifying a Launch Template ID.}
 
 \item{...}{Additional arguments passed to [ec2HTTP()].}
 }

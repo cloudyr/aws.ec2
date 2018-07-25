@@ -5,7 +5,8 @@
 \alias{disassociate_ip}
 \title{(Dis)Associate IP}
 \usage{
-associate_ip(instance, ip, private, netinterface, allow, ...)
+associate_ip(instance, ip, private = NULL, netinterface = NULL,
+  allow = FALSE, ...)
 
 disassociate_ip(ip, ...)
 }

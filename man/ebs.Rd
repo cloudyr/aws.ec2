@@ -35,15 +35,15 @@ describe_volumes(volume = NULL, filter = NULL, ...)
 volume_status(volume = NULL, filter = NULL, ...)
 }
 \arguments{
-\item{size}{\dots}
+\item{size}{Size of the volume in gigabytes. See API documentation for allowed values.}
 
-\item{type}{\dots}
+\item{type}{The volume type. Defaults to "Standard".}
 
-\item{iops}{\dots}
+\item{iops}{The number of I/O operations per second (IOPS) to provision for the volume, ranging from 100 to 32000.}
 
 \item{snapshot}{A character string containing an EBS Volume Snapshot snapshot ID or an object of class \dQuote{ec2_ebs_snapshot}.}
 
-\item{\dots}{\dots}
+\item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{volume}{A character string containing an EBS Volume volume ID, or an object of class \dQuote{ec2_ebs_volume}.}
 

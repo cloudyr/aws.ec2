@@ -2,9 +2,9 @@
 #' @title Elastic Block Store Volumes
 #' @description Manage Elastic Block Store (EBS) volumes for EC2
 #' @template volume
-#' @param size \dots
-#' @param type \dots
-#' @param iops \dots
+#' @param size Size of the volume in gigabytes. See API documentation for allowed values.
+#' @param type The volume type. Defaults to "Standard".
+#' @param iops The number of I/O operations per second (IOPS) to provision for the volume, ranging from 100 to 32000.
 #' @template instance
 #' @template snapshot
 #' @param device \dots
@@ -12,7 +12,7 @@
 #' @param auto_enable \dots
 #' @param force \dots
 #' @template filter
-#' @param \dots \dots
+#' @template dots
 #' @return \dots
 #' @references
 #' <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html>

@@ -5,7 +5,7 @@
 #' @template volume
 #' @template snapshot
 #' @param description \dots
-#' @param \dots \dots
+#' @template dots
 #' @return \dots
 #' @references
 #' <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html>

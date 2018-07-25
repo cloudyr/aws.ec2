@@ -15,12 +15,14 @@
 #' @seealso [allocate_ip()], [describe_ips()], [release_ip()]
 #' @export
 associate_ip <- 
-function(instance, 
-         ip, 
-         private, 
-         netinterface, 
-         allow,
-         ...) {
+function(
+  instance,
+  ip,
+  private = NULL,
+  netinterface = NULL,
+  allow = FALSE,
+  ...
+) {
     query <- list(Action = "AssociateAddress", InstanceId = get_instanceid(instance))
     if (inherits(ip, "ec2_ip")) {
         if (ip$domain == "vpc") {
@@ -48,14 +50,14 @@ function(instance,
         stop("'ip' must be an allocationId, a publicIp, or an object of class 'ec2_ip'")
     }
     
-    if (!missing(private)) {
+    if (!is.null(private)) {
         query$PrivateIpAddress <- private
     }
-    if (!missing(netinterface)) {
+    if (!is.null(netinterface)) {
         query$NetworkInterfaceId <- netinterface
     }
-    if (!missing(allow)) {
-        query$AllowReassociation <- tolower(as.character(allow))
+    if (!isTRUE(allow)) {
+        query$AllowReassociation <- TRUE
     }
     r <- ec2HTTP(query = query, ...)
     return(if (r$return[[1L]] == "true") TRUE else FALSE)

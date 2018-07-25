@@ -5,7 +5,7 @@
 \alias{get_vpc_attr}
 \title{VPC Attributes}
 \usage{
-set_vpc_attr(vpc, dns = NULL, hostnames = NULL, ...)
+set_vpc_attr(vpc, dns, hostnames, ...)
 
 get_vpc_attr(vpc, attribute = c("enableDnsSupport", "enableDnsHostnames"),
   ...)

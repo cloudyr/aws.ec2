@@ -27,7 +27,7 @@ ec2HTTP(query = list(), headers = list(), dryrun = FALSE,
 
 \item{session_token}{Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See \code{\link[aws.signature:locate_credentials]{aws.signature::locate_credentials()}}.}
 
-\item{version}{A character string specifying an API version. Default is \dQuote{2015-10-01}.}
+\item{version}{A character string specifying an API version. Default is \dQuote{2016-11-15}.}
 
 \item{clean_response}{A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).}
 
@@ -37,5 +37,5 @@ ec2HTTP(query = list(), headers = list(), dryrun = FALSE,
 A list
 }
 \description{
-Execute an EC2 API Request
+Internal workhorse function to execute an EC2 API Request
 }

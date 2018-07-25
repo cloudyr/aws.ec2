@@ -7,13 +7,13 @@
 #' @template keypair
 #' @template subnet
 #' @template sgroup
-#' @param userdata Optionally, a character string specifying a script to run during launch.
+#' @param userdata Optionally, a character string specifying a script to run during launch. See <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html>.
 #' @param shutdown A character string specifying either \dQuote{stop} or \dQuote{terminate}, to control the behavior of a shutdown action taken from within the instance.
 #' @template token
 #' @param tags A named list of tags.
 #' @param spot_options Optionally, an empty `list()` to request a spot instance with API defaults, or list of spot-market options. See <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html> for available options
 #' @param query_extra Optionally, additional query parameters to be passed to the RunInstances API. See <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html> for available parameters.
-#' @param launch_template LaunchTemplate
+#' @param launch_template A character string specifying a Launch Template ID.
 #' @template dots
 #' @return A list
 #' @references
@@ -77,7 +77,7 @@ function(
         query <- c(query, sgroup)
     }
     if (!is.null(userdata)) {
-        query$UserData <- userdata
+        query$UserData <- base64enc::base64encode(userdata)
     }
     if (!is.null(shutdown)) {
         query$InstanceInitiatedShutdownBehavior <- match.arg(shutdown)
@@ -85,18 +85,18 @@ function(
     if (!is.null(token)) {
         query$ClientToken <- token
     }
-    if (!is.null(spot_options) && !is.null(spot_options)) {
+    if (!is.null(spot_options)) {
         query$InstanceMarketOptions.MarketType <- "spot"
         if (length(spot_options)) {
             names(spot_options) <- paste0("InstanceMarketOptions.SpotOptions.",names(spot_options))
             query <- c(query, spot_options) 
         }
     }
-    if (!is.null(launch_template) && !is.null(launch_template)) {
-        names(launch_template) <- "LaunchTemplate"
+    if (!is.null(launch_template)) {
+        names(launch_template) <- "LaunchTemplate.LaunchTemplateId"
         query <- c(query, launch_template)
     }
-    if (!is.null(tags) && !is.null(tags)) {
+    if (!is.null(tags)) {
         tags <- .tag_specification(resource_type = "instance", tags)
         query <- c(query, tags)
     }
