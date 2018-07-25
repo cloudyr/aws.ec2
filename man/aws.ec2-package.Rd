@@ -8,6 +8,85 @@
 \description{
 A simple client package for the Amazon Web Services (AWS) Elastic Cloud Compute (EC2) REST API.
 }
+\details{
+The examples below provide a complete workflow for setting up EC2 via this package and launching an instance.
+}
+\examples{
+\dontrun{
+# check credentials
+aws.signature::locate_credentials()
+
+# check EC2 account settings
+account_attrs()
+
+# create an SSH keypair in EC2 and save locally
+my_keypair <- create_keypair("r-ec2-example")
+pem_file <- tempfile(fileext = ".pem")
+cat(my_keypair$keyMaterial, file = pem_file)
+
+# create a "security group" allowing access from current IP
+my_sg <- create_sgroup("r-ec2-sg", "Allow my IP")
+## authorize access from this IP
+try(authorize_ingress(my_sg))
+try(authorize_egress(my_sg))
+
+# find an EC2 AMI, like: http://www.louisaslett.com/RStudio_AMI/
+my_image <- "ami-3b0c205e"
+
+# Launch the instance using appropriate settings
+my_inst <- run_instances(image = my_image,
+                         type = "t2.nano",
+                         sgroup = my_sg,
+                         keypair = my_keypair)
+Sys.sleep(5L) # wait for instance to boot
+
+# allocate an IPv4 address
+ip <- allocate_ip("vpc")
+
+# associate IP with instane
+associate_ip(my_inst, ip)
+
+
+# login to instance through browser
+utils::browseURL(ip)
+
+# login to instance through R
+library("ssh")
+session <- ssh::ssh_connect(paste0("ubuntu@", instance_ip), keyfile = pem_file, passwd = "rstudio")
+
+# write a quick little R script to execute
+cat("'hello world!'\\nsprintf('2+2 is \%d', 2+2)\\n", file = "helloworld.R")
+# upload it to instance
+invisible(ssh::scp_upload(session, "helloworld.R"))
+
+# execute script on instance
+x <- ssh::ssh_exec_wait(session, "Rscript helloworld.R")
+
+## disconnect from instance
+ssh:ssh_disconnect(session)
+
+
+# create an image from the instance to reuse later
+my_image <- create_image(my_inst, "My Rstudio Image")
+
+
+# when finished, completely cleanup all EC2 material
+## stop and terminate the instance
+stop_instances(i[[1L]])
+terminate_instances(i[[1L]])
+
+## revoke access from this IP to security group
+try(revoke_ingress(my_sg))
+try(revoke_egress(my_sg))
+
+## delete keypair
+delete_keypair(my_keypair)
+
+## release IP address
+release_ip(ips[[1L]])
+
+}
+}
 \seealso{
 \code{\link[=account_attrs]{account_attrs()}} \code{\link[=run_instances]{run_instances()}}
 }

@@ -3,6 +3,7 @@
 \name{create_image}
 \alias{create_image}
 \alias{copy_image}
+\alias{deregister_image}
 \title{Create AMI}
 \usage{
 create_image(instance, name, description = NULL,
@@ -11,6 +12,8 @@ create_image(instance, name, description = NULL,
 
 copy_image(name, image, description = NULL,
   region = getOption("AWS_DEFAULT_REGION", "us-east-1"), token = NULL, ...)
+
+deregister_image(image, ...)
 }
 \arguments{
 \item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}
@@ -44,6 +47,7 @@ copy_image("example-rstudio-ami", "ami-7f9dc615", "This is a description")
 }
 }
 \references{
+\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopyImage.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html}
 }

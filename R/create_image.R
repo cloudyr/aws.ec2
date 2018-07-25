@@ -12,6 +12,7 @@
 #' @template dots
 #' @return A list.
 #' @references
+#' <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html>
 #' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopyImage.html>
 #' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html>
 #' @examples
@@ -75,15 +76,16 @@ function(
     return(r)
 }
 
-# \url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html}
-# \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RegisterImage.html}
-#' @keywords images
+# <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RegisterImage.html>
+# @keywords images
 register_image <- function() {
     
     # NEED TO DO THIS
     
 }
 
+#' @rdname create_ami
+#' @export
 deregister_image <- function(image, ...) {
     query <- list(Action = "DeregisterImage", 
                   ImageId = get_imageid(image))

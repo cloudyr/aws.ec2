@@ -10,15 +10,13 @@ create_snapshot(volume, description = NULL, ...)
 delete_snapshot(snapshot, ...)
 }
 \arguments{
-\item{volume}{An object of class \dQuote{ec2_ebs_volume} or a character string containing a volume ID.}
+\item{volume}{A character string containing an EBS Volume volume ID, or an object of class \dQuote{ec2_ebs_volume}.}
 
 \item{description}{\dots}
 
 \item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{snapshot}{A character string containing an EBS Volume Snapshot snapshot ID or an object of class \dQuote{ec2_ebs_snapshot}.}
-
-\item{volume}{A character string containing an EBS Volume volume ID, or an object of class \dQuote{ec2_ebs_volume}.}
 }
 \value{
 \dots

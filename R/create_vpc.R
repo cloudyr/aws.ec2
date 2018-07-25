@@ -7,6 +7,7 @@
 #' @template dots
 #' @return For `create_vpc`, a list of class \dQuote{ec2_vpc}. For `delete_vpc`, a logical indicating whether the operation succeeded.
 #' @references
+#' <https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html>
 #' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html>
 #' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpc.html>
 #' @examples

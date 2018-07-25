@@ -1,7 +1,6 @@
 #' @rdname ebs_snapshots
 #' @title Elastic Block Store Snapshots
 #' @description Manage Elastic Block Store (EBS) volumes for EC2
-#' @param volume An object of class \dQuote{ec2_ebs_volume} or a character string containing a volume ID.
 #' @template volume
 #' @template snapshot
 #' @param description \dots

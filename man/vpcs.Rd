@@ -34,6 +34,7 @@ delete_vpc(v)
 }
 }
 \references{
+\url{https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html}
 \url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpc.html}
 }
