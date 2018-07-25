@@ -125,3 +125,9 @@ revoke_egress <- function(sgroup, cidr = paste0(my_ip(),"/32"), port, protocol =
         return(FALSE)
     }
 }
+
+#' @rdname sg_ingress
+#' @export
+my_ip <- function() {
+    readLines("http://checkip.amazonaws.com/")
+}

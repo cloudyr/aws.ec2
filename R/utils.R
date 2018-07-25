@@ -144,3 +144,19 @@ get_networkaclid <- function(x) {
         return(x)
     }
 }
+
+get_snapshotid <- function(x) {
+    if (inherits(x, "ec2_ebs_snapshot")) {
+        return(x$snapshotId)
+    } else {
+        return(x)
+    }
+}
+
+get_volumeid <- function(x) {
+    if (inherits(x, "ec2_ebs_volume")) {
+        return(x$volumeId)
+    } else {
+        return(x)
+    }
+}

@@ -1,3 +1,8 @@
+# aws.ec2 0.1.16
+
+* Added provisional support for EBS volumes and snapshots.
+* Reorganized code.
+
 # aws.ec2 0.1.15
 
 * Added functions `get_instance_public_ip()` and `get_instance_private_ip()` to obtain IP addresses for one or more instances. (#41)
