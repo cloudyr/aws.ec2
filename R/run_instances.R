@@ -21,8 +21,8 @@
 #' <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html>
 #' @examples
 #' \dontrun{
-#' # RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
-#' describe_images("ami-7f9dc615")
+#' # Rstudio instance for interactive use
+#' ## RStudio AMIs from: http://www.louisaslett.com/RStudio_AMI/
 #' s <- describe_subnets()
 #' g <- create_sgroup("my_security_group", "a security group", vpc = s[[1]])
 #' i <- run_instances(image = "ami-7f9dc615",
@@ -30,6 +30,45 @@
 #'                    subnet = s[[1]],
 #'                    sgroup = g[[1]])
 #'
+#' stop_instances(i[[1]])
+#' terminate_instances(i[[1]])
+#' 
+#' 
+#' # Generic linux image
+#' ## create an SSH keypair
+#' my_keypair <- create_keypair("r-ec2-example")
+#' pem_file <- tempfile(fileext = ".pem")
+#' cat(my_keypair$keyMaterial, file = pem_file)
+#' 
+#' ## script to install R, RStudio, and awspack
+#' sh <- system.file("rstudio.sh", package = "aws.ec2")
+#' 
+#' ## run instance
+#' i <- run_instances(image = "ami-97785bed",
+#'                    type = "t2.micro",
+#'                    userdata = readBin(sh)
+#'                    keypair = my_keypair)
+#' )
+#' try(authorize_ingress(my_sg))
+#' instance_ip <- associate_ip(i, allocate_ip("vpc"))$publicIp
+#' 
+#' # log in to instance
+#' library("ssh")
+#' session <- ssh::ssh_connect(paste0("ec2user@", instance_ip),
+#'                             keyfile = pem_file, passwd = "ec2password")
+#' 
+#' # write a quick little R script to execute
+#' cat("'hello world!'\n", file = "helloworld.R")
+#' # upload it to instance
+#' invisible(ssh::scp_upload(session, "helloworld.R"))
+#' 
+#' # execute script on instance
+#' x <- ssh::ssh_exec_wait(session, "Rscript helloworld.R")
+#' 
+#' ## disconnect from instance
+#' ssh_disconnect(session)
+#' 
+#' # kill instance
 #' stop_instances(i[[1]])
 #' terminate_instances(i[[1]])
 #' }

@@ -1,8 +1,8 @@
 Package: aws.ec2
 Type: Package
 Title: Amazon Web Services EC2 Client Package
-Version: 0.1.16
-Date: 2018-07-25
+Version: 0.1.17
+Date: 2018-07-27
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com",
                     comment = c(ORCID = "0000-0003-4097-6326")),
@@ -19,6 +19,7 @@ Imports:
 Suggests:
     testthat,
     aws.ec2metadata,
+    aws.iam,
     ssh
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues
