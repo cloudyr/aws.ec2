@@ -1,3 +1,7 @@
+# aws.ec2 0.1.17
+
+* Added provisional support for Launch Templates(#42)
+
 # aws.ec2 0.1.16
 
 * Added provisional support for EBS volumes and snapshots.
