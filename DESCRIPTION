@@ -3,10 +3,11 @@ Type: Package
 Title: Amazon Web Services EC2 Client Package
 Version: 0.1.17
 Date: 2018-07-27
-Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
+Authors@R: c(person("Thomas J.", "Leeper", role = c("aut"),
                     email = "thosjleeper@gmail.com",
                     comment = c(ORCID = "0000-0003-4097-6326")),
              person("Andrie", "de Vries", role = "ctb"))
+Maintainer: ORPHANED
 Description: A simple client package for the Amazon Web Services ('AWS') Elastic
     Cloud Compute ('EC2') <https://aws.amazon.com/ec2/> 'API'.
 License: GPL (>= 2)
