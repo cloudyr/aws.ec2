@@ -26,8 +26,7 @@ Imports:
 Suggests:
     testthat,
     aws.ec2metadata,
-    aws.iam,
-    ssh
+    aws.iam
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues
 RoxygenNote: 7.1.0
