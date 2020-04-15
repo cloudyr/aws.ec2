@@ -20,10 +20,10 @@ detach_gateway(gateway, vpc, ...)
 Attach or Detacth Network Gateways for a VPC
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachInternetGateway.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachInternetGateway.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html>
 }
 \seealso{
-\code{\link[=create_gateway]{create_gateway()}}, \code{\link[=describe_gateways]{describe_gateways()}}
+[create_gateway()], [describe_gateways()]
 }
 \keyword{security}

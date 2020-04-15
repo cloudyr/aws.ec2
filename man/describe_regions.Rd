@@ -25,5 +25,5 @@ decribe_regions()
 }
 }
 \seealso{
-\code{\link[=describe_zones]{describe_zones()}}
+[describe_zones()]
 }

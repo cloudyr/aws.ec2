@@ -7,11 +7,16 @@
 \alias{get_instance_private_ip}
 \title{EC2 Instance Status}
 \usage{
-describe_instances(instance = NULL, filter = NULL, n = NULL,
-  token = NULL, ...)
+describe_instances(instance = NULL, filter = NULL, n = NULL, token = NULL, ...)
 
-instance_status(instance = NULL, filter = NULL, runningonly = NULL,
-  n = NULL, token = NULL, ...)
+instance_status(
+  instance = NULL,
+  filter = NULL,
+  runningonly = NULL,
+  n = NULL,
+  token = NULL,
+  ...
+)
 
 get_instance_public_ip(instance, ...)
 
@@ -31,7 +36,7 @@ get_instance_private_ip(instance, ...)
 \item{runningonly}{\dots}
 }
 \value{
-For \code{describe_instances}, a list containing several lists of elements, including one or more \dQuote{instancesSet} elements that lists various instances. For \code{instance_status}, a possibly empty list.
+For `describe_instances`, a list containing several lists of elements, including one or more \dQuote{instancesSet} elements that lists various instances. For `instance_status`, a possibly empty list.
 }
 \description{
 Describe or check status of an EC2 instance
@@ -47,7 +52,7 @@ terminate_instances(i[[1]])
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceStatus.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceStatus.html>
 }
 \keyword{instances}

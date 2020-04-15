@@ -13,8 +13,7 @@
 \alias{volume_status}
 \title{Elastic Block Store Volumes}
 \usage{
-create_volume(size = NULL, type = NULL, iops = NULL, snapshot = NULL,
-  ...)
+create_volume(size = NULL, type = NULL, iops = NULL, snapshot = NULL, ...)
 
 modify_volume(volume, size = NULL, type = NULL, iops = NULL, ...)
 
@@ -66,16 +65,16 @@ volume_status(volume = NULL, filter = NULL, ...)
 Manage Elastic Block Store (EBS) volumes for EC2
 }
 \references{
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html}
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVolume.html}
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVolume.html}
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachVolume.html}
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachVolume.html}
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html}
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumeStatus.html}
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumeAttribute.html}
-\url{https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVolumeAttribute.html}
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html>
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVolume.html>
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVolume.html>
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachVolume.html>
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachVolume.html>
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html>
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumeStatus.html>
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumeAttribute.html>
+<https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVolumeAttribute.html>
 }
 \seealso{
-\code{\link[=run_instances]{run_instances()}}, \code{\link[=create_snapshot]{create_snapshot()}}
+[run_instances()], [create_snapshot()]
 }

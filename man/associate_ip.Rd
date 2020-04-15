@@ -5,8 +5,14 @@
 \alias{disassociate_ip}
 \title{(Dis)Associate IP}
 \usage{
-associate_ip(instance, ip, private = NULL, netinterface = NULL,
-  allow = FALSE, ...)
+associate_ip(
+  instance,
+  ip,
+  private = NULL,
+  netinterface = NULL,
+  allow = FALSE,
+  ...
+)
 
 disassociate_ip(ip, ...)
 }
@@ -15,9 +21,9 @@ disassociate_ip(ip, ...)
 
 \item{ip}{An object of class \dQuote{ec2_ip} or an allocationId (for a VPC IP) or publicIp (for a standard IP).}
 
-\item{private}{For a VPC \code{ip}, the primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.}
+\item{private}{For a VPC `ip`, the primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.}
 
-\item{netinterface}{For a VCP \code{ip}, the ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.}
+\item{netinterface}{For a VCP `ip`, the ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.}
 
 \item{allow}{\dots}
 
@@ -30,10 +36,10 @@ A list.
 Associate/Disassociate IP with Instance
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateAddress.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateAddress.html>
 }
 \seealso{
-\code{\link[=allocate_ip]{allocate_ip()}}, \code{\link[=describe_ips]{describe_ips()}}, \code{\link[=release_ip]{release_ip()}}
+[allocate_ip()], [describe_ips()], [release_ip()]
 }

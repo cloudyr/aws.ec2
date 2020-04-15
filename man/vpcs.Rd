@@ -19,7 +19,7 @@ delete_vpc(vpc, ...)
 \item{vpc}{A character string specifying a VPC Allocation ID or an object of class \dQuote{ec2_ip}.}
 }
 \value{
-For \code{create_vpc}, a list of class \dQuote{ec2_vpc}. For \code{delete_vpc}, a logical indicating whether the operation succeeded.
+For `create_vpc`, a list of class \dQuote{ec2_vpc}. For `delete_vpc`, a logical indicating whether the operation succeeded.
 }
 \description{
 Create/delete VPCs
@@ -34,11 +34,11 @@ delete_vpc(v)
 }
 }
 \references{
-\url{https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpc.html}
+<https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteVpc.html>
 }
 \seealso{
-\code{\link[=describe_vpcs]{describe_vpcs()}}, \code{\link[=get_vpc_attr]{get_vpc_attr()}}
+[describe_vpcs()], [get_vpc_attr()]
 }
 \keyword{security}

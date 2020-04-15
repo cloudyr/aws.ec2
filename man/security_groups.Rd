@@ -26,13 +26,13 @@ delete_sgroup(name = NULL, sgroup = NULL, ...)
 \item{vpc}{A character string specifying a VPC Id (required for a VPC).}
 }
 \value{
-For \code{describe_sgroups} and \code{create_sgroup}, a list of objects of class \dQuote{ec2_security_group}. For \code{delete_sgroup}, a logical.
+For `describe_sgroups` and `create_sgroup`, a list of objects of class \dQuote{ec2_security_group}. For `delete_sgroup`, a logical.
 }
 \description{
 Describe, create, and delete Security Groups
 }
 \details{
-Security groups provide a layer of security for a Virtual Private Cloud (VPC) for an EC2 instance or set of instances. These can be used in tandem with or in lieu of network Access Control Lists (ACLs) (see \code{\link[=describe_netacls]{describe_netacls()}}). Any given instance can be in multiple security groups, which can be confusing.
+Security groups provide a layer of security for a Virtual Private Cloud (VPC) for an EC2 instance or set of instances. These can be used in tandem with or in lieu of network Access Control Lists (ACLs) (see [describe_netacls()]). Any given instance can be in multiple security groups, which can be confusing.
 }
 \examples{
 \dontrun{
@@ -49,12 +49,12 @@ sg2 <- create_sgroup("test_group2", "new security group", vpc = vpc)
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSecurityGroup.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSecurityGroup.html>
 }
 \seealso{
-\code{\link[=authorize_ingress]{authorize_ingress()}}
+[authorize_ingress()]
 }
 \keyword{security}

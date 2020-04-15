@@ -8,8 +8,17 @@
 \usage{
 get_image_attr(image, attribute, ...)
 
-set_image_attr(image, attribute, value, description, operationtype,
-  launchpermission, usergroup, userid, ...)
+set_image_attr(
+  image,
+  attribute,
+  value,
+  description,
+  operationtype,
+  launchpermission,
+  usergroup,
+  userid,
+  ...
+)
 
 reset_image_attr(image, attribute, ...)
 }

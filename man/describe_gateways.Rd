@@ -20,9 +20,9 @@ A list.
 Describe Network Gateways
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInternetGateways.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInternetGateways.html>
 }
 \seealso{
-\code{\link[=create_gateway]{create_gateway()}}, \code{\link[=attach_gateway]{attach_gateway()}}
+[create_gateway()], [attach_gateway()]
 }
 \keyword{security}

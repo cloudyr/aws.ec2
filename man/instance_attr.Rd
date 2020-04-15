@@ -15,7 +15,7 @@ reset_instance_attr(instance, attribute, ...)
 \arguments{
 \item{instance}{A character string containing an EC2 instance ID or an object of class \dQuote{ec2_instance}. Or, actions can be taken on multiple instances in one call by passing a character vector of instance IDs, or a list of objects of class \dQuote{ec2_instance}.}
 
-\item{attribute}{For \code{get_instance_attr} and \code{reset_instance_attr}, a character string. For \code{set_instance_attr}, a named character string, where the name is an attribute name. Valid attribute names are: \dQuote{instanceType}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{userData}, \dQuote{disableApiTermination}, \dQuote{instanceInitiatedShutdownBehavior}, \dQuote{rootDeviceName}, \dQuote{blockDeviceMapping}, \dQuote{productCodes}, \dQuote{sourceDestCheck}, \dQuote{groupSet}, \dQuote{ebsOptimized}, \dQuote{sriovNetSupport}.}
+\item{attribute}{For `get_instance_attr` and `reset_instance_attr`, a character string. For `set_instance_attr`, a named character string, where the name is an attribute name. Valid attribute names are: \dQuote{instanceType}, \dQuote{kernel}, \dQuote{ramdisk}, \dQuote{userData}, \dQuote{disableApiTermination}, \dQuote{instanceInitiatedShutdownBehavior}, \dQuote{rootDeviceName}, \dQuote{blockDeviceMapping}, \dQuote{productCodes}, \dQuote{sourceDestCheck}, \dQuote{groupSet}, \dQuote{ebsOptimized}, \dQuote{sriovNetSupport}.}
 
 \item{...}{Additional arguments passed to [ec2HTTP()].}
 }
@@ -28,17 +28,17 @@ Get, set, and reset attributes for an EC2 instance
 \examples{
 \dontrun{
 i <- run_instances()
-cat(get_console_output(), "\\n")
+cat(get_console_output(), "\n")
 stop_instances(i[[1]])
 terminate_instances(i[[1]])
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceAttribute.html>
 }
 \seealso{
-\code{\link[=describe_instances]{describe_instances()}}, \code{\link[=create_tags]{create_tags()}}
+[describe_instances()], [create_tags()]
 }
 \keyword{instances}

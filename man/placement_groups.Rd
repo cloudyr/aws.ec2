@@ -22,7 +22,7 @@ describe_placements(group = NULL, filter = NULL, ...)
 \item{filter}{\dots}
 }
 \value{
-For \code{describe_placements}, a list of objects of class \dQuote{ec2_placement_group}. Otherwise, a logical.
+For `describe_placements`, a list of objects of class \dQuote{ec2_placement_group}. Otherwise, a logical.
 }
 \description{
 EC2 Cluster \dQuote{Placement Groups}
@@ -35,9 +35,9 @@ delete_placement("examplepg")
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribePlacementGroups.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreatePlacementGroup.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeletePlacementGroup.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribePlacementGroups.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreatePlacementGroup.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeletePlacementGroup.html>
 }

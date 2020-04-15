@@ -8,24 +8,44 @@
 \alias{my_ip}
 \title{Security Group Egress/Ingress}
 \usage{
-authorize_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
-  protocol = "-1", ...)
+authorize_ingress(
+  sgroup,
+  cidr = paste0(my_ip(), "/32"),
+  port = NULL,
+  protocol = "-1",
+  ...
+)
 
-revoke_ingress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
-  protocol = "-1", ...)
+revoke_ingress(
+  sgroup,
+  cidr = paste0(my_ip(), "/32"),
+  port = NULL,
+  protocol = "-1",
+  ...
+)
 
-authorize_egress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
-  protocol = "-1", ...)
+authorize_egress(
+  sgroup,
+  cidr = paste0(my_ip(), "/32"),
+  port = NULL,
+  protocol = "-1",
+  ...
+)
 
-revoke_egress(sgroup, cidr = paste0(my_ip(), "/32"), port = NULL,
-  protocol = "-1", ...)
+revoke_egress(
+  sgroup,
+  cidr = paste0(my_ip(), "/32"),
+  port = NULL,
+  protocol = "-1",
+  ...
+)
 
 my_ip()
 }
 \arguments{
 \item{sgroup}{A character vector specifying one or more Security Group IDs, or (a list of) objects of class \dQuote{ec2_security_group}.}
 
-\item{cidr}{A one- or two-element character vector specifying an IP or range of IP addresses. The default is your current machine's public IP as returned by \url{http://checkip.amazonaws.com/}.}
+\item{cidr}{A one- or two-element character vector specifying an IP or range of IP addresses. The default is your current machine's public IP as returned by <http://checkip.amazonaws.com/>.}
 
 \item{port}{A one- or two-element integer vector, specifying a port or port range.}
 
@@ -52,6 +72,6 @@ revoke_egress(g, port = 80, protocol = "tcp")
 }
 }
 \seealso{
-\code{\link[=create_sgroup]{create_sgroup()}}
+[create_sgroup()]
 }
 \keyword{security}

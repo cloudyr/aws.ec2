@@ -4,11 +4,19 @@
 \alias{ec2HTTP}
 \title{EC2 API Requests}
 \usage{
-ec2HTTP(query = list(), headers = list(), dryrun = FALSE,
+ec2HTTP(
+  query = list(),
+  headers = list(),
+  dryrun = FALSE,
   verbose = getOption("verbose", FALSE),
-  region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"), key = NULL,
-  secret = NULL, session_token = NULL, version = "2016-11-15",
-  clean_response = TRUE, ...)
+  region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"),
+  key = NULL,
+  secret = NULL,
+  session_token = NULL,
+  version = "2016-11-15",
+  clean_response = TRUE,
+  ...
+)
 }
 \arguments{
 \item{query}{A named list of query string parameters.}
@@ -17,21 +25,21 @@ ec2HTTP(query = list(), headers = list(), dryrun = FALSE,
 
 \item{dryrun}{An optional logical specifying whether to execute a consequence-free \dQuote{dry run} of the request.}
 
-\item{verbose}{A logical indicating whether to be verbose. Default is given by \code{options("verbose")}.}
+\item{verbose}{A logical indicating whether to be verbose. Default is given by `options("verbose")`.}
 
-\item{region}{A character string specifying an AWS region. See \code{\link[aws.signature:locate_credentials]{aws.signature::locate_credentials()}}.}
+\item{region}{A character string specifying an AWS region. See [aws.signature::locate_credentials()].}
 
-\item{key}{A character string specifying an AWS Access Key. See \code{\link[aws.signature:locate_credentials]{aws.signature::locate_credentials()}}.}
+\item{key}{A character string specifying an AWS Access Key. See [aws.signature::locate_credentials()].}
 
-\item{secret}{A character string specifying an AWS Secret Key. See \code{\link[aws.signature:locate_credentials]{aws.signature::locate_credentials()}}.}
+\item{secret}{A character string specifying an AWS Secret Key. See [aws.signature::locate_credentials()].}
 
-\item{session_token}{Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See \code{\link[aws.signature:locate_credentials]{aws.signature::locate_credentials()}}.}
+\item{session_token}{Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See [aws.signature::locate_credentials()].}
 
 \item{version}{A character string specifying an API version. Default is \dQuote{2016-11-15}.}
 
 \item{clean_response}{A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).}
 
-\item{\dots}{Additional arguments passed to \code{\link[httr:GET]{httr::GET()}}.}
+\item{\dots}{Additional arguments passed to [httr::GET()].}
 }
 \value{
 A list

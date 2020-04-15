@@ -31,11 +31,11 @@ terminate_instances(i[[1]])
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_MonitorInstances.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UnmonitorInstances.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_MonitorInstances.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UnmonitorInstances.html>
 }
 \seealso{
-\code{\link[=describe_instances]{describe_instances()}}
+[describe_instances()]
 }
 \keyword{instances}

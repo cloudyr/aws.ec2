@@ -6,14 +6,35 @@
 \alias{delete_netacl_rule}
 \title{ACL Rules}
 \usage{
-create_netacl_rule(acl, rule, cidr, port, protocol = "-1",
-  action = c("allow", "deny"), direction = c("ingress", "egress"), ...)
+create_netacl_rule(
+  acl,
+  rule,
+  cidr,
+  port,
+  protocol = "-1",
+  action = c("allow", "deny"),
+  direction = c("ingress", "egress"),
+  ...
+)
 
-replace_netacl_rule(acl, rule, cidr, port, protocol = "-1",
-  action = c("allow", "deny"), direction = c("ingress", "egress"), ...)
+replace_netacl_rule(
+  acl,
+  rule,
+  cidr,
+  port,
+  protocol = "-1",
+  action = c("allow", "deny"),
+  direction = c("ingress", "egress"),
+  ...
+)
 
-delete_netacl_rule(acl, rule, protocol = "-1", direction = c("ingress",
-  "egress"), ...)
+delete_netacl_rule(
+  acl,
+  rule,
+  protocol = "-1",
+  direction = c("ingress", "egress"),
+  ...
+)
 }
 \arguments{
 \item{acl}{\dots}
@@ -28,7 +49,7 @@ delete_netacl_rule(acl, rule, protocol = "-1", direction = c("ingress",
 
 \item{action}{A character vector specifying one of \dQuote{allow} (the default) or \dQuote{deny}.}
 
-\item{direction}{A character vector specifying one of \dQuote{ingress} (the default) or \code{egress}.}
+\item{direction}{A character vector specifying one of \dQuote{ingress} (the default) or `egress`.}
 
 \item{...}{Additional arguments passed to [ec2HTTP()].}
 }
@@ -39,7 +60,7 @@ A logical indicating whether the operation succeeded.
 Set/Replace/Delete ACL Rules
 }
 \details{
-Network ACL rules control inbound and outbound traffic. An ACL is, by default, created without any rules. \code{create_netacl_rule} adds a new rule. Each Network ACL rule consists of a a unique identifying number, an access protocol, an action (\dQuote{allow} or \dQuote{deny}), a direction (ingress or egress), a CIDR block, and a port range. Rules cannot be modified, but they can be deleted and replaced. \code{replace_netacl_rule} replaces an existing rule. \code{delete_netacl_rule} deletes an existing rule.
+Network ACL rules control inbound and outbound traffic. An ACL is, by default, created without any rules. `create_netacl_rule` adds a new rule. Each Network ACL rule consists of a a unique identifying number, an access protocol, an action (\dQuote{allow} or \dQuote{deny}), a direction (ingress or egress), a CIDR block, and a port range. Rules cannot be modified, but they can be deleted and replaced. `replace_netacl_rule` replaces an existing rule. `delete_netacl_rule` deletes an existing rule.
 }
 \examples{
 \dontrun{
@@ -66,8 +87,8 @@ delete_vpc(v)
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAclEntry.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclEntry.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAclEntry.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAclEntry.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclEntry.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAclEntry.html>
 }
 \keyword{security}

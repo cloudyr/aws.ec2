@@ -6,12 +6,24 @@
 \alias{deregister_image}
 \title{Create AMI}
 \usage{
-create_image(instance, name, description = NULL,
-  region = getOption("AWS_DEFAULT_REGION", "us-east-1"), mapping = NULL,
-  noreboot = FALSE, ...)
+create_image(
+  instance,
+  name,
+  description = NULL,
+  region = getOption("AWS_DEFAULT_REGION", "us-east-1"),
+  mapping = NULL,
+  noreboot = FALSE,
+  ...
+)
 
-copy_image(name, image, description = NULL,
-  region = getOption("AWS_DEFAULT_REGION", "us-east-1"), token = NULL, ...)
+copy_image(
+  name,
+  image,
+  description = NULL,
+  region = getOption("AWS_DEFAULT_REGION", "us-east-1"),
+  token = NULL,
+  ...
+)
 
 deregister_image(image, ...)
 }
@@ -47,8 +59,8 @@ copy_image("example-rstudio-ami", "ami-7f9dc615", "This is a description")
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopyImage.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopyImage.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html>
 }
 \keyword{images}

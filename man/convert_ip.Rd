@@ -24,6 +24,6 @@ Convert IP between Classic/EC2
 IP addresses can only be used within EC2 classic or a Virtual Private Cloud. These functions allow you to convert an IP address between the two systems.
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RestoreAddressToClassic.html>
 }

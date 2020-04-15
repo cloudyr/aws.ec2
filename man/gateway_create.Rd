@@ -18,11 +18,11 @@ delete_gateway(gateway, ...)
 Create and delete Network Gateways for a VPC
 }
 \references{
-\url{http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway.html}
+<http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway.html>
 }
 \seealso{
-\code{\link[=create_gateway]{create_gateway()}}, \code{\link[=describe_gateways]{describe_gateways()}}
+[create_gateway()], [describe_gateways()]
 }
 \keyword{security}

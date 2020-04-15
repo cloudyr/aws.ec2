@@ -20,15 +20,15 @@ Retrieve console output for an EC2 instance as a character string
 \examples{
 \dontrun{
 i <- run_instances()
-cat(get_console_output(), "\\n")
+cat(get_console_output(), "\n")
 stop_instances(i[[1]])
 terminate_instances(i[[1]])
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html>
 }
 \seealso{
-\code{\link[=get_instance_attr]{get_instance_attr()}}, \code{\link[=describe_instances]{describe_instances()}}, \code{\link[=get_password_data]{get_password_data()}}
+[get_instance_attr()], [describe_instances()], [get_password_data()]
 }
 \keyword{instances}

@@ -55,7 +55,7 @@ library("ssh")
 session <- ssh::ssh_connect(paste0("ubuntu@", instance_ip), keyfile = pem_file, passwd = "rstudio")
 
 # write a quick little R script to execute
-cat("'hello world!'\\nsprintf('2+2 is \%d', 2+2)\\n", file = "helloworld.R")
+cat("'hello world!'\nsprintf('2+2 is \%d', 2+2)\n", file = "helloworld.R")
 # upload it to instance
 invisible(ssh::scp_upload(session, "helloworld.R"))
 
@@ -88,9 +88,9 @@ release_ip(ips[[1L]])
 }
 }
 \seealso{
-\code{\link[=account_attrs]{account_attrs()}} \code{\link[=run_instances]{run_instances()}}
+[account_attrs()] [run_instances()]
 }
 \author{
-Thomas J. Leeper \href{mailto:thosjleeper@gmail.com}{thosjleeper@gmail.com}
+Thomas J. Leeper <thosjleeper@gmail.com>
 }
 \keyword{package}

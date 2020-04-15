@@ -4,8 +4,13 @@
 \alias{describe_images}
 \title{Describe AMI(s)}
 \usage{
-describe_images(image = NULL, filter = NULL, availableto = NULL,
-  owner = NULL, ...)
+describe_images(
+  image = NULL,
+  filter = NULL,
+  availableto = NULL,
+  owner = NULL,
+  ...
+)
 }
 \arguments{
 \item{image}{A character string containing an Amazon Machine Image (AMI) image ID or an object of class \dQuote{ec2_image}.}
@@ -13,12 +18,12 @@ describe_images(image = NULL, filter = NULL, availableto = NULL,
 \item{filter}{\dots}
 
 \item{availableto}{Scopes the images by users with explicit launch
-permissions. Specify an AWS account ID, \code{"self"} (the sender of the
+permissions. Specify an AWS account ID, `"self"` (the sender of the
 request), or `"all"`` (public AMIs).}
 
 \item{owner}{Filters the images by the owner. Specify an AWS account ID,
-\code{"self"} (owner is the sender of the request), or an AWS owner alias (valid
-values are \code{"amazon"} | \code{"aws-marketplace"} | \code{"microsoft"}). Omitting this
+`"self"` (owner is the sender of the request), or an AWS owner alias (valid
+values are `"amazon"` | `"aws-marketplace"` | `"microsoft"`). Omitting this
 option returns all images for which you have launch permissions, regardless
 of ownership.}
 

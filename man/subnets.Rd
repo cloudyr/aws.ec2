@@ -23,7 +23,7 @@ delete_subnet(subnet, ...)
 
 \item{cidr}{A character string specifying a network range for the subnet in CIDR notation.}
 
-\item{zone}{Optionally, a character string specifying an availability zone (see \code{\link[=describe_zones]{describe_zones()}}) or an object of class \dQuote{ec2_zone}. If omitted, a zone is selected automatically.}
+\item{zone}{Optionally, a character string specifying an availability zone (see [describe_zones()]) or an object of class \dQuote{ec2_zone}. If omitted, a zone is selected automatically.}
 }
 \value{
 A list of objects of class \dQuote{ec2_subnet}.
@@ -32,7 +32,7 @@ A list of objects of class \dQuote{ec2_subnet}.
 Get, create, and delete subnets
 }
 \details{
-Use \code{\link[=create_netacl]{create_netacl()}} and \code{\link[=associate_netacl]{associate_netacl()}} to specify a non-default Access Control List (ACL) for the subnet
+Use [create_netacl()] and [associate_netacl()] to specify a non-default Access Control List (ACL) for the subnet
 }
 \examples{
 \dontrun{
@@ -51,12 +51,12 @@ s <- create_subnet(aid, cidr = "10.0.1.0/24")
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSubnet.html}
+<http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSubnet.html>
 }
 \seealso{
-\code{\link[=create_vpc]{create_vpc()}}, \code{\link[=create_netacl]{create_netacl()}}, \code{\link[=associate_netacl]{associate_netacl()}}
+[create_vpc()], [create_netacl()], [associate_netacl()]
 }
 \keyword{security}

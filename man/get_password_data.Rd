@@ -26,9 +26,9 @@ terminate_instances(i[[1]])
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetConsoleOutput.html>
 }
 \seealso{
-\code{\link[=describe_instances]{describe_instances()}}, \code{\link[=get_console_output]{get_console_output()}}
+[describe_instances()], [get_console_output()]
 }
 \keyword{instances}

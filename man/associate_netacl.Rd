@@ -9,7 +9,7 @@ associate_netacl(acl, association, ...)
 \arguments{
 \item{acl}{\dots}
 
-\item{association}{A character string specifying a Network ACL Association, or an object of class \dQuote{ec2_network_association} (possibly returned by \code{\link[=describe_netacls]{describe_netacls()}}). This should be the association that you want to replace.}
+\item{association}{A character string specifying a Network ACL Association, or an object of class \dQuote{ec2_network_association} (possibly returned by [describe_netacls()]). This should be the association that you want to replace.}
 
 \item{...}{Additional arguments passed to [ec2HTTP()].}
 }
@@ -23,9 +23,9 @@ Associate a Network ACL with a Subnet
 This function modifies the ACL associated with a Subnet. By default when you create a Subnet, it is automatically associated with the default network ACL. This can be used to change that association.
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclAssociation.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceNetworkAclAssociation.html>
 }
 \seealso{
-\code{\link[=create_netacl]{create_netacl()}}, \code{\link[=create_subnet]{create_subnet()}}
+[create_netacl()], [create_subnet()]
 }
 \keyword{security}

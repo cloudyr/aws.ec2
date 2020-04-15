@@ -7,22 +7,21 @@
 \usage{
 set_vpc_attr(vpc, dns, hostnames, ...)
 
-get_vpc_attr(vpc, attribute = c("enableDnsSupport", "enableDnsHostnames"),
-  ...)
+get_vpc_attr(vpc, attribute = c("enableDnsSupport", "enableDnsHostnames"), ...)
 }
 \arguments{
 \item{vpc}{A character string specifying a VPC Allocation ID or an object of class \dQuote{ec2_ip}.}
 
-\item{dns}{A logical indicating whether DNS resolution is supported for the VPC. A request can only specify only \code{dns} xor \code{hostnames}.}
+\item{dns}{A logical indicating whether DNS resolution is supported for the VPC. A request can only specify only `dns` xor `hostnames`.}
 
-\item{hostnames}{A logical indicating whether instances launched in the VPC get DNS hostnames. A request can only specify only \code{dns} xor \code{hostnames}.}
+\item{hostnames}{A logical indicating whether instances launched in the VPC get DNS hostnames. A request can only specify only `dns` xor `hostnames`.}
 
 \item{...}{Additional arguments passed to [ec2HTTP()].}
 
 \item{attribute}{A character string specifying one of \dQuote{enableDnsSupport} or \dQuote{enableDnsHostnames}.}
 }
 \value{
-For \code{get_vpc_attr}, a logical indicating the value of the attribute. For \code{set_vpc_attr}, a logical indicating whether the operation succeeded.
+For `get_vpc_attr`, a logical indicating the value of the attribute. For `set_vpc_attr`, a logical indicating whether the operation succeeded.
 }
 \description{
 Get and set VPC attributes
@@ -39,10 +38,10 @@ delete_vpc(v)
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcAttribute.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcAttribute.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcAttribute.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcAttribute.html>
 }
 \seealso{
-\code{\link[=describe_vpcs]{describe_vpcs()}}, \code{\link[=create_vpc]{create_vpc()}}
+[describe_vpcs()], [create_vpc()]
 }
 \keyword{security}

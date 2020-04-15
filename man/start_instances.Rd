@@ -40,12 +40,12 @@ terminate_instances(i[[1]])
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_StartInstances.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_StopInstances.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RebootInstances.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_StartInstances.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_StopInstances.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RebootInstances.html>
 }
 \seealso{
-\code{\link[=describe_instances]{describe_instances()}}, \code{\link[=run_instances]{run_instances()}}
+[describe_instances()], [run_instances()]
 }
 \keyword{instances}

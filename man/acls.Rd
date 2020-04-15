@@ -17,13 +17,13 @@ delete_netacl(acl, ...)
 \item{acl}{\dots}
 }
 \value{
-For \code{create_netacl}, a list of class \dQuote{ec2_acl}. For \code{delete_netacl}, a logical indicating whether the operation succeeded.
+For `create_netacl`, a list of class \dQuote{ec2_acl}. For `delete_netacl`, a logical indicating whether the operation succeeded.
 }
 \description{
 Create/Delete Network ACL for VPC
 }
 \details{
-Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see \code{\link[=describe_sgroups]{describe_sgroups()}}).
+Access Control Lists (ACLs) for a Virtual Private Cloud (VPC) provide a layer of security for an EC2 instance or set of instances. These can be used in tandem with or in lieu of Security Groups (see [describe_sgroups()]).
 }
 \examples{
 \dontrun{
@@ -40,11 +40,11 @@ delete_vpc(v)
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Security.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAcl.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAcl.html}
+<http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Security.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAcl.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteNetworkAcl.html>
 }
 \seealso{
-\code{\link[=describe_netacls]{describe_netacls()}}
+[describe_netacls()]
 }
 \keyword{security}

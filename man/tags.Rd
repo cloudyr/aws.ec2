@@ -15,7 +15,7 @@ describe_tags(filter = NULL, n = NULL, page = NULL, ...)
 \arguments{
 \item{resource}{A character vector specifying one or more resource IDs, typically EC2 instance IDs.}
 
-\item{tag}{A named character string of key-value pairs of tag names and their corresponding values. For \code{delete_tags}, the value can be an empty string (in which case, the tag is delete regardless of value) or a specific value (in which case the tag is only deleted if it matches the value).}
+\item{tag}{A named character string of key-value pairs of tag names and their corresponding values. For `delete_tags`, the value can be an empty string (in which case, the tag is delete regardless of value) or a specific value (in which case the tag is only deleted if it matches the value).}
 
 \item{...}{Additional arguments passed to [ec2HTTP()].}
 
@@ -26,7 +26,7 @@ describe_tags(filter = NULL, n = NULL, page = NULL, ...)
 \item{page}{\dots}
 }
 \value{
-For \code{create_tags} and \code{delete_tags}, a logical. Otherwise, a list of tags.
+For `create_tags` and `delete_tags`, a logical. Otherwise, a list of tags.
 }
 \description{
 Tag an EC2 Resource
@@ -40,12 +40,12 @@ delete_tags("i-b79cfd34", list("foo" = "bar"))
 }
 }
 \references{
-\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTags.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html}
-\url{http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTags.html}
+<http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTags.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html>
+<http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTags.html>
 }
 \seealso{
-\code{\link[=describe_instances]{describe_instances()}}, \code{\link[=get_instance_attr]{get_instance_attr()}}, \code{\link[=associate_ip]{associate_ip()}}
+[describe_instances()], [get_instance_attr()], [associate_ip()]
 }
 \keyword{instances}
