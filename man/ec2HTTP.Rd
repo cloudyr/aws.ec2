@@ -7,7 +7,7 @@
 ec2HTTP(
   query = list(),
   headers = list(),
-  dryrun = FALSE,
+  dry_run = FALSE,
   verbose = getOption("verbose", FALSE),
   region = Sys.getenv("AWS_DEFAULT_REGION", "us-east-1"),
   key = NULL,
@@ -23,27 +23,40 @@ ec2HTTP(
 
 \item{headers}{A list of headers to pass to the HTTP request.}
 
-\item{dryrun}{An optional logical specifying whether to execute a consequence-free \dQuote{dry run} of the request.}
+\item{dry_run}{An optional logical specifying whether to execute a
+consequence-free \dQuote{dry run} of the request. When this parameter is
+\code{TRUE}, the return of this function is either \code{TRUE} or an error.}
 
-\item{verbose}{A logical indicating whether to be verbose. Default is given by `options("verbose")`.}
+\item{verbose}{A logical indicating whether to be verbose. Default is given
+by `options("verbose")`.}
 
-\item{region}{A character string specifying an AWS region. See [aws.signature::locate_credentials()].}
+\item{region}{A character string specifying an AWS region. See
+\code{\link[aws.signature]{locate_credentials}}.}
 
-\item{key}{A character string specifying an AWS Access Key. See [aws.signature::locate_credentials()].}
+\item{key}{A character string specifying an AWS Access Key. See
+\code{\link[aws.signature]{locate_credentials}}.}
 
-\item{secret}{A character string specifying an AWS Secret Key. See [aws.signature::locate_credentials()].}
+\item{secret}{A character string specifying an AWS Secret Key. See
+\code{\link[aws.signature]{locate_credentials}}.}
 
-\item{session_token}{Optionally, a character string specifying an AWS temporary Session Token to use in signing a request. See [aws.signature::locate_credentials()].}
+\item{session_token}{Optionally, a character string specifying an AWS
+temporary Session Token to use in signing a request. See
+\code{\link[aws.signature]{locate_credentials}}.}
 
-\item{version}{A character string specifying an API version. Default is \dQuote{2016-11-15}.}
+\item{version}{A character string specifying an API version. Default is
+\dQuote{2016-11-15}. Note: For future-proofing, this parameter is not
+validated.}
 
-\item{clean_response}{A logical indicating whether to remove line breaks from the response. This is useful for returning a clean response object, but may not be appropriate if the XML-formatted API response contains meaningful linebreaks (e.g., in a keypair).}
+\item{clean_response}{A logical indicating whether to remove line breaks from
+the response. This is useful for returning a clean response object, but may
+not be appropriate if the XML-formatted API response contains meaningful
+linebreaks (e.g., in a keypair).}
 
-\item{\dots}{Additional arguments passed to [httr::GET()].}
+\item{\dots}{Additional arguments passed to \code{\link[httr]{GET}}.}
 }
 \value{
-A list
+A list.
 }
 \description{
-Internal workhorse function to execute an EC2 API Request
+This is the workhorse function to execute calls to the EC2 API.
 }
