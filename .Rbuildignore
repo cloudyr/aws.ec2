@@ -8,3 +8,4 @@ knitreadme.sh
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github.?
+^LICENSE\.md$

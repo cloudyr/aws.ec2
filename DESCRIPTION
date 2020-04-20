@@ -1,28 +1,32 @@
 Package: aws.ec2
 Type: Package
 Title: Amazon Web Services EC2 Client Package
-Version: 0.1.17
-Date: 2018-07-27
-Authors@R: c(person("Thomas J.", "Leeper", role = c("aut"),
+Version: 0.1.17.9000
+Authors@R: c(
+             person("Thomas J.", "Leeper", role = c("aut"),
                     email = "thosjleeper@gmail.com",
                     comment = c(ORCID = "0000-0003-4097-6326")),
-             person("Andrie", "de Vries", role = "ctb"))
-Maintainer: ORPHANED
+             person("Jon", "Harmon", role = c("ctb", "cre"),
+                    email = "jonthegeek@gmail.com",
+                    comment = c(ORCID = "0000-0003-4781-4346")),
+             person("Andrie", "de Vries", role = "ctb")
+           )
 Description: A simple client package for the Amazon Web Services ('AWS') Elastic
     Cloud Compute ('EC2') <https://aws.amazon.com/ec2/> 'API'.
-License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.4)
+License: GPL-3
 Imports:
     utils,
-    aws.signature (>= 0.4.0),
+    aws.signature (>= 0.5.2),
     httr,
     xml2,
     base64enc
 Suggests:
     testthat,
     aws.ec2metadata,
-    aws.iam,
-    ssh
+    aws.iam
 URL: https://github.com/cloudyr/aws.ec2
 BugReports: https://github.com/cloudyr/aws.ec2/issues
-RoxygenNote: 6.0.1
-Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
